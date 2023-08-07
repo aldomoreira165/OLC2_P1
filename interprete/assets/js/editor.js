@@ -2,6 +2,7 @@ const botonAbrirArchivo = document.getElementById("btn-abrir-archivo");
 const botonCrearArchivo = document.getElementById("btn-crear-archivo");
 const botonGuardarArchivo = document.getElementById("btn-guardar-archivo");
 const btnEjecutar = document.getElementById("btn-ejecutar");
+const btnReportes = document.getElementById("btn-reportes");
 
 /*funcionalidad de editor de codigo*/
 
@@ -68,7 +69,7 @@ function destroyClickedElement(event) {
 btnEjecutar.addEventListener("click", function () {
   const codigo = Fuente.getValue();
 
-  fetch("/enviar-texto", {
+  fetch("/enviar-codigo", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -82,10 +83,13 @@ btnEjecutar.addEventListener("click", function () {
     return response.json();
   })
   .then((data) => {
-    // Aquí puedes procesar la respuesta del backend, si es necesario
-    console.log("Respuesta del backend:", data);
+    Salida.setValue(data);
   })
   .catch((error) => {
     console.error("Error:", error);
   });
+});
+
+btnReportes.addEventListener("click", function(){
+  alert('aaa');
 });
