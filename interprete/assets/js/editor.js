@@ -89,7 +89,3 @@ btnEjecutar.addEventListener("click", function () {
     console.error("Error:", error);
   });
 });
-
-btnReportes.addEventListener("click", function(){
-  alert('aaa');
-});

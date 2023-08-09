@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-
 	"github.com/antlr4-go/antlr/v4"
 )
 
@@ -34,9 +33,9 @@ func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
 		stmtResult := l.Visit(ctx.Stmt(i))
 		switch stmtResult.(type) {
 		case int64:
-			out += strconv.FormatInt(stmtResult.(int64), 10) + " "
+			out += strconv.FormatInt(stmtResult.(int64), 10) + "\n"
 		case string:
-			out += stmtResult.(string) + " "
+			out += stmtResult.(string) + "\n"
 		}
 	}
 	return out
@@ -133,8 +132,6 @@ func (l *Visitor) Visit(tree antlr.ParseTree) interface{} {
 	}
 }
 
-
-
 type CodigoEnviado struct {
 	Contenido string `json:"contenido"`
 }
@@ -158,7 +155,6 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	tree := p.S()
 	out := visitor.Visit(tree)
 	fmt.Println(out)
-	//fmt.Println(code)
 	
 	// enviando respuesta al cliente
 	w.Header().Set("Content-Type", "application/json")
@@ -167,8 +163,9 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	fs := http.FileServer(http.Dir("."))
-
 	http.HandleFunc("/enviar-codigo", manejarEnviarcodigo)
 	http.Handle("/", fs)
 	http.ListenAndServe("localhost:3000", nil)
 }
+
+//antlr4 -Dlanguage=Go -o parser -package parser -visitor *.g4
