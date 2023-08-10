@@ -50,11 +50,29 @@ func (s *BaseSwiftGrammarListener) EnterIfstmt(ctx *IfstmtContext) {}
 // ExitIfstmt is called when production ifstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitIfstmt(ctx *IfstmtContext) {}
 
-// EnterDeclstmt is called when production declstmt is entered.
-func (s *BaseSwiftGrammarListener) EnterDeclstmt(ctx *DeclstmtContext) {}
+// EnterTypedDeclstmt is called when production typedDeclstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterTypedDeclstmt(ctx *TypedDeclstmtContext) {}
 
-// ExitDeclstmt is called when production declstmt is exited.
-func (s *BaseSwiftGrammarListener) ExitDeclstmt(ctx *DeclstmtContext) {}
+// ExitTypedDeclstmt is called when production typedDeclstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitTypedDeclstmt(ctx *TypedDeclstmtContext) {}
+
+// EnterUntypedDeclstmt is called when production untypedDeclstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterUntypedDeclstmt(ctx *UntypedDeclstmtContext) {}
+
+// ExitUntypedDeclstmt is called when production untypedDeclstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitUntypedDeclstmt(ctx *UntypedDeclstmtContext) {}
+
+// EnterOptionalTypedDeclstmt is called when production optionalTypedDeclstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterOptionalTypedDeclstmt(ctx *OptionalTypedDeclstmtContext) {}
+
+// ExitOptionalTypedDeclstmt is called when production optionalTypedDeclstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitOptionalTypedDeclstmt(ctx *OptionalTypedDeclstmtContext) {}
+
+// EnterAsignstmt is called when production asignstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterAsignstmt(ctx *AsignstmtContext) {}
+
+// ExitAsignstmt is called when production asignstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitAsignstmt(ctx *AsignstmtContext) {}
 
 // EnterParExpr is called when production ParExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterParExpr(ctx *ParExprContext) {}
@@ -98,8 +116,8 @@ func (s *BaseSwiftGrammarListener) EnterBoolExpr(ctx *BoolExprContext) {}
 // ExitBoolExpr is called when production BoolExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitBoolExpr(ctx *BoolExprContext) {}
 
-// EnterPtipo is called when production Ptipo is entered.
-func (s *BaseSwiftGrammarListener) EnterPtipo(ctx *PtipoContext) {}
+// EnterTipo is called when production tipo is entered.
+func (s *BaseSwiftGrammarListener) EnterTipo(ctx *TipoContext) {}
 
-// ExitPtipo is called when production Ptipo is exited.
-func (s *BaseSwiftGrammarListener) ExitPtipo(ctx *PtipoContext) {}
+// ExitTipo is called when production tipo is exited.
+func (s *BaseSwiftGrammarListener) ExitTipo(ctx *TipoContext) {}

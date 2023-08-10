@@ -22,8 +22,17 @@ type SwiftGrammarListener interface {
 	// EnterIfstmt is called when entering the ifstmt production.
 	EnterIfstmt(c *IfstmtContext)
 
-	// EnterDeclstmt is called when entering the declstmt production.
-	EnterDeclstmt(c *DeclstmtContext)
+	// EnterTypedDeclstmt is called when entering the typedDeclstmt production.
+	EnterTypedDeclstmt(c *TypedDeclstmtContext)
+
+	// EnterUntypedDeclstmt is called when entering the untypedDeclstmt production.
+	EnterUntypedDeclstmt(c *UntypedDeclstmtContext)
+
+	// EnterOptionalTypedDeclstmt is called when entering the optionalTypedDeclstmt production.
+	EnterOptionalTypedDeclstmt(c *OptionalTypedDeclstmtContext)
+
+	// EnterAsignstmt is called when entering the asignstmt production.
+	EnterAsignstmt(c *AsignstmtContext)
 
 	// EnterParExpr is called when entering the ParExpr production.
 	EnterParExpr(c *ParExprContext)
@@ -46,8 +55,8 @@ type SwiftGrammarListener interface {
 	// EnterBoolExpr is called when entering the BoolExpr production.
 	EnterBoolExpr(c *BoolExprContext)
 
-	// EnterPtipo is called when entering the Ptipo production.
-	EnterPtipo(c *PtipoContext)
+	// EnterTipo is called when entering the tipo production.
+	EnterTipo(c *TipoContext)
 
 	// ExitS is called when exiting the s production.
 	ExitS(c *SContext)
@@ -64,8 +73,17 @@ type SwiftGrammarListener interface {
 	// ExitIfstmt is called when exiting the ifstmt production.
 	ExitIfstmt(c *IfstmtContext)
 
-	// ExitDeclstmt is called when exiting the declstmt production.
-	ExitDeclstmt(c *DeclstmtContext)
+	// ExitTypedDeclstmt is called when exiting the typedDeclstmt production.
+	ExitTypedDeclstmt(c *TypedDeclstmtContext)
+
+	// ExitUntypedDeclstmt is called when exiting the untypedDeclstmt production.
+	ExitUntypedDeclstmt(c *UntypedDeclstmtContext)
+
+	// ExitOptionalTypedDeclstmt is called when exiting the optionalTypedDeclstmt production.
+	ExitOptionalTypedDeclstmt(c *OptionalTypedDeclstmtContext)
+
+	// ExitAsignstmt is called when exiting the asignstmt production.
+	ExitAsignstmt(c *AsignstmtContext)
 
 	// ExitParExpr is called when exiting the ParExpr production.
 	ExitParExpr(c *ParExprContext)
@@ -88,6 +106,6 @@ type SwiftGrammarListener interface {
 	// ExitBoolExpr is called when exiting the BoolExpr production.
 	ExitBoolExpr(c *BoolExprContext)
 
-	// ExitPtipo is called when exiting the Ptipo production.
-	ExitPtipo(c *PtipoContext)
+	// ExitTipo is called when exiting the tipo production.
+	ExitTipo(c *TipoContext)
 }

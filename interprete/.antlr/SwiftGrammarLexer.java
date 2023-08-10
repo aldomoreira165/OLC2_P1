@@ -43,7 +43,7 @@ public class SwiftGrammarLexer extends Lexer {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'Int'", "'Float'", "'Bool'", "'Character'", "'String'", "'true'", 
+			null, "'int'", "'float'", "'bool'", "'character'", "'String'", "'true'", 
 			"'false'", "'print'", "'if'", "'else'", "'while'", "'var'", null, null, 
 			null, "'!='", "'=='", "'!'", "'||'", "'&&'", "'='", "'>='", "'<='", "'>'", 
 			"'<'", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "'{'", "'}'", "':'", 
@@ -155,9 +155,9 @@ public class SwiftGrammarLexer extends Lexer {
 		"\2\2\2\61\u00c7\3\2\2\2\63\u00c9\3\2\2\2\65\u00cb\3\2\2\2\67\u00cd\3\2"+
 		"\2\29\u00cf\3\2\2\2;\u00d1\3\2\2\2=\u00d3\3\2\2\2?\u00d5\3\2\2\2A\u00d7"+
 		"\3\2\2\2C\u00d9\3\2\2\2E\u00db\3\2\2\2G\u00dd\3\2\2\2I\u00e0\3\2\2\2K"+
-		"\u00e6\3\2\2\2M\u00f4\3\2\2\2O\u00ff\3\2\2\2QR\7K\2\2RS\7p\2\2ST\7v\2"+
-		"\2T\4\3\2\2\2UV\7H\2\2VW\7n\2\2WX\7q\2\2XY\7c\2\2YZ\7v\2\2Z\6\3\2\2\2"+
-		"[\\\7D\2\2\\]\7q\2\2]^\7q\2\2^_\7n\2\2_\b\3\2\2\2`a\7E\2\2ab\7j\2\2bc"+
+		"\u00e6\3\2\2\2M\u00f4\3\2\2\2O\u00ff\3\2\2\2QR\7k\2\2RS\7p\2\2ST\7v\2"+
+		"\2T\4\3\2\2\2UV\7h\2\2VW\7n\2\2WX\7q\2\2XY\7c\2\2YZ\7v\2\2Z\6\3\2\2\2"+
+		"[\\\7d\2\2\\]\7q\2\2]^\7q\2\2^_\7n\2\2_\b\3\2\2\2`a\7e\2\2ab\7j\2\2bc"+
 		"\7c\2\2cd\7t\2\2de\7c\2\2ef\7e\2\2fg\7v\2\2gh\7g\2\2hi\7t\2\2i\n\3\2\2"+
 		"\2jk\7U\2\2kl\7v\2\2lm\7t\2\2mn\7k\2\2no\7p\2\2op\7i\2\2p\f\3\2\2\2qr"+
 		"\7v\2\2rs\7t\2\2st\7w\2\2tu\7g\2\2u\16\3\2\2\2vw\7h\2\2wx\7c\2\2xy\7n"+

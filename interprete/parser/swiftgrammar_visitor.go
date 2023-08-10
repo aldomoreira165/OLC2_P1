@@ -22,8 +22,17 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#ifstmt.
 	VisitIfstmt(ctx *IfstmtContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#declstmt.
-	VisitDeclstmt(ctx *DeclstmtContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#typedDeclstmt.
+	VisitTypedDeclstmt(ctx *TypedDeclstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#untypedDeclstmt.
+	VisitUntypedDeclstmt(ctx *UntypedDeclstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#optionalTypedDeclstmt.
+	VisitOptionalTypedDeclstmt(ctx *OptionalTypedDeclstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#asignstmt.
+	VisitAsignstmt(ctx *AsignstmtContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#ParExpr.
 	VisitParExpr(ctx *ParExprContext) interface{}
@@ -46,6 +55,6 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#BoolExpr.
 	VisitBoolExpr(ctx *BoolExprContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#Ptipo.
-	VisitPtipo(ctx *PtipoContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#tipo.
+	VisitTipo(ctx *TipoContext) interface{}
 }

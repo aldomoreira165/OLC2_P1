@@ -2,10 +2,10 @@ lexer grammar SwiftLexer;
 
 // --------------- Tokens
 // types
-INT: 'Int';
-FLOAT: 'Float';
-BOOL: 'Bool';
-CHARACTER: 'Character';
+INT: 'int';
+FLOAT: 'float';
+BOOL: 'bool';
+CHARACTER: 'character';
 PSTRING: 'String';
 
 // reserved words
@@ -18,7 +18,7 @@ WHILE: 'while';
 VAR: 'var';
 
 // primitives
-NUMBER : [0-9]+ ('.'[0-9]+)?;
+NUMBER : [0-9]+('.'[0-9]+)?;
 STRING: '"'~["]*'"';
 ID: ([a-zA-Z_])[a-zA-Z0-9_]*;
 

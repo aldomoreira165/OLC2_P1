@@ -27,7 +27,19 @@ func (v *BaseSwiftGrammarVisitor) VisitIfstmt(ctx *IfstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitDeclstmt(ctx *DeclstmtContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitTypedDeclstmt(ctx *TypedDeclstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitUntypedDeclstmt(ctx *UntypedDeclstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitOptionalTypedDeclstmt(ctx *OptionalTypedDeclstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAsignstmt(ctx *AsignstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -59,6 +71,6 @@ func (v *BaseSwiftGrammarVisitor) VisitBoolExpr(ctx *BoolExprContext) interface{
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitPtipo(ctx *PtipoContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitTipo(ctx *TipoContext) interface{} {
 	return v.VisitChildren(ctx)
 }

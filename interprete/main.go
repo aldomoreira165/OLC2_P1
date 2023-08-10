@@ -15,19 +15,25 @@ import (
 // entornos
 type Environment struct {
 	parent    *Environment
-	variables map[string]interface{}
+	variables map[string]Variable
 }
 
-func NewEnvironment(parent *Environment) *Environment {
-	return &Environment{
-		parent:    parent,
-		variables: make(map[string]interface{}),
-	}
+type Variable struct {
+	Name  string
+	Type  string
+	Value interface{}
 }
 
 type Visitor struct {
 	antlr.ParseTreeVisitor
 	currentEnvironment *Environment
+}
+
+func NewEnvironment(parent *Environment) *Environment {
+	return &Environment{
+		parent:    parent,
+		variables: make(map[string]Variable),
+	}
 }
 
 func NewVisitor() parser.SwiftGrammarVisitor {
@@ -72,8 +78,17 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Ifstmt() != nil {
 		return l.Visit(ctx.Ifstmt())
 	}
-	if ctx.Declstmt() != nil {
-		return l.Visit(ctx.Declstmt())
+	if ctx.TypedDeclstmt() != nil {
+		return l.Visit(ctx.TypedDeclstmt())
+	}
+	if ctx.UntypedDeclstmt() != nil {
+		return l.Visit(ctx.UntypedDeclstmt())
+	}
+	if ctx.OptionalTypedDeclstmt() != nil {
+		return l.Visit(ctx.OptionalTypedDeclstmt())
+	}
+	if ctx.Asignstmt() != nil {
+		return l.Visit(ctx.Asignstmt())
 	}
 	return nil
 }
@@ -94,20 +109,167 @@ func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	return true
 }
 
-func (l *Visitor) VisitDeclstmt(ctx *parser.DeclstmtContext) interface{} {
+func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface{} {
+	varName := ctx.ID().GetText()
+	declType := l.Visit(ctx.Tipo()).(string)
+	value := l.Visit(ctx.Expr())
+
+	// Verificar si la variable ya existe en el entorno
+	if _, ok := l.currentEnvironment.variables[varName]; ok {
+		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
+	}
+
+	// Comprobar si el tipo de la expresión coincide con el tipo declarado
+	if !validateType(value, declType) {
+		return fmt.Sprintf("Error de tipo en la declaración: %s", varName)
+	}
+
+	// Crear una instancia de Variable y almacenarla en el entorno actual
+	nuevaVariable := Variable{
+		Name:  varName,
+		Type:  declType,
+		Value: value,
+	}
+
+	// Almacenar la información de la declaración en el entorno
+	l.currentEnvironment.variables[varName] = nuevaVariable
+	return true
+}
+
+func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtContext) interface{} {
+	varName := ctx.ID().GetText()
+	declType := l.Visit(ctx.Tipo()).(string)
+
+	// Verificar si la variable ya existe en el entorno
+	if _, ok := l.currentEnvironment.variables[varName]; ok {
+		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
+	}
+
+	// Crear una instancia de Variable y almacenarla en el entorno actual
+	nuevaVariable := Variable{
+		Name:  varName,
+		Type:  declType,
+		Value: nil,
+	}
+
+	// Almacenar la información de la declaración en el entorno
+	l.currentEnvironment.variables[varName] = nuevaVariable
+	return true
+
+}
+
+func (l *Visitor) VisitUntypedDeclstmt(ctx *parser.UntypedDeclstmtContext) interface{} {
 	varName := ctx.ID().GetText()
 	value := l.Visit(ctx.Expr())
 
 	// Verificar si la variable ya existe en el entorno
 	if _, ok := l.currentEnvironment.variables[varName]; ok {
 		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
-	} else {
-		l.currentEnvironment.variables[varName] = value
 	}
+
+	// Determinar el tipo de la expresión
+	valueType := determineType(value)
+	fmt.Println(valueType)
+
+	// Crear una instancia de Variable y almacenarla en el entorno actual
+	nuevaVariable := Variable{
+		Name:  varName,
+		Type:  valueType, // Asignar el tipo de la expresión
+		Value: value,
+	}
+
+	// Almacenar la información de la declaración en el entorno
+	l.currentEnvironment.variables[varName] = nuevaVariable
 	return true
 }
 
-func (l *Visitor) VisitPtipo(ctx *parser.PtipoContext) interface{} {
+func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
+	varName := ctx.ID().GetText()
+	value := l.Visit(ctx.Expr())
+
+	// Verificar si la variable ya existe en el entorno
+	if variableExistente, ok := l.currentEnvironment.variables[varName]; ok {
+
+		// Determinar el tipo de la expresión y el tipo de la variable existente
+		exprType := determineType(value)
+		existingVarType := variableExistente.Type
+
+		if exprType == existingVarType {
+
+			variableActualizada := Variable{
+				Name:  varName,
+				Type:  exprType, // Asignar el tipo de la expresión
+				Value: value,
+			}
+
+			l.currentEnvironment.variables[varName] = variableActualizada
+			return true // La asignación fue exitosa
+		} else {
+			fmt.Println("Error de tipo en la asignación para", varName)
+			return false // La asignación falló debido a un error de tipo
+		}
+	} else {
+		fmt.Println("Variable no encontrada:", varName)
+		return false // La variable no existe en el entorno actual
+	}
+}
+
+func determineType(value interface{}) string {
+	switch value.(type) {
+	case int64:
+		return "int"
+	case float64:
+		//ARREGLARRRR
+		return "float"
+	case bool:
+		//ARREGLARRRR
+		return "bool"
+	case string:
+		if len(value.(string)) == 1 {
+			return "character"
+		}
+		return "String"
+	default:
+		return "unknown"
+	}
+}
+
+func validateType(value interface{}, declType string) bool {
+	switch declType {
+	case "int":
+		_, isInt := value.(int64)
+		return isInt
+	case "float":
+		//ARREGLARRRRRRRR
+		_, isFloat := value.(float64)
+		return isFloat
+	case "bool":
+		//ARREGLARRRRRRRR
+		_, isBool := value.(bool)
+		return isBool
+	case "character":
+		_, isChar := value.(string)
+		return isChar && len(value.(string)) == 1
+	case "String":
+		_, isString := value.(string)
+		return isString && len(value.(string)) > 1
+	default:
+		return false // Tipo desconocido o no admitido
+	}
+}
+
+func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
+	if ctx.INT() != nil {
+		return "int"
+	} else if ctx.FLOAT() != nil {
+		return "float"
+	} else if ctx.BOOL() != nil {
+		return "bool"
+	} else if ctx.CHARACTER() != nil {
+		return "character"
+	} else if ctx.PSTRING() != nil {
+		return "String"
+	}
 	return nil
 }
 
@@ -154,7 +316,7 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 	for currentEnv != nil {
 		value, ok := currentEnv.variables[id]
 		if ok {
-			return value
+			return value.Value
 		}
 		currentEnv = currentEnv.parent
 	}
@@ -207,7 +369,7 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	tree := p.S()
 	out := visitor.Visit(tree)
 	//fmt.Println(out)
-	
+
 	// enviando respuesta al cliente
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(out)
@@ -221,4 +383,3 @@ func main() {
 }
 
 //antlr4 -Dlanguage=Go -o parser -package parser -visitor *.g4
-

@@ -7,7 +7,10 @@ block: (stmt)*
      ;
 
 stmt: printstmt
-    | declstmt
+    | typedDeclstmt
+    | untypedDeclstmt
+    | optionalTypedDeclstmt
+    | asignstmt
     | ifstmt
     ;
 
@@ -19,10 +22,20 @@ ifstmt
     : IF expr LLAVEIZQ block LLAVEDER
     ;
 
-declstmt
-    //: VAR ID DOSPUNTOS tipo IG expr
-    : VAR ID IG expr
-    //| VAR ID DOSPUNTOS tipo INTERROGACION                            
+typedDeclstmt
+    : VAR ID DOSPUNTOS tipo IG expr 
+    ;
+
+untypedDeclstmt
+    : VAR ID IG expr                         
+    ;
+
+optionalTypedDeclstmt
+    : VAR ID DOSPUNTOS tipo INTERROGACION                          
+    ;
+
+asignstmt
+    : ID IG expr
     ;
 
 expr
@@ -45,9 +58,9 @@ primitivo
     ;
 
 tipo
-    : INT                                       #Ptipo
-    | FLOAT                                     #Ptipo
-    | BOOL                                      #Ptipo
-    | CHARACTER                                 #Ptipo
-    | PSTRING                                   #Ptipo
+    : INT                                      
+    | FLOAT                                     
+    | BOOL                                      
+    | CHARACTER                                 
+    | PSTRING                                  
     ;
