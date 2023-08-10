@@ -1,4 +1,4 @@
-// Code generated from SwiftLexer.g4 by ANTLR 4.13.0. DO NOT EDIT.
+// Code generated from SwiftGrammar.g4 by ANTLR 4.13.0. DO NOT EDIT.
 
 package parser
 
@@ -14,14 +14,14 @@ var _ = fmt.Printf
 var _ = sync.Once{}
 var _ = unicode.IsLetter
 
-type SwiftLexer struct {
+type SwiftGrammarLexer struct {
 	*antlr.BaseLexer
 	channelNames []string
 	modeNames    []string
 	// TODO: EOF string
 }
 
-var SwiftLexerLexerStaticData struct {
+var SwiftGrammarLexerLexerStaticData struct {
 	once                   sync.Once
 	serializedATN          []int32
 	ChannelNames           []string
@@ -34,8 +34,8 @@ var SwiftLexerLexerStaticData struct {
 	decisionToDFA          []*antlr.DFA
 }
 
-func swiftlexerLexerInit() {
-	staticData := &SwiftLexerLexerStaticData
+func swiftgrammarlexerLexerInit() {
+	staticData := &SwiftGrammarLexerLexerStaticData
 	staticData.ChannelNames = []string{
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN",
 	}
@@ -188,71 +188,71 @@ func swiftlexerLexerInit() {
 	}
 }
 
-// SwiftLexerInit initializes any static state used to implement SwiftLexer. By default the
+// SwiftGrammarLexerInit initializes any static state used to implement SwiftGrammarLexer. By default the
 // static state used to implement the lexer is lazily initialized during the first call to
-// NewSwiftLexer(). You can call this function if you wish to initialize the static state ahead
+// NewSwiftGrammarLexer(). You can call this function if you wish to initialize the static state ahead
 // of time.
-func SwiftLexerInit() {
-	staticData := &SwiftLexerLexerStaticData
-	staticData.once.Do(swiftlexerLexerInit)
+func SwiftGrammarLexerInit() {
+	staticData := &SwiftGrammarLexerLexerStaticData
+	staticData.once.Do(swiftgrammarlexerLexerInit)
 }
 
-// NewSwiftLexer produces a new lexer instance for the optional input antlr.CharStream.
-func NewSwiftLexer(input antlr.CharStream) *SwiftLexer {
-	SwiftLexerInit()
-	l := new(SwiftLexer)
+// NewSwiftGrammarLexer produces a new lexer instance for the optional input antlr.CharStream.
+func NewSwiftGrammarLexer(input antlr.CharStream) *SwiftGrammarLexer {
+	SwiftGrammarLexerInit()
+	l := new(SwiftGrammarLexer)
 	l.BaseLexer = antlr.NewBaseLexer(input)
-	staticData := &SwiftLexerLexerStaticData
+	staticData := &SwiftGrammarLexerLexerStaticData
 	l.Interpreter = antlr.NewLexerATNSimulator(l, staticData.atn, staticData.decisionToDFA, staticData.PredictionContextCache)
 	l.channelNames = staticData.ChannelNames
 	l.modeNames = staticData.ModeNames
 	l.RuleNames = staticData.RuleNames
 	l.LiteralNames = staticData.LiteralNames
 	l.SymbolicNames = staticData.SymbolicNames
-	l.GrammarFileName = "SwiftLexer.g4"
+	l.GrammarFileName = "SwiftGrammar.g4"
 	// TODO: l.EOF = antlr.TokenEOF
 
 	return l
 }
 
-// SwiftLexer tokens.
+// SwiftGrammarLexer tokens.
 const (
-	SwiftLexerINT           = 1
-	SwiftLexerFLOAT         = 2
-	SwiftLexerBOOL          = 3
-	SwiftLexerCHARACTER     = 4
-	SwiftLexerPSTRING       = 5
-	SwiftLexerTRU           = 6
-	SwiftLexerFAL           = 7
-	SwiftLexerPRINT         = 8
-	SwiftLexerIF            = 9
-	SwiftLexerELSE          = 10
-	SwiftLexerWHILE         = 11
-	SwiftLexerVAR           = 12
-	SwiftLexerNUMBER        = 13
-	SwiftLexerSTRING        = 14
-	SwiftLexerID            = 15
-	SwiftLexerDIF           = 16
-	SwiftLexerIG_IG         = 17
-	SwiftLexerNOT           = 18
-	SwiftLexerOR            = 19
-	SwiftLexerAND           = 20
-	SwiftLexerIG            = 21
-	SwiftLexerMAY_IG        = 22
-	SwiftLexerMEN_IG        = 23
-	SwiftLexerMAYOR         = 24
-	SwiftLexerMENOR         = 25
-	SwiftLexerMUL           = 26
-	SwiftLexerDIV           = 27
-	SwiftLexerADD           = 28
-	SwiftLexerSUB           = 29
-	SwiftLexerPARIZQ        = 30
-	SwiftLexerPARDER        = 31
-	SwiftLexerLLAVEIZQ      = 32
-	SwiftLexerLLAVEDER      = 33
-	SwiftLexerDOSPUNTOS     = 34
-	SwiftLexerINTERROGACION = 35
-	SwiftLexerWHITESPACE    = 36
-	SwiftLexerCOMMENT       = 37
-	SwiftLexerLINE_COMMENT  = 38
+	SwiftGrammarLexerINT           = 1
+	SwiftGrammarLexerFLOAT         = 2
+	SwiftGrammarLexerBOOL          = 3
+	SwiftGrammarLexerCHARACTER     = 4
+	SwiftGrammarLexerPSTRING       = 5
+	SwiftGrammarLexerTRU           = 6
+	SwiftGrammarLexerFAL           = 7
+	SwiftGrammarLexerPRINT         = 8
+	SwiftGrammarLexerIF            = 9
+	SwiftGrammarLexerELSE          = 10
+	SwiftGrammarLexerWHILE         = 11
+	SwiftGrammarLexerVAR           = 12
+	SwiftGrammarLexerNUMBER        = 13
+	SwiftGrammarLexerSTRING        = 14
+	SwiftGrammarLexerID            = 15
+	SwiftGrammarLexerDIF           = 16
+	SwiftGrammarLexerIG_IG         = 17
+	SwiftGrammarLexerNOT           = 18
+	SwiftGrammarLexerOR            = 19
+	SwiftGrammarLexerAND           = 20
+	SwiftGrammarLexerIG            = 21
+	SwiftGrammarLexerMAY_IG        = 22
+	SwiftGrammarLexerMEN_IG        = 23
+	SwiftGrammarLexerMAYOR         = 24
+	SwiftGrammarLexerMENOR         = 25
+	SwiftGrammarLexerMUL           = 26
+	SwiftGrammarLexerDIV           = 27
+	SwiftGrammarLexerADD           = 28
+	SwiftGrammarLexerSUB           = 29
+	SwiftGrammarLexerPARIZQ        = 30
+	SwiftGrammarLexerPARDER        = 31
+	SwiftGrammarLexerLLAVEIZQ      = 32
+	SwiftGrammarLexerLLAVEDER      = 33
+	SwiftGrammarLexerDOSPUNTOS     = 34
+	SwiftGrammarLexerINTERROGACION = 35
+	SwiftGrammarLexerWHITESPACE    = 36
+	SwiftGrammarLexerCOMMENT       = 37
+	SwiftGrammarLexerLINE_COMMENT  = 38
 )

@@ -13,8 +13,8 @@ type SwiftGrammarListener interface {
 	// EnterBlock is called when entering the block production.
 	EnterBlock(c *BlockContext)
 
-	// EnterInstruction is called when entering the instruction production.
-	EnterInstruction(c *InstructionContext)
+	// EnterStmt is called when entering the stmt production.
+	EnterStmt(c *StmtContext)
 
 	// EnterPrintstmt is called when entering the printstmt production.
 	EnterPrintstmt(c *PrintstmtContext)
@@ -22,8 +22,32 @@ type SwiftGrammarListener interface {
 	// EnterIfstmt is called when entering the ifstmt production.
 	EnterIfstmt(c *IfstmtContext)
 
-	// EnterExpr is called when entering the expr production.
-	EnterExpr(c *ExprContext)
+	// EnterDeclstmt is called when entering the declstmt production.
+	EnterDeclstmt(c *DeclstmtContext)
+
+	// EnterParExpr is called when entering the ParExpr production.
+	EnterParExpr(c *ParExprContext)
+
+	// EnterPrimExpr is called when entering the PrimExpr production.
+	EnterPrimExpr(c *PrimExprContext)
+
+	// EnterOpExpr is called when entering the OpExpr production.
+	EnterOpExpr(c *OpExprContext)
+
+	// EnterNumExpr is called when entering the NumExpr production.
+	EnterNumExpr(c *NumExprContext)
+
+	// EnterIdExpr is called when entering the IdExpr production.
+	EnterIdExpr(c *IdExprContext)
+
+	// EnterStrExpr is called when entering the StrExpr production.
+	EnterStrExpr(c *StrExprContext)
+
+	// EnterBoolExpr is called when entering the BoolExpr production.
+	EnterBoolExpr(c *BoolExprContext)
+
+	// EnterPtipo is called when entering the Ptipo production.
+	EnterPtipo(c *PtipoContext)
 
 	// ExitS is called when exiting the s production.
 	ExitS(c *SContext)
@@ -31,8 +55,8 @@ type SwiftGrammarListener interface {
 	// ExitBlock is called when exiting the block production.
 	ExitBlock(c *BlockContext)
 
-	// ExitInstruction is called when exiting the instruction production.
-	ExitInstruction(c *InstructionContext)
+	// ExitStmt is called when exiting the stmt production.
+	ExitStmt(c *StmtContext)
 
 	// ExitPrintstmt is called when exiting the printstmt production.
 	ExitPrintstmt(c *PrintstmtContext)
@@ -40,6 +64,30 @@ type SwiftGrammarListener interface {
 	// ExitIfstmt is called when exiting the ifstmt production.
 	ExitIfstmt(c *IfstmtContext)
 
-	// ExitExpr is called when exiting the expr production.
-	ExitExpr(c *ExprContext)
+	// ExitDeclstmt is called when exiting the declstmt production.
+	ExitDeclstmt(c *DeclstmtContext)
+
+	// ExitParExpr is called when exiting the ParExpr production.
+	ExitParExpr(c *ParExprContext)
+
+	// ExitPrimExpr is called when exiting the PrimExpr production.
+	ExitPrimExpr(c *PrimExprContext)
+
+	// ExitOpExpr is called when exiting the OpExpr production.
+	ExitOpExpr(c *OpExprContext)
+
+	// ExitNumExpr is called when exiting the NumExpr production.
+	ExitNumExpr(c *NumExprContext)
+
+	// ExitIdExpr is called when exiting the IdExpr production.
+	ExitIdExpr(c *IdExprContext)
+
+	// ExitStrExpr is called when exiting the StrExpr production.
+	ExitStrExpr(c *StrExprContext)
+
+	// ExitBoolExpr is called when exiting the BoolExpr production.
+	ExitBoolExpr(c *BoolExprContext)
+
+	// ExitPtipo is called when exiting the Ptipo production.
+	ExitPtipo(c *PtipoContext)
 }
