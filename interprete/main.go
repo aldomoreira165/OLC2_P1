@@ -12,7 +12,7 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
-//entornos
+// entornos
 type Environment struct {
 	parent    *Environment
 	variables map[string]interface{}
@@ -72,7 +72,7 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Ifstmt() != nil {
 		return l.Visit(ctx.Ifstmt())
 	}
-	if ctx.Declstmt() != nil{
+	if ctx.Declstmt() != nil {
 		return l.Visit(ctx.Declstmt())
 	}
 	return nil
@@ -87,7 +87,7 @@ func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
 
 func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	result := l.Visit(ctx.Expr())
-	
+
 	if result == true {
 		return l.Visit(ctx.Block())
 	}
@@ -97,8 +97,13 @@ func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 func (l *Visitor) VisitDeclstmt(ctx *parser.DeclstmtContext) interface{} {
 	varName := ctx.ID().GetText()
 	value := l.Visit(ctx.Expr())
-	// Guardar la variable en el entorno actual
-	l.currentEnvironment.variables[varName] = value
+
+	// Verificar si la variable ya existe en el entorno
+	if _, ok := l.currentEnvironment.variables[varName]; ok {
+		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
+	} else {
+		l.currentEnvironment.variables[varName] = value
+	}
 	return true
 }
 
@@ -153,7 +158,8 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
-	panic("Variable no encontrada: " + id)
+	// Devolver un mensaje de error en lugar de lanzar una excepción
+	return fmt.Sprintf("Variable no encontrada: %s", id)
 }
 
 func (l *Visitor) VisitStrExpr(ctx *parser.StrExprContext) interface{} {
@@ -192,7 +198,6 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	code := codigo.Contenido
-	fmt.Print("contenidoooo: ",code)
 	input := antlr.NewInputStream(code)
 	lexer := parser.NewSwiftLexer(input)
 	tokens := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
@@ -216,3 +221,4 @@ func main() {
 }
 
 //antlr4 -Dlanguage=Go -o parser -package parser -visitor *.g4
+

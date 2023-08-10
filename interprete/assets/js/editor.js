@@ -78,14 +78,27 @@ btnEjecutar.addEventListener("click", function () {
   })
   .then((response) => {
     if (!response.ok) {
-      throw new Error("Error al obtener datos del backend")
+      return response.json(); // Leer el cuerpo de la respuesta como JSON
     }
     return response.json();
   })
   .then((data) => {
-    Salida.setValue(data);
+    if (data.error) {
+      // Mostrar mensaje de error en la consola
+      console.error("Error en el servidor:", data.error);
+
+      // Mostrar mensaje de error en el textarea "Salida"
+      Salida.setValue(data.error);
+    } else {
+      // Mostrar resultado en la interfaz
+      Salida.setValue(data);
+    }
   })
   .catch((error) => {
     console.error("Error:", error);
   });
+});
+
+btnReportes.addEventListener("click", function(){
+  alert("hello")
 });
