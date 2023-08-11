@@ -43,6 +43,10 @@ func (v *BaseSwiftGrammarVisitor) VisitAsignstmt(ctx *AsignstmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitWhilestmt(ctx *WhilestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitParExpr(ctx *ParExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }

@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"interprete/Parser"
+	parser "interprete/Parser"
 	"log"
 	"net/http"
 	"strconv"
@@ -12,23 +12,26 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
-// entornos
+// estructura para los entornos
 type Environment struct {
 	parent    *Environment
 	variables map[string]Variable
 }
 
+// estructura para las variables
 type Variable struct {
 	Name  string
 	Type  string
 	Value interface{}
 }
 
+// estructura visitor
 type Visitor struct {
 	antlr.ParseTreeVisitor
 	currentEnvironment *Environment
 }
 
+// constructor del entorno
 func NewEnvironment(parent *Environment) *Environment {
 	return &Environment{
 		parent:    parent,
@@ -36,7 +39,9 @@ func NewEnvironment(parent *Environment) *Environment {
 	}
 }
 
+// inicializando el visitor
 func NewVisitor() parser.SwiftGrammarVisitor {
+	//entorno global
 	globalEnvironment := NewEnvironment(nil)
 	return &Visitor{
 		currentEnvironment: globalEnvironment,
@@ -48,8 +53,9 @@ func (l *Visitor) VisitS(ctx *parser.SContext) interface{} {
 }
 
 func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
-	// Crear un nuevo entorno local para el bloque
+	//Se crea un nuevo entorno local para el bloque
 	localEnvironment := NewEnvironment(l.currentEnvironment)
+	fmt.Println("se ha creado un nuevo entorno")
 	// Cambiar al nuevo entorno local
 	previousEnvironment := l.currentEnvironment
 	l.currentEnvironment = localEnvironment
@@ -90,13 +96,15 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Asignstmt() != nil {
 		return l.Visit(ctx.Asignstmt())
 	}
+	if ctx.Whilestmt() != nil {
+		return l.Visit(ctx.Whilestmt())
+	}
 	return nil
 }
 
 func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
 	returnValue := l.Visit(ctx.Expr())
 	stringValue := fmt.Sprint(returnValue)
-	//fmt.Println(returnValue)
 	return stringValue
 }
 
@@ -212,6 +220,21 @@ func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
 		fmt.Println("Variable no encontrada:", varName)
 		return false // La variable no existe en el entorno actual
 	}
+}
+
+func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
+    for {
+        expresion := l.Visit(ctx.Expr())
+
+        // Se verifica si la expresión es verdadera
+        if expresion == true {
+            // Se ejecuta el bloque de código dentro del bucle
+            l.Visit(ctx.Block())
+        } else {
+            break // Se sale del bucle si la expresion es falsa
+        }
+    }
+    return nil
 }
 
 func determineType(value interface{}) string {

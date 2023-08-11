@@ -12,6 +12,7 @@ stmt: printstmt
     | optionalTypedDeclstmt
     | asignstmt
     | ifstmt
+    | whilestmt
     ;
 
 printstmt
@@ -36,6 +37,10 @@ optionalTypedDeclstmt
 
 asignstmt
     : ID IG expr
+    ;
+
+whilestmt
+    : WHILE expr LLAVEIZQ block LLAVEDER
     ;
 
 expr

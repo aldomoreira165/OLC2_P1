@@ -34,6 +34,9 @@ type SwiftGrammarListener interface {
 	// EnterAsignstmt is called when entering the asignstmt production.
 	EnterAsignstmt(c *AsignstmtContext)
 
+	// EnterWhilestmt is called when entering the whilestmt production.
+	EnterWhilestmt(c *WhilestmtContext)
+
 	// EnterParExpr is called when entering the ParExpr production.
 	EnterParExpr(c *ParExprContext)
 
@@ -84,6 +87,9 @@ type SwiftGrammarListener interface {
 
 	// ExitAsignstmt is called when exiting the asignstmt production.
 	ExitAsignstmt(c *AsignstmtContext)
+
+	// ExitWhilestmt is called when exiting the whilestmt production.
+	ExitWhilestmt(c *WhilestmtContext)
 
 	// ExitParExpr is called when exiting the ParExpr production.
 	ExitParExpr(c *ParExprContext)

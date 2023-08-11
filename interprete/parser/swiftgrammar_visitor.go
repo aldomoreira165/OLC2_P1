@@ -34,6 +34,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#asignstmt.
 	VisitAsignstmt(ctx *AsignstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#whilestmt.
+	VisitWhilestmt(ctx *WhilestmtContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#ParExpr.
 	VisitParExpr(ctx *ParExprContext) interface{}
 

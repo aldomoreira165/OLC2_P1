@@ -74,6 +74,12 @@ func (s *BaseSwiftGrammarListener) EnterAsignstmt(ctx *AsignstmtContext) {}
 // ExitAsignstmt is called when production asignstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitAsignstmt(ctx *AsignstmtContext) {}
 
+// EnterWhilestmt is called when production whilestmt is entered.
+func (s *BaseSwiftGrammarListener) EnterWhilestmt(ctx *WhilestmtContext) {}
+
+// ExitWhilestmt is called when production whilestmt is exited.
+func (s *BaseSwiftGrammarListener) ExitWhilestmt(ctx *WhilestmtContext) {}
+
 // EnterParExpr is called when production ParExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterParExpr(ctx *ParExprContext) {}
 
