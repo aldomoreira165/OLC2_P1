@@ -6,7 +6,6 @@ func determineType(value interface{}) string {
 	case int64:
 		return "int"
 	case float64:
-		//ARREGLARRRR
 		return "float"
 	case bool:
 		//ARREGLARRRR
@@ -28,7 +27,6 @@ func validateType(value interface{}, declType string) bool {
 		_, isInt := value.(int64)
 		return isInt
 	case "float":
-		//ARREGLARRRRRRRR
 		_, isFloat := value.(float64)
 		return isFloat
 	case "bool":

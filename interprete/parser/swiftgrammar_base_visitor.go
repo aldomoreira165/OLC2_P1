@@ -47,19 +47,15 @@ func (v *BaseSwiftGrammarVisitor) VisitWhilestmt(ctx *WhilestmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitParExpr(ctx *ParExprContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitIncremento(ctx *IncrementoContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitPrimExpr(ctx *PrimExprContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitDecremento(ctx *DecrementoContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitOpExpr(ctx *OpExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSwiftGrammarVisitor) VisitNumExpr(ctx *NumExprContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitBoolExpr(ctx *BoolExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -67,11 +63,19 @@ func (v *BaseSwiftGrammarVisitor) VisitIdExpr(ctx *IdExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitNumExpr(ctx *NumExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitParExpr(ctx *ParExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitStrExpr(ctx *StrExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitBoolExpr(ctx *BoolExprContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitOpExpr(ctx *OpExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

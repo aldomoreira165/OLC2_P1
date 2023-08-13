@@ -13,6 +13,7 @@ stmt: printstmt
     | asignstmt
     | ifstmt
     | whilestmt
+    | opasignstmt
     ;
 
 printstmt
@@ -43,6 +44,11 @@ whilestmt
     : WHILE expr LLAVEIZQ block LLAVEDER
     ;
 
+opasignstmt
+    : ID ADD IG expr                           #Incremento
+    | ID SUB IG expr                           #Decremento  
+    ;
+
 expr
     : left=expr op=(MUL|DIV) right=expr         # OpExpr
     | left=expr op=(ADD|SUB) right=expr         # OpExpr
@@ -52,11 +58,7 @@ expr
     | left=expr AND right=expr                  # OpExpr
     | left=expr OR right=expr                   # OpExpr
     | PARIZQ expr PARDER                        # ParExpr
-    | primitivo                                 # PrimExpr
-    ;
-
-primitivo    
-    : NUMBER                                    # NumExpr
+    | NUMBER                                    # NumExpr
     | ID                                        # IdExpr
     | STRING                                    # StrExpr    
     | (TRU | FAL)                               # BoolExpr

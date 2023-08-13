@@ -37,26 +37,29 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#whilestmt.
 	VisitWhilestmt(ctx *WhilestmtContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#ParExpr.
-	VisitParExpr(ctx *ParExprContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#Incremento.
+	VisitIncremento(ctx *IncrementoContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#PrimExpr.
-	VisitPrimExpr(ctx *PrimExprContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#Decremento.
+	VisitDecremento(ctx *DecrementoContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#OpExpr.
-	VisitOpExpr(ctx *OpExprContext) interface{}
-
-	// Visit a parse tree produced by SwiftGrammarParser#NumExpr.
-	VisitNumExpr(ctx *NumExprContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#BoolExpr.
+	VisitBoolExpr(ctx *BoolExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#IdExpr.
 	VisitIdExpr(ctx *IdExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#NumExpr.
+	VisitNumExpr(ctx *NumExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#ParExpr.
+	VisitParExpr(ctx *ParExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#StrExpr.
 	VisitStrExpr(ctx *StrExprContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#BoolExpr.
-	VisitBoolExpr(ctx *BoolExprContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#OpExpr.
+	VisitOpExpr(ctx *OpExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#tipo.
 	VisitTipo(ctx *TipoContext) interface{}

@@ -37,26 +37,29 @@ type SwiftGrammarListener interface {
 	// EnterWhilestmt is called when entering the whilestmt production.
 	EnterWhilestmt(c *WhilestmtContext)
 
-	// EnterParExpr is called when entering the ParExpr production.
-	EnterParExpr(c *ParExprContext)
+	// EnterIncremento is called when entering the Incremento production.
+	EnterIncremento(c *IncrementoContext)
 
-	// EnterPrimExpr is called when entering the PrimExpr production.
-	EnterPrimExpr(c *PrimExprContext)
+	// EnterDecremento is called when entering the Decremento production.
+	EnterDecremento(c *DecrementoContext)
 
-	// EnterOpExpr is called when entering the OpExpr production.
-	EnterOpExpr(c *OpExprContext)
-
-	// EnterNumExpr is called when entering the NumExpr production.
-	EnterNumExpr(c *NumExprContext)
+	// EnterBoolExpr is called when entering the BoolExpr production.
+	EnterBoolExpr(c *BoolExprContext)
 
 	// EnterIdExpr is called when entering the IdExpr production.
 	EnterIdExpr(c *IdExprContext)
 
+	// EnterNumExpr is called when entering the NumExpr production.
+	EnterNumExpr(c *NumExprContext)
+
+	// EnterParExpr is called when entering the ParExpr production.
+	EnterParExpr(c *ParExprContext)
+
 	// EnterStrExpr is called when entering the StrExpr production.
 	EnterStrExpr(c *StrExprContext)
 
-	// EnterBoolExpr is called when entering the BoolExpr production.
-	EnterBoolExpr(c *BoolExprContext)
+	// EnterOpExpr is called when entering the OpExpr production.
+	EnterOpExpr(c *OpExprContext)
 
 	// EnterTipo is called when entering the tipo production.
 	EnterTipo(c *TipoContext)
@@ -91,26 +94,29 @@ type SwiftGrammarListener interface {
 	// ExitWhilestmt is called when exiting the whilestmt production.
 	ExitWhilestmt(c *WhilestmtContext)
 
-	// ExitParExpr is called when exiting the ParExpr production.
-	ExitParExpr(c *ParExprContext)
+	// ExitIncremento is called when exiting the Incremento production.
+	ExitIncremento(c *IncrementoContext)
 
-	// ExitPrimExpr is called when exiting the PrimExpr production.
-	ExitPrimExpr(c *PrimExprContext)
+	// ExitDecremento is called when exiting the Decremento production.
+	ExitDecremento(c *DecrementoContext)
 
-	// ExitOpExpr is called when exiting the OpExpr production.
-	ExitOpExpr(c *OpExprContext)
-
-	// ExitNumExpr is called when exiting the NumExpr production.
-	ExitNumExpr(c *NumExprContext)
+	// ExitBoolExpr is called when exiting the BoolExpr production.
+	ExitBoolExpr(c *BoolExprContext)
 
 	// ExitIdExpr is called when exiting the IdExpr production.
 	ExitIdExpr(c *IdExprContext)
 
+	// ExitNumExpr is called when exiting the NumExpr production.
+	ExitNumExpr(c *NumExprContext)
+
+	// ExitParExpr is called when exiting the ParExpr production.
+	ExitParExpr(c *ParExprContext)
+
 	// ExitStrExpr is called when exiting the StrExpr production.
 	ExitStrExpr(c *StrExprContext)
 
-	// ExitBoolExpr is called when exiting the BoolExpr production.
-	ExitBoolExpr(c *BoolExprContext)
+	// ExitOpExpr is called when exiting the OpExpr production.
+	ExitOpExpr(c *OpExprContext)
 
 	// ExitTipo is called when exiting the tipo production.
 	ExitTipo(c *TipoContext)
