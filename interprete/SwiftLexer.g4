@@ -16,6 +16,9 @@ PRINT: 'print';
 IF: 'if';
 ELSE: 'else';
 WHILE: 'while';
+SWITCH: 'switch';
+CASE: 'case';
+DEFAULT: 'default';
 VAR: 'var';
 
 // primitives

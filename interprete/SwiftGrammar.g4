@@ -12,6 +12,7 @@ stmt: printstmt
     | optionalTypedDeclstmt
     | asignstmt
     | ifstmt
+    | switchstmt
     | whilestmt
     | opasignstmt
     ;
@@ -25,6 +26,12 @@ ifstmt
     ;
 
 elseifstmt: ELSE IF expr LLAVEIZQ block LLAVEDER;
+
+switchstmt: SWITCH expr LLAVEIZQ  caseStmt+ defaultCase? LLAVEDER;
+
+caseStmt: CASE expr DOSPUNTOS block;
+
+defaultCase: DEFAULT DOSPUNTOS block;
 
 typedDeclstmt
     : VAR ID DOSPUNTOS tipo IG expr 

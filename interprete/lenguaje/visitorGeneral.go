@@ -2,10 +2,11 @@ package lenguaje
 
 import (
 	"fmt"
-	"github.com/antlr4-go/antlr/v4"
-	"interprete/Parser"
+	parser "interprete/Parser"
 	"log"
 	"strconv"
+
+	"github.com/antlr4-go/antlr/v4"
 )
 
 type Visitor struct {
@@ -49,6 +50,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Ifstmt() != nil {
 		return l.Visit(ctx.Ifstmt())
 	}
+	if ctx.Switchstmt() != nil {
+		return l.Visit(ctx.Switchstmt())
+	}
 	if ctx.TypedDeclstmt() != nil {
 		return l.Visit(ctx.TypedDeclstmt())
 	}
@@ -77,7 +81,7 @@ func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
 	return stringValue
 }
 
-// visit del if (falta eliminar y crear entornos)
+// visit del if
 func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	result := l.Visit(ctx.Expr())
 
@@ -113,6 +117,40 @@ func (l *Visitor) VisitElseifstmt(ctx *parser.ElseifstmtContext) interface{} {
 		l.Visit(ctx.Block())
 	}
 
+	return nil
+}
+
+// switch
+func (l *Visitor) VisitSwitchstmt(ctx *parser.SwitchstmtContext) interface{} {
+	expresion := l.Visit(ctx.Expr())
+	exprType := determineType(expresion)
+	valorExpresion := convertirExpresion(exprType, expresion)
+	for _, caseCtx := range ctx.AllCaseStmt() {
+		caseSwitch := l.Visit(caseCtx.Expr())
+		caseSwitchType := determineType(caseSwitch)
+		valorCase := convertirExpresion(caseSwitchType,caseSwitch)
+		
+		if valorExpresion == valorCase && exprType == caseSwitchType {
+			return l.Visit(caseCtx.Block()) // Salir del switch después de ejecutar un caso válido
+		}
+	}
+
+	// Si no se encontró un caso, ejecutar el caso por defecto si existe
+	if ctx.DefaultCase() != nil {
+		return l.Visit(ctx.DefaultCase().Block())
+	}
+	return nil
+}
+
+func (l *Visitor) VisitCaseStmt(ctx *parser.CaseStmtContext) interface{} {
+	// No se necesita implementación adicional aquí, ya que los bloques se ejecutan en VisitSwitchstmt
+	l.Visit(ctx.Block())
+	return nil
+}
+
+func (l *Visitor) VisitDefaultCase(ctx *parser.DefaultCaseContext) interface{} {
+	// No se necesita implementación adicional aquí, ya que los bloques se ejecutan en VisitSwitchstmt
+	l.Visit(ctx.Block())
 	return nil
 }
 

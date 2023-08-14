@@ -25,6 +25,15 @@ type SwiftGrammarListener interface {
 	// EnterElseifstmt is called when entering the elseifstmt production.
 	EnterElseifstmt(c *ElseifstmtContext)
 
+	// EnterSwitchstmt is called when entering the switchstmt production.
+	EnterSwitchstmt(c *SwitchstmtContext)
+
+	// EnterCaseStmt is called when entering the caseStmt production.
+	EnterCaseStmt(c *CaseStmtContext)
+
+	// EnterDefaultCase is called when entering the defaultCase production.
+	EnterDefaultCase(c *DefaultCaseContext)
+
 	// EnterTypedDeclstmt is called when entering the typedDeclstmt production.
 	EnterTypedDeclstmt(c *TypedDeclstmtContext)
 
@@ -90,6 +99,15 @@ type SwiftGrammarListener interface {
 
 	// ExitElseifstmt is called when exiting the elseifstmt production.
 	ExitElseifstmt(c *ElseifstmtContext)
+
+	// ExitSwitchstmt is called when exiting the switchstmt production.
+	ExitSwitchstmt(c *SwitchstmtContext)
+
+	// ExitCaseStmt is called when exiting the caseStmt production.
+	ExitCaseStmt(c *CaseStmtContext)
+
+	// ExitDefaultCase is called when exiting the defaultCase production.
+	ExitDefaultCase(c *DefaultCaseContext)
 
 	// ExitTypedDeclstmt is called when exiting the typedDeclstmt production.
 	ExitTypedDeclstmt(c *TypedDeclstmtContext)

@@ -56,6 +56,24 @@ func (s *BaseSwiftGrammarListener) EnterElseifstmt(ctx *ElseifstmtContext) {}
 // ExitElseifstmt is called when production elseifstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitElseifstmt(ctx *ElseifstmtContext) {}
 
+// EnterSwitchstmt is called when production switchstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterSwitchstmt(ctx *SwitchstmtContext) {}
+
+// ExitSwitchstmt is called when production switchstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitSwitchstmt(ctx *SwitchstmtContext) {}
+
+// EnterCaseStmt is called when production caseStmt is entered.
+func (s *BaseSwiftGrammarListener) EnterCaseStmt(ctx *CaseStmtContext) {}
+
+// ExitCaseStmt is called when production caseStmt is exited.
+func (s *BaseSwiftGrammarListener) ExitCaseStmt(ctx *CaseStmtContext) {}
+
+// EnterDefaultCase is called when production defaultCase is entered.
+func (s *BaseSwiftGrammarListener) EnterDefaultCase(ctx *DefaultCaseContext) {}
+
+// ExitDefaultCase is called when production defaultCase is exited.
+func (s *BaseSwiftGrammarListener) ExitDefaultCase(ctx *DefaultCaseContext) {}
+
 // EnterTypedDeclstmt is called when production typedDeclstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterTypedDeclstmt(ctx *TypedDeclstmtContext) {}
 

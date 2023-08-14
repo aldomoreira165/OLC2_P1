@@ -25,6 +25,15 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#elseifstmt.
 	VisitElseifstmt(ctx *ElseifstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#switchstmt.
+	VisitSwitchstmt(ctx *SwitchstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#caseStmt.
+	VisitCaseStmt(ctx *CaseStmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#defaultCase.
+	VisitDefaultCase(ctx *DefaultCaseContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#typedDeclstmt.
 	VisitTypedDeclstmt(ctx *TypedDeclstmtContext) interface{}
 

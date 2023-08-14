@@ -59,7 +59,27 @@ func validateType(value interface{}, declType string) bool {
 	}
 }
 
-
-
+//para convertir una expresion en el tipo que se indica
+func convertirExpresion(tipo string ,exp interface{}) interface{} {
+	switch tipo {
+	case "int":
+		result, _ := exp.(int64)
+		return result
+	case "float":
+		result, _ := exp.(float64)
+		return result
+	case "bool":
+		result, _ := exp.(bool)
+		return result
+	case "character":
+		result, _ := exp.(string)
+		return result
+	case "String":
+		result, _ := exp.(string)
+		return result
+	default:
+		return false // Tipo desconocido o no admitido
+	}
+}
 
 

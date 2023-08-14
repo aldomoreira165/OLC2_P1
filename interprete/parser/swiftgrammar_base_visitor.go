@@ -31,6 +31,18 @@ func (v *BaseSwiftGrammarVisitor) VisitElseifstmt(ctx *ElseifstmtContext) interf
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitSwitchstmt(ctx *SwitchstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitCaseStmt(ctx *CaseStmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitDefaultCase(ctx *DefaultCaseContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitTypedDeclstmt(ctx *TypedDeclstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
