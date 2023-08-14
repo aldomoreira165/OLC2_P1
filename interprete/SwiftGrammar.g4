@@ -21,8 +21,10 @@ printstmt
     ;
 
 ifstmt  
-    : IF expr LLAVEIZQ block LLAVEDER
+    : IF expr LLAVEIZQ block LLAVEDER (elseifstmt)* (ELSE LLAVEIZQ block LLAVEDER)?
     ;
+
+elseifstmt: ELSE IF expr LLAVEIZQ block LLAVEDER;
 
 typedDeclstmt
     : VAR ID DOSPUNTOS tipo IG expr 

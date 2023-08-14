@@ -50,6 +50,12 @@ func (s *BaseSwiftGrammarListener) EnterIfstmt(ctx *IfstmtContext) {}
 // ExitIfstmt is called when production ifstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitIfstmt(ctx *IfstmtContext) {}
 
+// EnterElseifstmt is called when production elseifstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterElseifstmt(ctx *ElseifstmtContext) {}
+
+// ExitElseifstmt is called when production elseifstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitElseifstmt(ctx *ElseifstmtContext) {}
+
 // EnterTypedDeclstmt is called when production typedDeclstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterTypedDeclstmt(ctx *TypedDeclstmtContext) {}
 

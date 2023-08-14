@@ -2,10 +2,10 @@ package lenguaje
 
 import (
 	"fmt"
+	"github.com/antlr4-go/antlr/v4"
 	"interprete/Parser"
 	"log"
 	"strconv"
-	"github.com/antlr4-go/antlr/v4"
 )
 
 type Visitor struct {
@@ -32,7 +32,7 @@ func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
 		switch stmtResult.(type) {
 		case int64:
 			out += strconv.FormatInt(stmtResult.(int64), 10) + "\n"
-		case float64:  // Nuevo caso para números decimales
+		case float64: // Nuevo caso para números decimales
 			out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64) + "\n"
 		case string:
 			out += stmtResult.(string) + "\n"
@@ -80,12 +80,40 @@ func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
 // visit del if (falta eliminar y crear entornos)
 func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	result := l.Visit(ctx.Expr())
+
 	if result == true {
 		previousEnvironment := CrearEntorno(l)
 		defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
-		return l.Visit(ctx.Block())
+		return l.Visit(ctx.Block(0))
+	} else {
+		// Recorrer los bloques else if
+		for _, elseifCtx := range ctx.AllElseifstmt() {
+			elseifValue := l.Visit(elseifCtx.Expr())
+			if elseifValue == true {
+				previousEnvironment := CrearEntorno(l)
+				defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
+				return l.Visit(elseifCtx.Block())
+			}
+		}
+
+		if ctx.ELSE() != nil {
+			previousEnvironment := CrearEntorno(l)
+			defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
+			return l.Visit(ctx.Block(1))
+		}
+
 	}
-	return true
+	return nil
+}
+
+func (l *Visitor) VisitElseifstmt(ctx *parser.ElseifstmtContext) interface{} {
+	elseifValue := l.Visit(ctx.Expr()).(bool)
+
+	if elseifValue {
+		l.Visit(ctx.Block())
+	}
+
+	return nil
 }
 
 // visit del while (arreglar)

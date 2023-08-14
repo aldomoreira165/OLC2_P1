@@ -27,6 +27,10 @@ func (v *BaseSwiftGrammarVisitor) VisitIfstmt(ctx *IfstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitElseifstmt(ctx *ElseifstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitTypedDeclstmt(ctx *TypedDeclstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }

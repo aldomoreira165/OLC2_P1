@@ -22,6 +22,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#ifstmt.
 	VisitIfstmt(ctx *IfstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#elseifstmt.
+	VisitElseifstmt(ctx *ElseifstmtContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#typedDeclstmt.
 	VisitTypedDeclstmt(ctx *TypedDeclstmtContext) interface{}
 

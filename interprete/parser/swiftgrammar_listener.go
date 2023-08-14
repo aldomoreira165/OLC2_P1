@@ -22,6 +22,9 @@ type SwiftGrammarListener interface {
 	// EnterIfstmt is called when entering the ifstmt production.
 	EnterIfstmt(c *IfstmtContext)
 
+	// EnterElseifstmt is called when entering the elseifstmt production.
+	EnterElseifstmt(c *ElseifstmtContext)
+
 	// EnterTypedDeclstmt is called when entering the typedDeclstmt production.
 	EnterTypedDeclstmt(c *TypedDeclstmtContext)
 
@@ -84,6 +87,9 @@ type SwiftGrammarListener interface {
 
 	// ExitIfstmt is called when exiting the ifstmt production.
 	ExitIfstmt(c *IfstmtContext)
+
+	// ExitElseifstmt is called when exiting the elseifstmt production.
+	ExitElseifstmt(c *ElseifstmtContext)
 
 	// ExitTypedDeclstmt is called when exiting the typedDeclstmt production.
 	ExitTypedDeclstmt(c *TypedDeclstmtContext)
