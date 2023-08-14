@@ -35,14 +35,14 @@ func swiftgrammarParserInit() {
 		"", "'int'", "'float'", "'bool'", "'character'", "'String'", "'nil'",
 		"'true'", "'false'", "'print'", "'if'", "'else'", "'while'", "'var'",
 		"", "", "", "'!='", "'=='", "'!'", "'||'", "'&&'", "'='", "'>='", "'<='",
-		"'>'", "'<'", "'*'", "'/'", "'+'", "'-'", "'('", "')'", "'{'", "'}'",
-		"':'", "'?'",
+		"'>'", "'<'", "'*'", "'/'", "'+'", "'-'", "'%'", "'('", "')'", "'{'",
+		"'}'", "':'", "'?'",
 	}
 	staticData.SymbolicNames = []string{
 		"", "INT", "FLOAT", "BOOL", "CHARACTER", "PSTRING", "NIL", "TRU", "FAL",
 		"PRINT", "IF", "ELSE", "WHILE", "VAR", "NUMBER", "STRING", "ID", "DIF",
 		"IG_IG", "NOT", "OR", "AND", "IG", "MAY_IG", "MEN_IG", "MAYOR", "MENOR",
-		"MUL", "DIV", "ADD", "SUB", "PARIZQ", "PARDER", "LLAVEIZQ", "LLAVEDER",
+		"MUL", "DIV", "ADD", "SUB", "MOD", "PARIZQ", "PARDER", "LLAVEIZQ", "LLAVEDER",
 		"DOSPUNTOS", "INTERROGACION", "WHITESPACE", "COMMENT", "LINE_COMMENT",
 	}
 	staticData.RuleNames = []string{
@@ -52,7 +52,7 @@ func swiftgrammarParserInit() {
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 39, 135, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 1, 40, 137, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
 		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 2, 10, 7,
 		10, 2, 11, 7, 11, 2, 12, 7, 12, 1, 0, 1, 0, 1, 0, 1, 1, 5, 1, 31, 8, 1,
 		10, 1, 12, 1, 34, 9, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
@@ -61,55 +61,56 @@ func swiftgrammarParserInit() {
 		6, 1, 6, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 7, 1, 8, 1, 8, 1, 8, 1, 8, 1,
 		9, 1, 9, 1, 9, 1, 9, 1, 9, 1, 9, 1, 10, 1, 10, 1, 10, 1, 10, 1, 10, 1,
 		10, 1, 10, 1, 10, 3, 10, 93, 8, 10, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11,
-		1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 3, 11, 105, 8, 11, 1, 11, 1, 11, 1,
+		1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 3, 11, 107, 8, 11, 1,
 		11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11,
-		1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 5, 11, 128, 8,
-		11, 10, 11, 12, 11, 131, 9, 11, 1, 12, 1, 12, 1, 12, 0, 1, 22, 13, 0, 2,
-		4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 0, 7, 1, 0, 7, 8, 1, 0, 27, 28,
-		1, 0, 29, 30, 2, 0, 23, 23, 25, 25, 2, 0, 24, 24, 26, 26, 1, 0, 17, 18,
-		1, 0, 1, 5, 142, 0, 26, 1, 0, 0, 0, 2, 32, 1, 0, 0, 0, 4, 43, 1, 0, 0,
-		0, 6, 45, 1, 0, 0, 0, 8, 50, 1, 0, 0, 0, 10, 56, 1, 0, 0, 0, 12, 63, 1,
-		0, 0, 0, 14, 68, 1, 0, 0, 0, 16, 74, 1, 0, 0, 0, 18, 78, 1, 0, 0, 0, 20,
-		92, 1, 0, 0, 0, 22, 104, 1, 0, 0, 0, 24, 132, 1, 0, 0, 0, 26, 27, 3, 2,
-		1, 0, 27, 28, 5, 0, 0, 1, 28, 1, 1, 0, 0, 0, 29, 31, 3, 4, 2, 0, 30, 29,
-		1, 0, 0, 0, 31, 34, 1, 0, 0, 0, 32, 30, 1, 0, 0, 0, 32, 33, 1, 0, 0, 0,
-		33, 3, 1, 0, 0, 0, 34, 32, 1, 0, 0, 0, 35, 44, 3, 6, 3, 0, 36, 44, 3, 10,
-		5, 0, 37, 44, 3, 12, 6, 0, 38, 44, 3, 14, 7, 0, 39, 44, 3, 16, 8, 0, 40,
-		44, 3, 8, 4, 0, 41, 44, 3, 18, 9, 0, 42, 44, 3, 20, 10, 0, 43, 35, 1, 0,
-		0, 0, 43, 36, 1, 0, 0, 0, 43, 37, 1, 0, 0, 0, 43, 38, 1, 0, 0, 0, 43, 39,
-		1, 0, 0, 0, 43, 40, 1, 0, 0, 0, 43, 41, 1, 0, 0, 0, 43, 42, 1, 0, 0, 0,
-		44, 5, 1, 0, 0, 0, 45, 46, 5, 9, 0, 0, 46, 47, 5, 31, 0, 0, 47, 48, 3,
-		22, 11, 0, 48, 49, 5, 32, 0, 0, 49, 7, 1, 0, 0, 0, 50, 51, 5, 10, 0, 0,
-		51, 52, 3, 22, 11, 0, 52, 53, 5, 33, 0, 0, 53, 54, 3, 2, 1, 0, 54, 55,
-		5, 34, 0, 0, 55, 9, 1, 0, 0, 0, 56, 57, 5, 13, 0, 0, 57, 58, 5, 16, 0,
-		0, 58, 59, 5, 35, 0, 0, 59, 60, 3, 24, 12, 0, 60, 61, 5, 22, 0, 0, 61,
-		62, 3, 22, 11, 0, 62, 11, 1, 0, 0, 0, 63, 64, 5, 13, 0, 0, 64, 65, 5, 16,
-		0, 0, 65, 66, 5, 22, 0, 0, 66, 67, 3, 22, 11, 0, 67, 13, 1, 0, 0, 0, 68,
-		69, 5, 13, 0, 0, 69, 70, 5, 16, 0, 0, 70, 71, 5, 35, 0, 0, 71, 72, 3, 24,
-		12, 0, 72, 73, 5, 36, 0, 0, 73, 15, 1, 0, 0, 0, 74, 75, 5, 16, 0, 0, 75,
-		76, 5, 22, 0, 0, 76, 77, 3, 22, 11, 0, 77, 17, 1, 0, 0, 0, 78, 79, 5, 12,
-		0, 0, 79, 80, 3, 22, 11, 0, 80, 81, 5, 33, 0, 0, 81, 82, 3, 2, 1, 0, 82,
-		83, 5, 34, 0, 0, 83, 19, 1, 0, 0, 0, 84, 85, 5, 16, 0, 0, 85, 86, 5, 29,
-		0, 0, 86, 87, 5, 22, 0, 0, 87, 93, 3, 22, 11, 0, 88, 89, 5, 16, 0, 0, 89,
-		90, 5, 30, 0, 0, 90, 91, 5, 22, 0, 0, 91, 93, 3, 22, 11, 0, 92, 84, 1,
-		0, 0, 0, 92, 88, 1, 0, 0, 0, 93, 21, 1, 0, 0, 0, 94, 95, 6, 11, -1, 0,
-		95, 96, 5, 31, 0, 0, 96, 97, 3, 22, 11, 0, 97, 98, 5, 32, 0, 0, 98, 105,
-		1, 0, 0, 0, 99, 105, 5, 14, 0, 0, 100, 105, 5, 16, 0, 0, 101, 105, 5, 15,
-		0, 0, 102, 105, 7, 0, 0, 0, 103, 105, 5, 6, 0, 0, 104, 94, 1, 0, 0, 0,
-		104, 99, 1, 0, 0, 0, 104, 100, 1, 0, 0, 0, 104, 101, 1, 0, 0, 0, 104, 102,
-		1, 0, 0, 0, 104, 103, 1, 0, 0, 0, 105, 129, 1, 0, 0, 0, 106, 107, 10, 13,
-		0, 0, 107, 108, 7, 1, 0, 0, 108, 128, 3, 22, 11, 14, 109, 110, 10, 12,
-		0, 0, 110, 111, 7, 2, 0, 0, 111, 128, 3, 22, 11, 13, 112, 113, 10, 11,
-		0, 0, 113, 114, 7, 3, 0, 0, 114, 128, 3, 22, 11, 12, 115, 116, 10, 10,
-		0, 0, 116, 117, 7, 4, 0, 0, 117, 128, 3, 22, 11, 11, 118, 119, 10, 9, 0,
-		0, 119, 120, 7, 5, 0, 0, 120, 128, 3, 22, 11, 10, 121, 122, 10, 8, 0, 0,
-		122, 123, 5, 21, 0, 0, 123, 128, 3, 22, 11, 9, 124, 125, 10, 7, 0, 0, 125,
-		126, 5, 20, 0, 0, 126, 128, 3, 22, 11, 8, 127, 106, 1, 0, 0, 0, 127, 109,
-		1, 0, 0, 0, 127, 112, 1, 0, 0, 0, 127, 115, 1, 0, 0, 0, 127, 118, 1, 0,
-		0, 0, 127, 121, 1, 0, 0, 0, 127, 124, 1, 0, 0, 0, 128, 131, 1, 0, 0, 0,
-		129, 127, 1, 0, 0, 0, 129, 130, 1, 0, 0, 0, 130, 23, 1, 0, 0, 0, 131, 129,
-		1, 0, 0, 0, 132, 133, 7, 6, 0, 0, 133, 25, 1, 0, 0, 0, 6, 32, 43, 92, 104,
-		127, 129,
+		1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 1, 11, 5,
+		11, 130, 8, 11, 10, 11, 12, 11, 133, 9, 11, 1, 12, 1, 12, 1, 12, 0, 1,
+		22, 13, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 0, 7, 1, 0, 7, 8,
+		2, 0, 27, 28, 31, 31, 1, 0, 29, 30, 2, 0, 23, 23, 25, 25, 2, 0, 24, 24,
+		26, 26, 1, 0, 17, 18, 1, 0, 1, 5, 145, 0, 26, 1, 0, 0, 0, 2, 32, 1, 0,
+		0, 0, 4, 43, 1, 0, 0, 0, 6, 45, 1, 0, 0, 0, 8, 50, 1, 0, 0, 0, 10, 56,
+		1, 0, 0, 0, 12, 63, 1, 0, 0, 0, 14, 68, 1, 0, 0, 0, 16, 74, 1, 0, 0, 0,
+		18, 78, 1, 0, 0, 0, 20, 92, 1, 0, 0, 0, 22, 106, 1, 0, 0, 0, 24, 134, 1,
+		0, 0, 0, 26, 27, 3, 2, 1, 0, 27, 28, 5, 0, 0, 1, 28, 1, 1, 0, 0, 0, 29,
+		31, 3, 4, 2, 0, 30, 29, 1, 0, 0, 0, 31, 34, 1, 0, 0, 0, 32, 30, 1, 0, 0,
+		0, 32, 33, 1, 0, 0, 0, 33, 3, 1, 0, 0, 0, 34, 32, 1, 0, 0, 0, 35, 44, 3,
+		6, 3, 0, 36, 44, 3, 10, 5, 0, 37, 44, 3, 12, 6, 0, 38, 44, 3, 14, 7, 0,
+		39, 44, 3, 16, 8, 0, 40, 44, 3, 8, 4, 0, 41, 44, 3, 18, 9, 0, 42, 44, 3,
+		20, 10, 0, 43, 35, 1, 0, 0, 0, 43, 36, 1, 0, 0, 0, 43, 37, 1, 0, 0, 0,
+		43, 38, 1, 0, 0, 0, 43, 39, 1, 0, 0, 0, 43, 40, 1, 0, 0, 0, 43, 41, 1,
+		0, 0, 0, 43, 42, 1, 0, 0, 0, 44, 5, 1, 0, 0, 0, 45, 46, 5, 9, 0, 0, 46,
+		47, 5, 32, 0, 0, 47, 48, 3, 22, 11, 0, 48, 49, 5, 33, 0, 0, 49, 7, 1, 0,
+		0, 0, 50, 51, 5, 10, 0, 0, 51, 52, 3, 22, 11, 0, 52, 53, 5, 34, 0, 0, 53,
+		54, 3, 2, 1, 0, 54, 55, 5, 35, 0, 0, 55, 9, 1, 0, 0, 0, 56, 57, 5, 13,
+		0, 0, 57, 58, 5, 16, 0, 0, 58, 59, 5, 36, 0, 0, 59, 60, 3, 24, 12, 0, 60,
+		61, 5, 22, 0, 0, 61, 62, 3, 22, 11, 0, 62, 11, 1, 0, 0, 0, 63, 64, 5, 13,
+		0, 0, 64, 65, 5, 16, 0, 0, 65, 66, 5, 22, 0, 0, 66, 67, 3, 22, 11, 0, 67,
+		13, 1, 0, 0, 0, 68, 69, 5, 13, 0, 0, 69, 70, 5, 16, 0, 0, 70, 71, 5, 36,
+		0, 0, 71, 72, 3, 24, 12, 0, 72, 73, 5, 37, 0, 0, 73, 15, 1, 0, 0, 0, 74,
+		75, 5, 16, 0, 0, 75, 76, 5, 22, 0, 0, 76, 77, 3, 22, 11, 0, 77, 17, 1,
+		0, 0, 0, 78, 79, 5, 12, 0, 0, 79, 80, 3, 22, 11, 0, 80, 81, 5, 34, 0, 0,
+		81, 82, 3, 2, 1, 0, 82, 83, 5, 35, 0, 0, 83, 19, 1, 0, 0, 0, 84, 85, 5,
+		16, 0, 0, 85, 86, 5, 29, 0, 0, 86, 87, 5, 22, 0, 0, 87, 93, 3, 22, 11,
+		0, 88, 89, 5, 16, 0, 0, 89, 90, 5, 30, 0, 0, 90, 91, 5, 22, 0, 0, 91, 93,
+		3, 22, 11, 0, 92, 84, 1, 0, 0, 0, 92, 88, 1, 0, 0, 0, 93, 21, 1, 0, 0,
+		0, 94, 95, 6, 11, -1, 0, 95, 96, 5, 32, 0, 0, 96, 97, 3, 22, 11, 0, 97,
+		98, 5, 33, 0, 0, 98, 107, 1, 0, 0, 0, 99, 100, 5, 30, 0, 0, 100, 107, 3,
+		22, 11, 13, 101, 107, 5, 14, 0, 0, 102, 107, 5, 16, 0, 0, 103, 107, 5,
+		15, 0, 0, 104, 107, 7, 0, 0, 0, 105, 107, 5, 6, 0, 0, 106, 94, 1, 0, 0,
+		0, 106, 99, 1, 0, 0, 0, 106, 101, 1, 0, 0, 0, 106, 102, 1, 0, 0, 0, 106,
+		103, 1, 0, 0, 0, 106, 104, 1, 0, 0, 0, 106, 105, 1, 0, 0, 0, 107, 131,
+		1, 0, 0, 0, 108, 109, 10, 12, 0, 0, 109, 110, 7, 1, 0, 0, 110, 130, 3,
+		22, 11, 13, 111, 112, 10, 11, 0, 0, 112, 113, 7, 2, 0, 0, 113, 130, 3,
+		22, 11, 12, 114, 115, 10, 10, 0, 0, 115, 116, 7, 3, 0, 0, 116, 130, 3,
+		22, 11, 11, 117, 118, 10, 9, 0, 0, 118, 119, 7, 4, 0, 0, 119, 130, 3, 22,
+		11, 10, 120, 121, 10, 8, 0, 0, 121, 122, 7, 5, 0, 0, 122, 130, 3, 22, 11,
+		9, 123, 124, 10, 7, 0, 0, 124, 125, 5, 21, 0, 0, 125, 130, 3, 22, 11, 8,
+		126, 127, 10, 6, 0, 0, 127, 128, 5, 20, 0, 0, 128, 130, 3, 22, 11, 7, 129,
+		108, 1, 0, 0, 0, 129, 111, 1, 0, 0, 0, 129, 114, 1, 0, 0, 0, 129, 117,
+		1, 0, 0, 0, 129, 120, 1, 0, 0, 0, 129, 123, 1, 0, 0, 0, 129, 126, 1, 0,
+		0, 0, 130, 133, 1, 0, 0, 0, 131, 129, 1, 0, 0, 0, 131, 132, 1, 0, 0, 0,
+		132, 23, 1, 0, 0, 0, 133, 131, 1, 0, 0, 0, 134, 135, 7, 6, 0, 0, 135, 25,
+		1, 0, 0, 0, 6, 32, 43, 92, 106, 129, 131,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -178,15 +179,16 @@ const (
 	SwiftGrammarParserDIV           = 28
 	SwiftGrammarParserADD           = 29
 	SwiftGrammarParserSUB           = 30
-	SwiftGrammarParserPARIZQ        = 31
-	SwiftGrammarParserPARDER        = 32
-	SwiftGrammarParserLLAVEIZQ      = 33
-	SwiftGrammarParserLLAVEDER      = 34
-	SwiftGrammarParserDOSPUNTOS     = 35
-	SwiftGrammarParserINTERROGACION = 36
-	SwiftGrammarParserWHITESPACE    = 37
-	SwiftGrammarParserCOMMENT       = 38
-	SwiftGrammarParserLINE_COMMENT  = 39
+	SwiftGrammarParserMOD           = 31
+	SwiftGrammarParserPARIZQ        = 32
+	SwiftGrammarParserPARDER        = 33
+	SwiftGrammarParserLLAVEIZQ      = 34
+	SwiftGrammarParserLLAVEDER      = 35
+	SwiftGrammarParserDOSPUNTOS     = 36
+	SwiftGrammarParserINTERROGACION = 37
+	SwiftGrammarParserWHITESPACE    = 38
+	SwiftGrammarParserCOMMENT       = 39
+	SwiftGrammarParserLINE_COMMENT  = 40
 )
 
 // SwiftGrammarParser rules.
@@ -2267,6 +2269,66 @@ func (s *ExprContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) s
 	return antlr.TreesStringTree(s, ruleNames, recog)
 }
 
+type UnariaExprContext struct {
+	ExprContext
+}
+
+func NewUnariaExprContext(parser antlr.Parser, ctx antlr.ParserRuleContext) *UnariaExprContext {
+	var p = new(UnariaExprContext)
+
+	InitEmptyExprContext(&p.ExprContext)
+	p.parser = parser
+	p.CopyAll(ctx.(*ExprContext))
+
+	return p
+}
+
+func (s *UnariaExprContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *UnariaExprContext) SUB() antlr.TerminalNode {
+	return s.GetToken(SwiftGrammarParserSUB, 0)
+}
+
+func (s *UnariaExprContext) Expr() IExprContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExprContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExprContext)
+}
+
+func (s *UnariaExprContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SwiftGrammarListener); ok {
+		listenerT.EnterUnariaExpr(s)
+	}
+}
+
+func (s *UnariaExprContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SwiftGrammarListener); ok {
+		listenerT.ExitUnariaExpr(s)
+	}
+}
+
+func (s *UnariaExprContext) Accept(visitor antlr.ParseTreeVisitor) interface{} {
+	switch t := visitor.(type) {
+	case SwiftGrammarVisitor:
+		return t.VisitUnariaExpr(s)
+
+	default:
+		return t.VisitChildren(s)
+	}
+}
+
 type BoolExprContext struct {
 	ExprContext
 }
@@ -2637,6 +2699,10 @@ func (s *OpExprContext) DIV() antlr.TerminalNode {
 	return s.GetToken(SwiftGrammarParserDIV, 0)
 }
 
+func (s *OpExprContext) MOD() antlr.TerminalNode {
+	return s.GetToken(SwiftGrammarParserMOD, 0)
+}
+
 func (s *OpExprContext) ADD() antlr.TerminalNode {
 	return s.GetToken(SwiftGrammarParserADD, 0)
 }
@@ -2717,7 +2783,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(104)
+	p.SetState(106)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -2750,12 +2816,29 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 			}
 		}
 
+	case SwiftGrammarParserSUB:
+		localctx = NewUnariaExprContext(p, localctx)
+		p.SetParserRuleContext(localctx)
+		_prevctx = localctx
+		{
+			p.SetState(99)
+			p.Match(SwiftGrammarParserSUB)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
+			p.SetState(100)
+			p.expr(13)
+		}
+
 	case SwiftGrammarParserNUMBER:
 		localctx = NewNumExprContext(p, localctx)
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(99)
+			p.SetState(101)
 			p.Match(SwiftGrammarParserNUMBER)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -2768,7 +2851,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(100)
+			p.SetState(102)
 			p.Match(SwiftGrammarParserID)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -2781,7 +2864,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(101)
+			p.SetState(103)
 			p.Match(SwiftGrammarParserSTRING)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -2794,7 +2877,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(102)
+			p.SetState(104)
 			_la = p.GetTokenStream().LA(1)
 
 			if !(_la == SwiftGrammarParserTRU || _la == SwiftGrammarParserFAL) {
@@ -2810,7 +2893,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 		p.SetParserRuleContext(localctx)
 		_prevctx = localctx
 		{
-			p.SetState(103)
+			p.SetState(105)
 			p.Match(SwiftGrammarParserNIL)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -2823,7 +2906,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 		goto errorExit
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(129)
+	p.SetState(131)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -2838,7 +2921,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(127)
+			p.SetState(129)
 			p.GetErrorHandler().Sync(p)
 			if p.HasError() {
 				goto errorExit
@@ -2850,14 +2933,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(106)
+				p.SetState(108)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 13)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 13)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 12)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 12)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(107)
+					p.SetState(109)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -2865,7 +2948,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 
 					_la = p.GetTokenStream().LA(1)
 
-					if !(_la == SwiftGrammarParserMUL || _la == SwiftGrammarParserDIV) {
+					if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&2550136832) != 0) {
 						var _ri = p.GetErrorHandler().RecoverInline(p)
 
 						localctx.(*OpExprContext).op = _ri
@@ -2875,9 +2958,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(108)
+					p.SetState(110)
 
-					var _x = p.expr(14)
+					var _x = p.expr(13)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -2887,14 +2970,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(109)
+				p.SetState(111)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 12)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 12)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 11)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 11)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(110)
+					p.SetState(112)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -2912,9 +2995,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(111)
+					p.SetState(113)
 
-					var _x = p.expr(13)
+					var _x = p.expr(12)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -2924,14 +3007,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(112)
+				p.SetState(114)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 11)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 11)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 10)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 10)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(113)
+					p.SetState(115)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -2949,9 +3032,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(114)
+					p.SetState(116)
 
-					var _x = p.expr(12)
+					var _x = p.expr(11)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -2961,14 +3044,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(115)
+				p.SetState(117)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 10)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 10)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 9)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 9)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(116)
+					p.SetState(118)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -2986,9 +3069,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(117)
+					p.SetState(119)
 
-					var _x = p.expr(11)
+					var _x = p.expr(10)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -2998,14 +3081,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(118)
+				p.SetState(120)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 9)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 9)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 8)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 8)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(119)
+					p.SetState(121)
 
 					var _lt = p.GetTokenStream().LT(1)
 
@@ -3023,9 +3106,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(120)
+					p.SetState(122)
 
-					var _x = p.expr(10)
+					var _x = p.expr(9)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -3035,14 +3118,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(121)
+				p.SetState(123)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 8)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 8)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 7)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 7)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(122)
+					p.SetState(124)
 					p.Match(SwiftGrammarParserAND)
 					if p.HasError() {
 						// Recognition error - abort rule
@@ -3050,9 +3133,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(123)
+					p.SetState(125)
 
-					var _x = p.expr(9)
+					var _x = p.expr(8)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -3062,14 +3145,14 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				localctx.(*OpExprContext).left = _prevctx
 
 				p.PushNewRecursionContext(localctx, _startState, SwiftGrammarParserRULE_expr)
-				p.SetState(124)
+				p.SetState(126)
 
-				if !(p.Precpred(p.GetParserRuleContext(), 7)) {
-					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 7)", ""))
+				if !(p.Precpred(p.GetParserRuleContext(), 6)) {
+					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 6)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(125)
+					p.SetState(127)
 					p.Match(SwiftGrammarParserOR)
 					if p.HasError() {
 						// Recognition error - abort rule
@@ -3077,9 +3160,9 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 					}
 				}
 				{
-					p.SetState(126)
+					p.SetState(128)
 
-					var _x = p.expr(8)
+					var _x = p.expr(7)
 
 					localctx.(*OpExprContext).right = _x
 				}
@@ -3089,7 +3172,7 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 			}
 
 		}
-		p.SetState(131)
+		p.SetState(133)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -3220,7 +3303,7 @@ func (p *SwiftGrammarParser) Tipo() (localctx ITipoContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(132)
+		p.SetState(134)
 		_la = p.GetTokenStream().LA(1)
 
 		if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&62) != 0) {
@@ -3261,25 +3344,25 @@ func (p *SwiftGrammarParser) Sempred(localctx antlr.RuleContext, ruleIndex, pred
 func (p *SwiftGrammarParser) Expr_Sempred(localctx antlr.RuleContext, predIndex int) bool {
 	switch predIndex {
 	case 0:
-		return p.Precpred(p.GetParserRuleContext(), 13)
-
-	case 1:
 		return p.Precpred(p.GetParserRuleContext(), 12)
 
-	case 2:
+	case 1:
 		return p.Precpred(p.GetParserRuleContext(), 11)
 
-	case 3:
+	case 2:
 		return p.Precpred(p.GetParserRuleContext(), 10)
 
-	case 4:
+	case 3:
 		return p.Precpred(p.GetParserRuleContext(), 9)
 
-	case 5:
+	case 4:
 		return p.Precpred(p.GetParserRuleContext(), 8)
 
-	case 6:
+	case 5:
 		return p.Precpred(p.GetParserRuleContext(), 7)
+
+	case 6:
+		return p.Precpred(p.GetParserRuleContext(), 6)
 
 	default:
 		panic("No predicate with index: " + fmt.Sprint(predIndex))

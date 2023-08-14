@@ -55,6 +55,10 @@ func (v *BaseSwiftGrammarVisitor) VisitDecremento(ctx *DecrementoContext) interf
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitUnariaExpr(ctx *UnariaExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitBoolExpr(ctx *BoolExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }

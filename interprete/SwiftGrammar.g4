@@ -50,14 +50,15 @@ opasignstmt
     ;
 
 expr
-    : left=expr op=(MUL|DIV) right=expr         # OpExpr
+    : PARIZQ expr PARDER                        # ParExpr
+    | SUB expr                                  # UnariaExpr
+    | left=expr op=(MUL|DIV|MOD) right=expr     # OpExpr
     | left=expr op=(ADD|SUB) right=expr         # OpExpr
     | left=expr op=(MAY_IG|MAYOR) right=expr    # OpExpr
     | left=expr op=(MEN_IG|MENOR) right=expr    # OpExpr
     | left=expr op=(IG_IG|DIF) right=expr       # OpExpr
     | left=expr AND right=expr                  # OpExpr
     | left=expr OR right=expr                   # OpExpr
-    | PARIZQ expr PARDER                        # ParExpr
     | NUMBER                                    # NumExpr
     | ID                                        # IdExpr
     | STRING                                    # StrExpr    

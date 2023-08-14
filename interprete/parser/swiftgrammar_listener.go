@@ -43,6 +43,9 @@ type SwiftGrammarListener interface {
 	// EnterDecremento is called when entering the Decremento production.
 	EnterDecremento(c *DecrementoContext)
 
+	// EnterUnariaExpr is called when entering the UnariaExpr production.
+	EnterUnariaExpr(c *UnariaExprContext)
+
 	// EnterBoolExpr is called when entering the BoolExpr production.
 	EnterBoolExpr(c *BoolExprContext)
 
@@ -102,6 +105,9 @@ type SwiftGrammarListener interface {
 
 	// ExitDecremento is called when exiting the Decremento production.
 	ExitDecremento(c *DecrementoContext)
+
+	// ExitUnariaExpr is called when exiting the UnariaExpr production.
+	ExitUnariaExpr(c *UnariaExprContext)
 
 	// ExitBoolExpr is called when exiting the BoolExpr production.
 	ExitBoolExpr(c *BoolExprContext)

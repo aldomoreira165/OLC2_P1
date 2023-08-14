@@ -92,6 +92,12 @@ func (s *BaseSwiftGrammarListener) EnterDecremento(ctx *DecrementoContext) {}
 // ExitDecremento is called when production Decremento is exited.
 func (s *BaseSwiftGrammarListener) ExitDecremento(ctx *DecrementoContext) {}
 
+// EnterUnariaExpr is called when production UnariaExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterUnariaExpr(ctx *UnariaExprContext) {}
+
+// ExitUnariaExpr is called when production UnariaExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitUnariaExpr(ctx *UnariaExprContext) {}
+
 // EnterBoolExpr is called when production BoolExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterBoolExpr(ctx *BoolExprContext) {}
 

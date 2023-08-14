@@ -43,6 +43,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#Decremento.
 	VisitDecremento(ctx *DecrementoContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#UnariaExpr.
+	VisitUnariaExpr(ctx *UnariaExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#BoolExpr.
 	VisitBoolExpr(ctx *BoolExprContext) interface{}
 

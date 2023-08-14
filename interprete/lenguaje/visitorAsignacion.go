@@ -37,7 +37,7 @@ func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
-	return fmt.Sprintf("No existe la variable: %s", varName)
+	return fmt.Sprintf("Error no existe la variable: %s", varName)
 }
 
 //operadores de asignacion += -=
@@ -89,7 +89,7 @@ func (l *Visitor) VisitIncremento(ctx *parser.IncrementoContext) interface{} {
 						return true // La asignación fue exitosa
 					}
 				}else {
-					return fmt.Sprintf("Operacion invalida")
+					return fmt.Sprintf("Error: Operacion invalida")
 				}
 			} else {
 				return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
@@ -97,7 +97,7 @@ func (l *Visitor) VisitIncremento(ctx *parser.IncrementoContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
-	return fmt.Sprintf("Variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
+	return fmt.Sprintf("Error Variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
 }
 
 func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
@@ -139,7 +139,7 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 						return true // La asignación fue exitosa
 					}
 				}else {
-					return fmt.Sprintf("Operacion invalida") // La asignación falló debido a un error de tipo
+					return fmt.Sprintf("Error: Operacion invalida") // La asignación falló debido a un error de tipo
 				}
 
 			} else {
@@ -148,5 +148,5 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
-	return fmt.Sprintf("Variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
+	return fmt.Sprintf("Error variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
 }

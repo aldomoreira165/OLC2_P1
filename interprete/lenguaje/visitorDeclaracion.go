@@ -2,7 +2,7 @@ package lenguaje
 
 import (
 	"fmt"
-	"interprete/Parser"
+	parser "interprete/Parser"
 )
 
 func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface{} {
@@ -12,11 +12,18 @@ func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface
 
 	// Verificar si la variable ya existe en el entorno
 	if _, ok := l.currentEnvironment.variables[varName]; ok {
-		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
+		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", varName)
 	}
 
 	// Comprobar si el tipo de la expresión coincide con el tipo declarado
 	if !validateType(value, declType) {
+		//se  toma como error y obtiene el valor de nil para fines practicos
+		nuevaVariable := Variable{
+			Name:  varName,
+			Type:  declType,
+			Value: nil,
+		}
+		l.currentEnvironment.variables[varName] = nuevaVariable
 		return fmt.Sprintf("Error de tipo en la declaración: %s", varName)
 	}
 
@@ -38,7 +45,7 @@ func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtCo
 
 	// Verificar si la variable ya existe en el entorno
 	if _, ok := l.currentEnvironment.variables[varName]; ok {
-		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
+		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", varName)
 	}
 
 	// Crear una instancia de Variable y almacenarla en el entorno actual
@@ -60,7 +67,7 @@ func (l *Visitor) VisitUntypedDeclstmt(ctx *parser.UntypedDeclstmtContext) inter
 
 	// Verificar si la variable ya existe en el entorno
 	if _, ok := l.currentEnvironment.variables[varName]; ok {
-		return fmt.Sprintf("Variable ya existente en el entorno actual: %s", varName)
+		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", varName)
 	}
 
 	// Determinar el tipo de la expresión
