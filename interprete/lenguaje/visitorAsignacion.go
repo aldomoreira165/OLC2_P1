@@ -32,14 +32,12 @@ func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
 				currentEnv.variables[varName] = variableActualizada
 				return true // La asignación fue exitosa
 			} else {
-				fmt.Println("Error de tipo en la asignación para", varName)
-				return false // La asignación falló debido a un error de tipo
+				return fmt.Sprintf("Error de tipo en la asignacion para la variable: %s", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
-	fmt.Println("Variable no encontrada:", varName)
-	return false // La variable no se encontró en ningún entorno
+	return fmt.Sprintf("No existe la variable: %s", varName)
 }
 
 //operadores de asignacion += -=
@@ -91,19 +89,15 @@ func (l *Visitor) VisitIncremento(ctx *parser.IncrementoContext) interface{} {
 						return true // La asignación fue exitosa
 					}
 				}else {
-					fmt.Println("Operacion invalida")
-					return false // La asignación falló debido a un error de tipo
+					return fmt.Sprintf("Operacion invalida")
 				}
-
 			} else {
-				fmt.Println("Error de tipo en la asignación para", varName)
-				return false // La asignación falló debido a un error de tipo
+				return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
-	fmt.Println("Variable no encontrada:", varName)
-	return false // La variable no se encontró en ningún entorno
+	return fmt.Sprintf("Variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
 }
 
 func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
@@ -126,6 +120,7 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 				if existingVarType == "int" || existingVarType == "float"  {
 					if existingVarType == "int" {
 						nuevoValor := value.(int64) - variableExistente.Value.(int64)
+						fmt.Print(nuevoValor)
 						variableActualizada := Variable{
 							Name:  varName,
 							Type:  exprType, // Asignar el tipo de la expresión
@@ -144,17 +139,14 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 						return true // La asignación fue exitosa
 					}
 				}else {
-					fmt.Println("Operacion invalida")
-					return false // La asignación falló debido a un error de tipo
+					return fmt.Sprintf("Operacion invalida") // La asignación falló debido a un error de tipo
 				}
 
 			} else {
-				fmt.Println("Error de tipo en la asignación para", varName)
-				return false // La asignación falló debido a un error de tipo
+				return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
-	fmt.Println("Variable no encontrada:", varName)
-	return false // La variable no se encontró en ningún entorno
+	return fmt.Sprintf("Variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
 }

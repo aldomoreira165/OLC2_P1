@@ -98,6 +98,12 @@ func (s *BaseSwiftGrammarListener) EnterBoolExpr(ctx *BoolExprContext) {}
 // ExitBoolExpr is called when production BoolExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitBoolExpr(ctx *BoolExprContext) {}
 
+// EnterNilExpr is called when production NilExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterNilExpr(ctx *NilExprContext) {}
+
+// ExitNilExpr is called when production NilExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitNilExpr(ctx *NilExprContext) {}
+
 // EnterIdExpr is called when production IdExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterIdExpr(ctx *IdExprContext) {}
 

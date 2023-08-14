@@ -62,6 +62,7 @@ expr
     | ID                                        # IdExpr
     | STRING                                    # StrExpr    
     | (TRU | FAL)                               # BoolExpr
+    | NIL                                       # NilExpr
     ;
 
 tipo

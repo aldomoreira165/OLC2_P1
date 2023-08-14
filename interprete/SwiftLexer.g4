@@ -7,6 +7,7 @@ FLOAT: 'float';
 BOOL: 'bool';
 CHARACTER: 'character';
 PSTRING: 'String';
+NIL: 'nil';
 
 // reserved words
 TRU: 'true';

@@ -46,6 +46,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#BoolExpr.
 	VisitBoolExpr(ctx *BoolExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#NilExpr.
+	VisitNilExpr(ctx *NilExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#IdExpr.
 	VisitIdExpr(ctx *IdExprContext) interface{}
 

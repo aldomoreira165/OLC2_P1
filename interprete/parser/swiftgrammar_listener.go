@@ -46,6 +46,9 @@ type SwiftGrammarListener interface {
 	// EnterBoolExpr is called when entering the BoolExpr production.
 	EnterBoolExpr(c *BoolExprContext)
 
+	// EnterNilExpr is called when entering the NilExpr production.
+	EnterNilExpr(c *NilExprContext)
+
 	// EnterIdExpr is called when entering the IdExpr production.
 	EnterIdExpr(c *IdExprContext)
 
@@ -102,6 +105,9 @@ type SwiftGrammarListener interface {
 
 	// ExitBoolExpr is called when exiting the BoolExpr production.
 	ExitBoolExpr(c *BoolExprContext)
+
+	// ExitNilExpr is called when exiting the NilExpr production.
+	ExitNilExpr(c *NilExprContext)
 
 	// ExitIdExpr is called when exiting the IdExpr production.
 	ExitIdExpr(c *IdExprContext)

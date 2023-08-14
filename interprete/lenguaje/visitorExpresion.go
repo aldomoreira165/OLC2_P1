@@ -200,7 +200,7 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 	}
 
 	//error, verificar como manejarlos
-	return ("Operacion no valida")
+	return 	fmt.Sprintf("Operacion no valida")
 }
 
 func (l *Visitor) VisitParExpr(ctx *parser.ParExprContext) interface{} {
@@ -219,7 +219,6 @@ func (l *Visitor) VisitNumExpr(ctx *parser.NumExprContext) interface{} {
     if floatErr == nil {
         return floatVal
     }
-
     return nil
 }
 
@@ -253,4 +252,8 @@ func (l *Visitor) VisitBoolExpr(ctx *parser.BoolExprContext) interface{} {
 	}
 	
 	return false
+}
+
+func (l *Visitor) VisitNilExpr(ctx *parser.NilExprContext) interface{} {
+	return nil
 }
