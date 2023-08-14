@@ -88,11 +88,12 @@ func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	return true
 }
 
-
 // visit del while (arreglar)
 func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
 	// Crear un nuevo entorno antes de entrar al ciclo
 	previousEnvironment := CrearEntorno(l)
+
+	var out string
 
 	for {
 		expresion := l.Visit(ctx.Expr())
@@ -100,15 +101,14 @@ func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
 		// Se verifica si la expresión es verdadera
 		if expresion == true {
 			// Se ejecuta el bloque de código dentro del bucle
-			l.Visit(ctx.Block())
+			resultado := l.Visit(ctx.Block())
+			out += resultado.(string)
 		} else {
 			// Salir del bucle y eliminar el entorno creado
 			EliminarEntorno(l, previousEnvironment)
-			break
+			return out
 		}
 	}
-
-	return nil
 }
 
 func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {

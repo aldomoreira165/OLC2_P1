@@ -119,7 +119,7 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 
 				if existingVarType == "int" || existingVarType == "float"  {
 					if existingVarType == "int" {
-						nuevoValor := value.(int64) - variableExistente.Value.(int64)
+						nuevoValor := -(value.(int64) - variableExistente.Value.(int64))
 						fmt.Print(nuevoValor)
 						variableActualizada := Variable{
 							Name:  varName,
