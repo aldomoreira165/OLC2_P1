@@ -15,8 +15,6 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 	leftType := determineType(leftValue)
 	rightType := determineType(rightValue)
 
-	print(leftType, rightType)
-
 	switch op {
 	case "+":
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
@@ -196,6 +194,38 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 				return false
 			}
 		}
+
+	case "&&":
+		if leftType == "bool" && rightType == "bool" {
+			valorA := leftValue.(bool)
+			valorB := rightValue.(bool)
+
+			if valorA && valorB {
+				return true
+			} else if valorA && !valorB {
+				return false
+			} else if !valorA && valorB {
+				return false
+			} else if !valorA && !valorB{
+				return false
+			}
+		}
+
+	case "||":
+		if leftType == "bool" && rightType == "bool" {
+			valorA := leftValue.(bool)
+			valorB := rightValue.(bool)
+
+			if valorA && valorB {
+				return true
+			} else if valorA && !valorB {
+				return true
+			} else if !valorA && valorB {
+				return true
+			} else if !valorA && !valorB{
+				return false
+			}
+		}
 	}
 
 	//error, verificar como manejarlos
@@ -260,7 +290,7 @@ func (l *Visitor) VisitUnariaExpr(ctx *parser.UnariaExprContext) interface{} {
 	if tipo == "int" {
 		valor, _ := exp.(int64)
 		return -valor
-	}else if tipo == "float" {
+	} else if tipo == "float" {
 		valor, _ := exp.(float64)
 		return -valor
 	}

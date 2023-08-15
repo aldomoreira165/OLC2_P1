@@ -66,8 +66,8 @@ expr
     | left=expr op=(MAY_IG|MAYOR) right=expr    # OpExpr
     | left=expr op=(MEN_IG|MENOR) right=expr    # OpExpr
     | left=expr op=(IG_IG|DIF) right=expr       # OpExpr
-    | left=expr AND right=expr                  # OpExpr
-    | left=expr OR right=expr                   # OpExpr
+    | left=expr op=AND right=expr               # OpExpr
+    | left=expr op=OR right=expr                # OpExpr
     | NUMBER                                    # NumExpr
     | ID                                        # IdExpr
     | STRING                                    # StrExpr    

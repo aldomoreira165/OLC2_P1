@@ -7,7 +7,7 @@ import (
 // visit del if
 func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	result := l.Visit(ctx.Expr())
-
+	
 	if result == true {
 		previousEnvironment := CrearEntorno(l)
 		defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque

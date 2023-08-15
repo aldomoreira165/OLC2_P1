@@ -4069,7 +4069,10 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				}
 				{
 					p.SetState(174)
-					p.Match(SwiftGrammarParserAND)
+
+					var _m = p.Match(SwiftGrammarParserAND)
+
+					localctx.(*OpExprContext).op = _m
 					if p.HasError() {
 						// Recognition error - abort rule
 						goto errorExit
@@ -4096,7 +4099,10 @@ func (p *SwiftGrammarParser) expr(_p int) (localctx IExprContext) {
 				}
 				{
 					p.SetState(177)
-					p.Match(SwiftGrammarParserOR)
+
+					var _m = p.Match(SwiftGrammarParserOR)
+
+					localctx.(*OpExprContext).op = _m
 					if p.HasError() {
 						// Recognition error - abort rule
 						goto errorExit

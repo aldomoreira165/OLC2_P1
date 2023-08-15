@@ -1237,7 +1237,7 @@ public class SwiftGrammarParser extends Parser {
 						setState(173);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(174);
-						match(AND);
+						((OpExprContext)_localctx).op = match(AND);
 						setState(175);
 						((OpExprContext)_localctx).right = expr(8);
 						}
@@ -1250,7 +1250,7 @@ public class SwiftGrammarParser extends Parser {
 						setState(176);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(177);
-						match(OR);
+						((OpExprContext)_localctx).op = match(OR);
 						setState(178);
 						((OpExprContext)_localctx).right = expr(7);
 						}
