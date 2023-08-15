@@ -19,6 +19,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#printstmt.
 	VisitPrintstmt(ctx *PrintstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#breakstmt.
+	VisitBreakstmt(ctx *BreakstmtContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#ifstmt.
 	VisitIfstmt(ctx *IfstmtContext) interface{}
 

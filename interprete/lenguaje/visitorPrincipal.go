@@ -10,7 +10,7 @@ import (
 
 type Visitor struct {
 	antlr.ParseTreeVisitor
-	currentEnvironment *Environment
+	currentEnvironment *Environment //entornos 
 }
 
 func NewVisitor() parser.SwiftGrammarVisitor {
@@ -69,6 +69,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	}
 	if ctx.Opasignstmt() != nil {
 		return l.Visit(ctx.Opasignstmt())
+	}
+	if ctx.Breakstmt() != nil {
+		return l.Visit(ctx.Breakstmt())
 	}
 	return nil
 }

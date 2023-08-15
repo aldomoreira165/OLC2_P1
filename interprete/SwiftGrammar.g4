@@ -15,11 +15,20 @@ stmt: printstmt
     | switchstmt
     | whilestmt
     | opasignstmt
+    | breakstmt
     ;
 
 printstmt
     : PRINT PARIZQ expr PARDER
     ;
+
+//sententencias de transferencia
+
+breakstmt
+    : BREAK
+    ;
+
+//sentencias de control de flujo
 
 ifstmt  
     : IF expr LLAVEIZQ block LLAVEDER (elseifstmt)* (ELSE LLAVEIZQ block LLAVEDER)?

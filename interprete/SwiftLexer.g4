@@ -20,6 +20,7 @@ SWITCH: 'switch';
 CASE: 'case';
 DEFAULT: 'default';
 VAR: 'var';
+BREAK: 'break';
 
 // primitives
 NUMBER : [0-9]+('.'[0-9]+)?;

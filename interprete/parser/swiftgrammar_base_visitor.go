@@ -23,6 +23,10 @@ func (v *BaseSwiftGrammarVisitor) VisitPrintstmt(ctx *PrintstmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitBreakstmt(ctx *BreakstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitIfstmt(ctx *IfstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
