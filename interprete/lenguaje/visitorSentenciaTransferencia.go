@@ -5,5 +5,6 @@ import (
 )
 
 func (l *Visitor) VisitBreakstmt(ctx *parser.BreakstmtContext) interface{} {
-    return nil
+    l.shouldBreak = true // Establecer shouldBreak en verdadero
+	return nil
 }

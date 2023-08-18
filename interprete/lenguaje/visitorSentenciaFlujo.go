@@ -7,7 +7,7 @@ import (
 // visit del if
 func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 	result := l.Visit(ctx.Expr())
-	
+
 	if result == true {
 		previousEnvironment := CrearEntorno(l)
 		defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
@@ -51,12 +51,12 @@ func (l *Visitor) VisitSwitchstmt(ctx *parser.SwitchstmtContext) interface{} {
 	for _, caseCtx := range ctx.AllCaseStmt() {
 		caseSwitch := l.Visit(caseCtx.Expr())
 		caseSwitchType := determineType(caseSwitch)
-		valorCase := convertirExpresion(caseSwitchType,caseSwitch)
-		
+		valorCase := convertirExpresion(caseSwitchType, caseSwitch)
+
 		if valorExpresion == valorCase && exprType == caseSwitchType {
 			previousEnvironment := CrearEntorno(l)
 			defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
-			return l.Visit(caseCtx.Block()) // Salir del switch después de ejecutar un caso válido
+			return l.Visit(caseCtx.Block())               // Salir del switch después de ejecutar un caso válido
 		}
 	}
 
@@ -81,25 +81,28 @@ func (l *Visitor) VisitDefaultCase(ctx *parser.DefaultCaseContext) interface{} {
 	return nil
 }
 
-// visit del while (arreglar)
+// visit del while (arreglar) break no jala todavia
 func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
-	// Crear un nuevo entorno antes de entrar al ciclo
 	previousEnvironment := CrearEntorno(l)
-
 	var out string
 
 	for {
 		expresion := l.Visit(ctx.Expr())
 
-		// Se verifica si la expresión es verdadera
-		if expresion == true {
-			// Se ejecuta el bloque de código dentro del bucle
+		if expresion == true && !l.shouldBreak {
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)
+
+			if l.shouldBreak {
+				break
+			}//implementar en for, while, switch, if
 		} else {
-			// Salir del bucle y eliminar el entorno creado
 			EliminarEntorno(l, previousEnvironment)
+			l.shouldBreak = false
 			return out
 		}
 	}
+	EliminarEntorno(l, previousEnvironment)
+	l.shouldBreak = false
+	return out
 }

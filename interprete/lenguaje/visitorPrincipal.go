@@ -2,21 +2,23 @@ package lenguaje
 
 import (
 	"fmt"
+	"github.com/antlr4-go/antlr/v4"
 	"interprete/Parser"
 	"log"
 	"strconv"
-	"github.com/antlr4-go/antlr/v4"
 )
 
 type Visitor struct {
 	antlr.ParseTreeVisitor
-	currentEnvironment *Environment //entornos 
+	currentEnvironment *Environment //entornos
+	shouldBreak        bool         //para verificar si se debe salir de bucles
 }
 
 func NewVisitor() parser.SwiftGrammarVisitor {
 	globalEnvironment := NewEnvironment(nil)
 	return &Visitor{
 		currentEnvironment: globalEnvironment,
+		shouldBreak:        false,
 	}
 }
 
@@ -27,15 +29,18 @@ func (l *Visitor) VisitS(ctx *parser.SContext) interface{} {
 // visit de block
 func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
 	var out string
+
 	for i := 0; ctx.Stmt(i) != nil; i++ {
-		stmtResult := l.Visit(ctx.Stmt(i))
-		switch stmtResult.(type) {
-		case int64:
-			out += strconv.FormatInt(stmtResult.(int64), 10) + "\n"
-		case float64: // Nuevo caso para números decimales
-			out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64) + "\n"
-		case string:
-			out += stmtResult.(string) + "\n"
+		if !l.shouldBreak {
+			stmtResult := l.Visit(ctx.Stmt(i))
+			switch stmtResult.(type) {
+			case int64:
+				out += strconv.FormatInt(stmtResult.(int64), 10) + "\n"
+			case float64: // Nuevo caso para números decimales
+				out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64) + "\n"
+			case string:
+				out += stmtResult.(string) + "\n"
+			}
 		}
 	}
 	return out
@@ -90,7 +95,6 @@ func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
 	}
 	return nil
 }
-
 
 // visit del print
 func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
