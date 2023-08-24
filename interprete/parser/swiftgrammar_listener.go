@@ -16,6 +16,15 @@ type SwiftGrammarListener interface {
 	// EnterStmt is called when entering the stmt production.
 	EnterStmt(c *StmtContext)
 
+	// EnterFuncdclstmt is called when entering the funcdclstmt production.
+	EnterFuncdclstmt(c *FuncdclstmtContext)
+
+	// EnterAccfuncstm is called when entering the accfuncstm production.
+	EnterAccfuncstm(c *AccfuncstmContext)
+
+	// EnterRetfuncdclstmt is called when entering the retfuncdclstmt production.
+	EnterRetfuncdclstmt(c *RetfuncdclstmtContext)
+
 	// EnterPrintstmt is called when entering the printstmt production.
 	EnterPrintstmt(c *PrintstmtContext)
 
@@ -93,6 +102,15 @@ type SwiftGrammarListener interface {
 
 	// ExitStmt is called when exiting the stmt production.
 	ExitStmt(c *StmtContext)
+
+	// ExitFuncdclstmt is called when exiting the funcdclstmt production.
+	ExitFuncdclstmt(c *FuncdclstmtContext)
+
+	// ExitAccfuncstm is called when exiting the accfuncstm production.
+	ExitAccfuncstm(c *AccfuncstmContext)
+
+	// ExitRetfuncdclstmt is called when exiting the retfuncdclstmt production.
+	ExitRetfuncdclstmt(c *RetfuncdclstmtContext)
 
 	// ExitPrintstmt is called when exiting the printstmt production.
 	ExitPrintstmt(c *PrintstmtContext)

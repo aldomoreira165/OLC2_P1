@@ -16,7 +16,25 @@ stmt: printstmt
     | whilestmt
     | opasignstmt
     | breakstmt
+    | funcdclstmt
+    | accfuncstm
     ;
+
+//funciones
+
+funcdclstmt
+    : FUNC ID PARIZQ PARDER LLAVEIZQ block LLAVEDER
+    ;
+
+accfuncstm
+    : ID PARIZQ PARDER
+    ;
+
+retfuncdclstmt
+    : FUNC ID PARIZQ PARDER SUB MAYOR tipo LLAVEIZQ block RETURN expr PTCOMA LLAVEDER
+    ;
+
+//=============================
 
 printstmt
     : PRINT PARIZQ expr PARDER

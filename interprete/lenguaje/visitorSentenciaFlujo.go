@@ -18,14 +18,14 @@ func (l *Visitor) VisitIfstmt(ctx *parser.IfstmtContext) interface{} {
 			elseifValue := l.Visit(elseifCtx.Expr())
 			if elseifValue == true {
 				previousEnvironment := CrearEntorno(l)
-				defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
+				defer EliminarEntorno(l, previousEnvironment)
 				return l.Visit(elseifCtx.Block())
 			}
 		}
 
 		if ctx.ELSE() != nil {
 			previousEnvironment := CrearEntorno(l)
-			defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
+			defer EliminarEntorno(l, previousEnvironment)
 			return l.Visit(ctx.Block(1))
 		}
 
@@ -39,7 +39,6 @@ func (l *Visitor) VisitElseifstmt(ctx *parser.ElseifstmtContext) interface{} {
 	if elseifValue {
 		l.Visit(ctx.Block())
 	}
-
 	return nil
 }
 
@@ -55,7 +54,7 @@ func (l *Visitor) VisitSwitchstmt(ctx *parser.SwitchstmtContext) interface{} {
 
 		if valorExpresion == valorCase && exprType == caseSwitchType {
 			previousEnvironment := CrearEntorno(l)
-			defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
+			defer EliminarEntorno(l, previousEnvironment)
 			return l.Visit(caseCtx.Block())               // Salir del switch después de ejecutar un caso válido
 		}
 	}
@@ -63,20 +62,18 @@ func (l *Visitor) VisitSwitchstmt(ctx *parser.SwitchstmtContext) interface{} {
 	// Si no se encontró un caso, ejecutar el caso por defecto si existe
 	if ctx.DefaultCase() != nil {
 		previousEnvironment := CrearEntorno(l)
-		defer EliminarEntorno(l, previousEnvironment) // Esto asegura que el entorno se elimine al salir del bloque
+		defer EliminarEntorno(l, previousEnvironment)
 		return l.Visit(ctx.DefaultCase().Block())
 	}
 	return nil
 }
 
 func (l *Visitor) VisitCaseStmt(ctx *parser.CaseStmtContext) interface{} {
-	// No se necesita implementación adicional aquí, ya que los bloques se ejecutan en VisitSwitchstmt
 	l.Visit(ctx.Block())
 	return nil
 }
 
 func (l *Visitor) VisitDefaultCase(ctx *parser.DefaultCaseContext) interface{} {
-	// No se necesita implementación adicional aquí, ya que los bloques se ejecutan en VisitSwitchstmt
 	l.Visit(ctx.Block())
 	return nil
 }
@@ -89,20 +86,28 @@ func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
 	for {
 		expresion := l.Visit(ctx.Expr())
 
-		if expresion == true && !l.shouldBreak {
+		if expresion == true {
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)
-
-			if l.shouldBreak {
-				break
-			}//implementar en for, while, switch, if
 		} else {
 			EliminarEntorno(l, previousEnvironment)
 			l.shouldBreak = false
 			return out
 		}
 	}
-	EliminarEntorno(l, previousEnvironment)
-	l.shouldBreak = false
-	return out
+}
+
+func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
+	if ctx.INT() != nil {
+		return "int"
+	} else if ctx.FLOAT() != nil {
+		return "float"
+	} else if ctx.BOOL() != nil {
+		return "bool"
+	} else if ctx.CHARACTER() != nil {
+		return "character"
+	} else if ctx.PSTRING() != nil {
+		return "String"
+	}
+	return nil
 }

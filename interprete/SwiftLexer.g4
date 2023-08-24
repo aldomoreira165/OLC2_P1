@@ -21,6 +21,8 @@ CASE: 'case';
 DEFAULT: 'default';
 VAR: 'var';
 BREAK: 'break';
+RETURN: 'return';
+FUNC: 'func';
 
 // primitives
 NUMBER : [0-9]+('.'[0-9]+)?;
@@ -49,6 +51,7 @@ PARDER:         ')';
 LLAVEIZQ:       '{';
 LLAVEDER:       '}';
 DOSPUNTOS:      ':';
+PTCOMA:      ';';
 INTERROGACION:  '?';
 
 // skip
