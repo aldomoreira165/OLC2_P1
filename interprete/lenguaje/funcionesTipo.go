@@ -3,10 +3,9 @@ package lenguaje
 import (
 	"fmt"
 	"strconv"
-	"strings"
 )
 
-//para determinar el tipo de una expresion
+// para determinar el tipo de una expresion
 func determineType(value interface{}) string {
 	switch value.(type) {
 	case int64:
@@ -65,9 +64,9 @@ func validateType(value interface{}, declType string) bool {
 	}
 }
 
-//para convertir una expresion en el tipo que se indica
-func convertirExpresion(tipo string ,exp interface{}) interface{} {
-	
+// para convertir una expresion en el tipo que se indica
+func convertirExpresion(tipo string, exp interface{}) interface{} {
+
 	switch tipo {
 	case "int":
 		result, _ := exp.(int64)
@@ -89,43 +88,43 @@ func convertirExpresion(tipo string ,exp interface{}) interface{} {
 	}
 }
 
-
-//convertir string al tipo que se indica
-func convertirExpresionStr(tipo string, exp string) interface{} {
-	expFormat := strings.ReplaceAll(exp, "\n", "")
+func convertirExpresionD(tipo string, exp interface{}) interface{} {
 	switch tipo {
 	case "int":
-		result, err := strconv.Atoi(expFormat)
+		intValue, err := strconv.Atoi(exp.(string))
 		if err != nil {
-			fmt.Println("Error:", err)
-			return nil
+			fmt.Println("Error al convertir a int:", err)
+		} else {
+			return int64(intValue)
 		}
-		return result
 	case "float":
-		result, err := strconv.ParseFloat(expFormat, 64)
+		floatValue, err := strconv.ParseFloat(exp.(string), 64)
 		if err != nil {
-			fmt.Println("Error:", err)
-			return nil
+			fmt.Println("Error al convertir a float:", err)
+		} else {
+			return floatValue
 		}
-		return result
-	case "bool":
-		result, err := strconv.ParseBool(expFormat)
-		if err != nil {
-			fmt.Println("Error:", err)
-			return nil
-		}
-		return result
 	case "character":
-		if len(expFormat) != 1 {
-			fmt.Println("Error: La cadena debe tener exactamente un carácter")
-			return nil
+		charValue := exp.(string)
+		if len(charValue) == 1 {
+			return charValue
+		} else {
+			fmt.Println("Error: Cadena de caracteres demasiado larga para 'character'")
 		}
-		return expFormat[0]
+	case "bool":
+		boolValue := exp.(string)
+		fmt.Println("boool: ",boolValue)
+		if boolValue == "true" {
+			return true
+		} else if boolValue == "false" {
+			return false
+		} else {
+			fmt.Println("Error: Valor no admitido para 'bool'")
+		}
 	case "String":
-		return expFormat
+		return exp.(string)
 	default:
-		fmt.Println("Error: Tipo desconocido o no admitido")
-		return nil
+		fmt.Println("Tipo no admitido:", tipo)
 	}
+	return nil
 }
-

@@ -35,11 +35,11 @@ func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
 		stmtResult := l.Visit(ctx.Stmt(i))
 		switch stmtResult.(type) {
 		case int64:
-			out += strconv.FormatInt(stmtResult.(int64), 10) + "\n"
-		case float64: // Nuevo caso para números decimales
-			out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64) + "\n"
+			out += strconv.FormatInt(stmtResult.(int64), 10)
+		case float64:
+			out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64)
 		case string:
-			out += stmtResult.(string) + "\n"
+			out += stmtResult.(string)
 		}
 	}
 	return out
@@ -93,7 +93,7 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
 	returnValue := l.Visit(ctx.Expr())
 	stringValue := fmt.Sprint(returnValue)
-	return stringValue
+	return stringValue + "\n"
 }
 
 // Funcion visitar

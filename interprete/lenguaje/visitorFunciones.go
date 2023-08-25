@@ -50,7 +50,10 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 				previousEnvironment := CrearEntorno(l)
 				defer EliminarEntorno(l, previousEnvironment)
 				retValue := l.Visit(function.Sentencias)
-				return retValue
+				retornarInterface := interface{}(retValue)
+				fmt.Println("Tipo de funcion", function.Tipo)
+				retorno := convertirExpresionD(function.Tipo, retornarInterface)
+				return retorno
 			}else{
 				previousEnvironment := CrearEntorno(l)
 				defer EliminarEntorno(l, previousEnvironment)
