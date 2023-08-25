@@ -28,6 +28,12 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#accfuncstm.
 	VisitAccfuncstm(ctx *AccfuncstmContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#parametros.
+	VisitParametros(ctx *ParametrosContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#parametroscall.
+	VisitParametroscall(ctx *ParametroscallContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#printstmt.
 	VisitPrintstmt(ctx *PrintstmtContext) interface{}
 

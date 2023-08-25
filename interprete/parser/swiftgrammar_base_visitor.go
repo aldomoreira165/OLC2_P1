@@ -35,6 +35,14 @@ func (v *BaseSwiftGrammarVisitor) VisitAccfuncstm(ctx *AccfuncstmContext) interf
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitParametros(ctx *ParametrosContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitParametroscall(ctx *ParametroscallContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitPrintstmt(ctx *PrintstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }

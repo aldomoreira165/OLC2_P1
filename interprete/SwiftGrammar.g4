@@ -30,12 +30,20 @@ returnstmt
 //funciones
 
 funcdclstmt
-    : FUNC ID PARIZQ PARDER LLAVEIZQ block LLAVEDER #FuncionNormal
-    | FUNC ID PARIZQ PARDER SUB MAYOR tipo LLAVEIZQ block LLAVEDER #FuncionRetorno
+    : FUNC ID PARIZQ parametros? PARDER LLAVEIZQ block LLAVEDER #FuncionNormal
+    | FUNC ID PARIZQ parametros? PARDER SUB MAYOR tipo LLAVEIZQ block LLAVEDER #FuncionRetorno
     ;
 
 accfuncstm
-    : ID PARIZQ PARDER
+    : ID PARIZQ parametroscall? PARDER
+    ;
+
+parametros
+    : ID ID DOSPUNTOS tipo (COMA ID ID DOSPUNTOS tipo)*
+    ;
+
+parametroscall
+    : ID DOSPUNTOS expr (COMA ID DOSPUNTOS expr)*
     ;
 
 //=============================

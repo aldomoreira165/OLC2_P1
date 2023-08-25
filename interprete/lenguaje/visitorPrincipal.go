@@ -93,6 +93,7 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
 	returnValue := l.Visit(ctx.Expr())
 	stringValue := fmt.Sprint(returnValue)
+	fmt.Println(stringValue + "\n")
 	return stringValue + "\n"
 }
 

@@ -28,6 +28,12 @@ type SwiftGrammarListener interface {
 	// EnterAccfuncstm is called when entering the accfuncstm production.
 	EnterAccfuncstm(c *AccfuncstmContext)
 
+	// EnterParametros is called when entering the parametros production.
+	EnterParametros(c *ParametrosContext)
+
+	// EnterParametroscall is called when entering the parametroscall production.
+	EnterParametroscall(c *ParametroscallContext)
+
 	// EnterPrintstmt is called when entering the printstmt production.
 	EnterPrintstmt(c *PrintstmtContext)
 
@@ -120,6 +126,12 @@ type SwiftGrammarListener interface {
 
 	// ExitAccfuncstm is called when exiting the accfuncstm production.
 	ExitAccfuncstm(c *AccfuncstmContext)
+
+	// ExitParametros is called when exiting the parametros production.
+	ExitParametros(c *ParametrosContext)
+
+	// ExitParametroscall is called when exiting the parametroscall production.
+	ExitParametroscall(c *ParametroscallContext)
 
 	// ExitPrintstmt is called when exiting the printstmt production.
 	ExitPrintstmt(c *PrintstmtContext)

@@ -51,6 +51,7 @@ PARDER:         ')';
 LLAVEIZQ:       '{';
 LLAVEDER:       '}';
 DOSPUNTOS:      ':';
+COMA:           ',';
 PTCOMA:      ';';
 INTERROGACION:  '?';
 

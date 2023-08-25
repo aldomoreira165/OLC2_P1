@@ -62,6 +62,18 @@ func (s *BaseSwiftGrammarListener) EnterAccfuncstm(ctx *AccfuncstmContext) {}
 // ExitAccfuncstm is called when production accfuncstm is exited.
 func (s *BaseSwiftGrammarListener) ExitAccfuncstm(ctx *AccfuncstmContext) {}
 
+// EnterParametros is called when production parametros is entered.
+func (s *BaseSwiftGrammarListener) EnterParametros(ctx *ParametrosContext) {}
+
+// ExitParametros is called when production parametros is exited.
+func (s *BaseSwiftGrammarListener) ExitParametros(ctx *ParametrosContext) {}
+
+// EnterParametroscall is called when production parametroscall is entered.
+func (s *BaseSwiftGrammarListener) EnterParametroscall(ctx *ParametroscallContext) {}
+
+// ExitParametroscall is called when production parametroscall is exited.
+func (s *BaseSwiftGrammarListener) ExitParametroscall(ctx *ParametroscallContext) {}
+
 // EnterPrintstmt is called when production printstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterPrintstmt(ctx *PrintstmtContext) {}
 
