@@ -25,7 +25,7 @@ func (l *Visitor) VisitFuncionNormal(ctx *parser.FuncionNormalContext) interface
 		l.currentEnvironment.funciones[funcId] = Funcion{
 			Id:         funcId,
 			Tipo:       "nil",
-			Sentencias: funcBlock,
+			Sentencias: funcBlock,	
 			Parametros: nil,
 	}		
 	}
