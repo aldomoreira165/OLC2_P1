@@ -1,5 +1,11 @@
 package lenguaje
 
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
 //para determinar el tipo de una expresion
 func determineType(value interface{}) string {
 	switch value.(type) {
@@ -61,6 +67,7 @@ func validateType(value interface{}, declType string) bool {
 
 //para convertir una expresion en el tipo que se indica
 func convertirExpresion(tipo string ,exp interface{}) interface{} {
+	
 	switch tipo {
 	case "int":
 		result, _ := exp.(int64)
@@ -83,4 +90,42 @@ func convertirExpresion(tipo string ,exp interface{}) interface{} {
 }
 
 
+//convertir string al tipo que se indica
+func convertirExpresionStr(tipo string, exp string) interface{} {
+	expFormat := strings.ReplaceAll(exp, "\n", "")
+	switch tipo {
+	case "int":
+		result, err := strconv.Atoi(expFormat)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return nil
+		}
+		return result
+	case "float":
+		result, err := strconv.ParseFloat(expFormat, 64)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return nil
+		}
+		return result
+	case "bool":
+		result, err := strconv.ParseBool(expFormat)
+		if err != nil {
+			fmt.Println("Error:", err)
+			return nil
+		}
+		return result
+	case "character":
+		if len(expFormat) != 1 {
+			fmt.Println("Error: La cadena debe tener exactamente un carácter")
+			return nil
+		}
+		return expFormat[0]
+	case "String":
+		return expFormat
+	default:
+		fmt.Println("Error: Tipo desconocido o no admitido")
+		return nil
+	}
+}
 

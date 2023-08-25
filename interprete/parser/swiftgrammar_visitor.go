@@ -16,14 +16,17 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#stmt.
 	VisitStmt(ctx *StmtContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#funcdclstmt.
-	VisitFuncdclstmt(ctx *FuncdclstmtContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#returnstmt.
+	VisitReturnstmt(ctx *ReturnstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#FuncionNormal.
+	VisitFuncionNormal(ctx *FuncionNormalContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#FuncionRetorno.
+	VisitFuncionRetorno(ctx *FuncionRetornoContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#accfuncstm.
 	VisitAccfuncstm(ctx *AccfuncstmContext) interface{}
-
-	// Visit a parse tree produced by SwiftGrammarParser#retfuncdclstmt.
-	VisitRetfuncdclstmt(ctx *RetfuncdclstmtContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#printstmt.
 	VisitPrintstmt(ctx *PrintstmtContext) interface{}
@@ -87,6 +90,9 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#StrExpr.
 	VisitStrExpr(ctx *StrExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#AccFuncExpr.
+	VisitAccFuncExpr(ctx *AccFuncExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#OpExpr.
 	VisitOpExpr(ctx *OpExprContext) interface{}

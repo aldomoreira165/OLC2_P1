@@ -38,23 +38,29 @@ func (s *BaseSwiftGrammarListener) EnterStmt(ctx *StmtContext) {}
 // ExitStmt is called when production stmt is exited.
 func (s *BaseSwiftGrammarListener) ExitStmt(ctx *StmtContext) {}
 
-// EnterFuncdclstmt is called when production funcdclstmt is entered.
-func (s *BaseSwiftGrammarListener) EnterFuncdclstmt(ctx *FuncdclstmtContext) {}
+// EnterReturnstmt is called when production returnstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterReturnstmt(ctx *ReturnstmtContext) {}
 
-// ExitFuncdclstmt is called when production funcdclstmt is exited.
-func (s *BaseSwiftGrammarListener) ExitFuncdclstmt(ctx *FuncdclstmtContext) {}
+// ExitReturnstmt is called when production returnstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitReturnstmt(ctx *ReturnstmtContext) {}
+
+// EnterFuncionNormal is called when production FuncionNormal is entered.
+func (s *BaseSwiftGrammarListener) EnterFuncionNormal(ctx *FuncionNormalContext) {}
+
+// ExitFuncionNormal is called when production FuncionNormal is exited.
+func (s *BaseSwiftGrammarListener) ExitFuncionNormal(ctx *FuncionNormalContext) {}
+
+// EnterFuncionRetorno is called when production FuncionRetorno is entered.
+func (s *BaseSwiftGrammarListener) EnterFuncionRetorno(ctx *FuncionRetornoContext) {}
+
+// ExitFuncionRetorno is called when production FuncionRetorno is exited.
+func (s *BaseSwiftGrammarListener) ExitFuncionRetorno(ctx *FuncionRetornoContext) {}
 
 // EnterAccfuncstm is called when production accfuncstm is entered.
 func (s *BaseSwiftGrammarListener) EnterAccfuncstm(ctx *AccfuncstmContext) {}
 
 // ExitAccfuncstm is called when production accfuncstm is exited.
 func (s *BaseSwiftGrammarListener) ExitAccfuncstm(ctx *AccfuncstmContext) {}
-
-// EnterRetfuncdclstmt is called when production retfuncdclstmt is entered.
-func (s *BaseSwiftGrammarListener) EnterRetfuncdclstmt(ctx *RetfuncdclstmtContext) {}
-
-// ExitRetfuncdclstmt is called when production retfuncdclstmt is exited.
-func (s *BaseSwiftGrammarListener) ExitRetfuncdclstmt(ctx *RetfuncdclstmtContext) {}
 
 // EnterPrintstmt is called when production printstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterPrintstmt(ctx *PrintstmtContext) {}
@@ -181,6 +187,12 @@ func (s *BaseSwiftGrammarListener) EnterStrExpr(ctx *StrExprContext) {}
 
 // ExitStrExpr is called when production StrExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitStrExpr(ctx *StrExprContext) {}
+
+// EnterAccFuncExpr is called when production AccFuncExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterAccFuncExpr(ctx *AccFuncExprContext) {}
+
+// ExitAccFuncExpr is called when production AccFuncExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitAccFuncExpr(ctx *AccFuncExprContext) {}
 
 // EnterOpExpr is called when production OpExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterOpExpr(ctx *OpExprContext) {}

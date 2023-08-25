@@ -19,15 +19,19 @@ func (v *BaseSwiftGrammarVisitor) VisitStmt(ctx *StmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitFuncdclstmt(ctx *FuncdclstmtContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitReturnstmt(ctx *ReturnstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitFuncionNormal(ctx *FuncionNormalContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitFuncionRetorno(ctx *FuncionRetornoContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitAccfuncstm(ctx *AccfuncstmContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSwiftGrammarVisitor) VisitRetfuncdclstmt(ctx *RetfuncdclstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -112,6 +116,10 @@ func (v *BaseSwiftGrammarVisitor) VisitParExpr(ctx *ParExprContext) interface{} 
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitStrExpr(ctx *StrExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccFuncExpr(ctx *AccFuncExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

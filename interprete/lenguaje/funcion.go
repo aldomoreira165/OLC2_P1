@@ -6,6 +6,7 @@ import (
 
 type Funcion struct {
 	Id  string
+	Tipo string
 	Sentencias antlr.ParserRuleContext
 }
 

@@ -16,14 +16,17 @@ type SwiftGrammarListener interface {
 	// EnterStmt is called when entering the stmt production.
 	EnterStmt(c *StmtContext)
 
-	// EnterFuncdclstmt is called when entering the funcdclstmt production.
-	EnterFuncdclstmt(c *FuncdclstmtContext)
+	// EnterReturnstmt is called when entering the returnstmt production.
+	EnterReturnstmt(c *ReturnstmtContext)
+
+	// EnterFuncionNormal is called when entering the FuncionNormal production.
+	EnterFuncionNormal(c *FuncionNormalContext)
+
+	// EnterFuncionRetorno is called when entering the FuncionRetorno production.
+	EnterFuncionRetorno(c *FuncionRetornoContext)
 
 	// EnterAccfuncstm is called when entering the accfuncstm production.
 	EnterAccfuncstm(c *AccfuncstmContext)
-
-	// EnterRetfuncdclstmt is called when entering the retfuncdclstmt production.
-	EnterRetfuncdclstmt(c *RetfuncdclstmtContext)
 
 	// EnterPrintstmt is called when entering the printstmt production.
 	EnterPrintstmt(c *PrintstmtContext)
@@ -88,6 +91,9 @@ type SwiftGrammarListener interface {
 	// EnterStrExpr is called when entering the StrExpr production.
 	EnterStrExpr(c *StrExprContext)
 
+	// EnterAccFuncExpr is called when entering the AccFuncExpr production.
+	EnterAccFuncExpr(c *AccFuncExprContext)
+
 	// EnterOpExpr is called when entering the OpExpr production.
 	EnterOpExpr(c *OpExprContext)
 
@@ -103,14 +109,17 @@ type SwiftGrammarListener interface {
 	// ExitStmt is called when exiting the stmt production.
 	ExitStmt(c *StmtContext)
 
-	// ExitFuncdclstmt is called when exiting the funcdclstmt production.
-	ExitFuncdclstmt(c *FuncdclstmtContext)
+	// ExitReturnstmt is called when exiting the returnstmt production.
+	ExitReturnstmt(c *ReturnstmtContext)
+
+	// ExitFuncionNormal is called when exiting the FuncionNormal production.
+	ExitFuncionNormal(c *FuncionNormalContext)
+
+	// ExitFuncionRetorno is called when exiting the FuncionRetorno production.
+	ExitFuncionRetorno(c *FuncionRetornoContext)
 
 	// ExitAccfuncstm is called when exiting the accfuncstm production.
 	ExitAccfuncstm(c *AccfuncstmContext)
-
-	// ExitRetfuncdclstmt is called when exiting the retfuncdclstmt production.
-	ExitRetfuncdclstmt(c *RetfuncdclstmtContext)
 
 	// ExitPrintstmt is called when exiting the printstmt production.
 	ExitPrintstmt(c *PrintstmtContext)
@@ -174,6 +183,9 @@ type SwiftGrammarListener interface {
 
 	// ExitStrExpr is called when exiting the StrExpr production.
 	ExitStrExpr(c *StrExprContext)
+
+	// ExitAccFuncExpr is called when exiting the AccFuncExpr production.
+	ExitAccFuncExpr(c *AccFuncExprContext)
 
 	// ExitOpExpr is called when exiting the OpExpr production.
 	ExitOpExpr(c *OpExprContext)

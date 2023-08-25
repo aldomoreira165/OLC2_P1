@@ -18,20 +18,24 @@ stmt: printstmt
     | breakstmt
     | funcdclstmt
     | accfuncstm
+    | returnstmt
+    ;
+
+//de flujo
+
+returnstmt
+    : RETURN expr PTCOMA
     ;
 
 //funciones
 
 funcdclstmt
-    : FUNC ID PARIZQ PARDER LLAVEIZQ block LLAVEDER
+    : FUNC ID PARIZQ PARDER LLAVEIZQ block LLAVEDER #FuncionNormal
+    | FUNC ID PARIZQ PARDER SUB MAYOR tipo LLAVEIZQ block LLAVEDER #FuncionRetorno
     ;
 
 accfuncstm
     : ID PARIZQ PARDER
-    ;
-
-retfuncdclstmt
-    : FUNC ID PARIZQ PARDER SUB MAYOR tipo LLAVEIZQ block RETURN expr PTCOMA LLAVEDER
     ;
 
 //=============================
@@ -100,6 +104,7 @@ expr
     | STRING                                    # StrExpr    
     | (TRU | FAL)                               # BoolExpr
     | NIL                                       # NilExpr
+    | accfuncstm                                # AccFuncExpr
     ;
 
 tipo

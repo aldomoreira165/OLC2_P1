@@ -42,7 +42,6 @@ func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
 			out += stmtResult.(string) + "\n"
 		}
 	}
-	fmt.Println("salidaaaa",out)
 	return out
 }
 
@@ -78,6 +77,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Breakstmt() != nil {
 		return l.Visit(ctx.Breakstmt())
 	}
+	if ctx.Returnstmt() != nil {
+		return l.Visit(ctx.Returnstmt())
+	}
 	if ctx.Funcdclstmt() != nil {
 		return l.Visit(ctx.Funcdclstmt())
 	}
@@ -105,3 +107,4 @@ func (l *Visitor) Visit(tree antlr.ParseTree) interface{} {
 		return nodo
 	}
 }
+

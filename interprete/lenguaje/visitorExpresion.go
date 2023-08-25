@@ -9,10 +9,12 @@ import (
 
 func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 	leftValue := l.Visit(ctx.GetLeft())
+	fmt.Println("valor izquierdo ", leftValue)
 	rightValue := l.Visit(ctx.GetRight())
 	op := ctx.GetOp().GetText()
 
 	leftType := determineType(leftValue)
+	fmt.Println("tipo izquierdo ", leftType)
 	rightType := determineType(rightValue)
 
 	switch op {
@@ -300,3 +302,8 @@ func (l *Visitor) VisitUnariaExpr(ctx *parser.UnariaExprContext) interface{} {
 func (l *Visitor) VisitNilExpr(ctx *parser.NilExprContext) interface{} {
 	return nil
 }
+
+func (l *Visitor) VisitAccFuncExpr(ctx *parser.AccFuncExprContext) interface{} {
+	return l.Visit(ctx.Accfuncstm())
+}
+
