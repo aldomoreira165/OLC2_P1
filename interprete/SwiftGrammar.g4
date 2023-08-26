@@ -27,6 +27,27 @@ returnstmt
     : RETURN expr PTCOMA
     ;
 
+
+//funciones embebidas
+
+printstmt
+    : PRINT PARIZQ expr PARDER
+    ;
+
+intstmt
+    : INT PARIZQ expr PARDER
+    ;
+
+floatstmt
+    : FLOAT PARIZQ expr PARDER
+    ;
+
+stringstmt
+    : PSTRING PARIZQ expr PARDER
+    ;
+
+//==============
+
 //funciones
 
 funcdclstmt
@@ -47,10 +68,6 @@ parametroscall
     ;
 
 //=============================
-
-printstmt
-    : PRINT PARIZQ expr PARDER
-    ;
 
 //sententencias de transferencia
 
@@ -113,6 +130,9 @@ expr
     | (TRU | FAL)                               # BoolExpr
     | NIL                                       # NilExpr
     | accfuncstm                                # AccFuncExpr
+    | intstmt                                   # IntExpr
+    | floatstmt                                 # FloatExpr
+    | stringstmt                                 # StringExpr
     ;
 
 tipo

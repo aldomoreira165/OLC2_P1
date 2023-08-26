@@ -11,11 +11,13 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 	leftValue := l.Visit(ctx.GetLeft())
 	fmt.Println("valor izquierdo ", leftValue)
 	rightValue := l.Visit(ctx.GetRight())
+	fmt.Println("valor derecho ", rightValue)
 	op := ctx.GetOp().GetText()
 
 	leftType := determineType(leftValue)
 	fmt.Println("tipo izquierdo ", leftType)
 	rightType := determineType(rightValue)
+	fmt.Println("tipo derecho ", rightType)
 
 	switch op {
 	case "+":
@@ -29,7 +31,9 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			return leftValue.(float64) + rightValue.(float64)
 		} else if leftType == "String" && rightType == "String" || rightType == "String" && leftType == "String" {
 			return leftValue.(string) + rightValue.(string)
-		}
+		} else if leftType == "String" && rightType == "character" || rightType == "character" && leftType == "String" {
+			return leftValue.(string) + rightValue.(string)
+		} 
 	case "-":
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
 			return leftValue.(int64) - rightValue.(int64)
@@ -307,3 +311,14 @@ func (l *Visitor) VisitAccFuncExpr(ctx *parser.AccFuncExprContext) interface{} {
 	return l.Visit(ctx.Accfuncstm())
 }
 
+func (l *Visitor) VisitIntExpr(ctx *parser.IntExprContext) interface{} {
+	return l.Visit(ctx.Intstmt())
+}
+
+func (l *Visitor) VisitFloatExpr(ctx *parser.FloatExprContext) interface{} {
+	return l.Visit(ctx.Floatstmt())
+}
+
+func (l *Visitor) VisitStringExpr(ctx *parser.StringExprContext) interface{} {
+	return l.Visit(ctx.Stringstmt())
+}

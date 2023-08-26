@@ -44,6 +44,30 @@ func (s *BaseSwiftGrammarListener) EnterReturnstmt(ctx *ReturnstmtContext) {}
 // ExitReturnstmt is called when production returnstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitReturnstmt(ctx *ReturnstmtContext) {}
 
+// EnterPrintstmt is called when production printstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterPrintstmt(ctx *PrintstmtContext) {}
+
+// ExitPrintstmt is called when production printstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitPrintstmt(ctx *PrintstmtContext) {}
+
+// EnterIntstmt is called when production intstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterIntstmt(ctx *IntstmtContext) {}
+
+// ExitIntstmt is called when production intstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitIntstmt(ctx *IntstmtContext) {}
+
+// EnterFloatstmt is called when production floatstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterFloatstmt(ctx *FloatstmtContext) {}
+
+// ExitFloatstmt is called when production floatstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitFloatstmt(ctx *FloatstmtContext) {}
+
+// EnterStringstmt is called when production stringstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterStringstmt(ctx *StringstmtContext) {}
+
+// ExitStringstmt is called when production stringstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitStringstmt(ctx *StringstmtContext) {}
+
 // EnterFuncionNormal is called when production FuncionNormal is entered.
 func (s *BaseSwiftGrammarListener) EnterFuncionNormal(ctx *FuncionNormalContext) {}
 
@@ -73,12 +97,6 @@ func (s *BaseSwiftGrammarListener) EnterParametroscall(ctx *ParametroscallContex
 
 // ExitParametroscall is called when production parametroscall is exited.
 func (s *BaseSwiftGrammarListener) ExitParametroscall(ctx *ParametroscallContext) {}
-
-// EnterPrintstmt is called when production printstmt is entered.
-func (s *BaseSwiftGrammarListener) EnterPrintstmt(ctx *PrintstmtContext) {}
-
-// ExitPrintstmt is called when production printstmt is exited.
-func (s *BaseSwiftGrammarListener) ExitPrintstmt(ctx *PrintstmtContext) {}
 
 // EnterBreakstmt is called when production breakstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterBreakstmt(ctx *BreakstmtContext) {}
@@ -170,11 +188,23 @@ func (s *BaseSwiftGrammarListener) EnterBoolExpr(ctx *BoolExprContext) {}
 // ExitBoolExpr is called when production BoolExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitBoolExpr(ctx *BoolExprContext) {}
 
+// EnterStringExpr is called when production StringExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterStringExpr(ctx *StringExprContext) {}
+
+// ExitStringExpr is called when production StringExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitStringExpr(ctx *StringExprContext) {}
+
 // EnterNilExpr is called when production NilExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterNilExpr(ctx *NilExprContext) {}
 
 // ExitNilExpr is called when production NilExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitNilExpr(ctx *NilExprContext) {}
+
+// EnterFloatExpr is called when production FloatExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterFloatExpr(ctx *FloatExprContext) {}
+
+// ExitFloatExpr is called when production FloatExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitFloatExpr(ctx *FloatExprContext) {}
 
 // EnterIdExpr is called when production IdExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterIdExpr(ctx *IdExprContext) {}
@@ -205,6 +235,12 @@ func (s *BaseSwiftGrammarListener) EnterAccFuncExpr(ctx *AccFuncExprContext) {}
 
 // ExitAccFuncExpr is called when production AccFuncExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitAccFuncExpr(ctx *AccFuncExprContext) {}
+
+// EnterIntExpr is called when production IntExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterIntExpr(ctx *IntExprContext) {}
+
+// ExitIntExpr is called when production IntExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitIntExpr(ctx *IntExprContext) {}
 
 // EnterOpExpr is called when production OpExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterOpExpr(ctx *OpExprContext) {}

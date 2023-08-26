@@ -19,6 +19,18 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#returnstmt.
 	VisitReturnstmt(ctx *ReturnstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#printstmt.
+	VisitPrintstmt(ctx *PrintstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#intstmt.
+	VisitIntstmt(ctx *IntstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#floatstmt.
+	VisitFloatstmt(ctx *FloatstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#stringstmt.
+	VisitStringstmt(ctx *StringstmtContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#FuncionNormal.
 	VisitFuncionNormal(ctx *FuncionNormalContext) interface{}
 
@@ -33,9 +45,6 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#parametroscall.
 	VisitParametroscall(ctx *ParametroscallContext) interface{}
-
-	// Visit a parse tree produced by SwiftGrammarParser#printstmt.
-	VisitPrintstmt(ctx *PrintstmtContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#breakstmt.
 	VisitBreakstmt(ctx *BreakstmtContext) interface{}
@@ -82,8 +91,14 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#BoolExpr.
 	VisitBoolExpr(ctx *BoolExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#StringExpr.
+	VisitStringExpr(ctx *StringExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#NilExpr.
 	VisitNilExpr(ctx *NilExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#FloatExpr.
+	VisitFloatExpr(ctx *FloatExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#IdExpr.
 	VisitIdExpr(ctx *IdExprContext) interface{}
@@ -99,6 +114,9 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#AccFuncExpr.
 	VisitAccFuncExpr(ctx *AccFuncExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#IntExpr.
+	VisitIntExpr(ctx *IntExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#OpExpr.
 	VisitOpExpr(ctx *OpExprContext) interface{}

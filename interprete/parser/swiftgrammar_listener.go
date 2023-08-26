@@ -19,6 +19,18 @@ type SwiftGrammarListener interface {
 	// EnterReturnstmt is called when entering the returnstmt production.
 	EnterReturnstmt(c *ReturnstmtContext)
 
+	// EnterPrintstmt is called when entering the printstmt production.
+	EnterPrintstmt(c *PrintstmtContext)
+
+	// EnterIntstmt is called when entering the intstmt production.
+	EnterIntstmt(c *IntstmtContext)
+
+	// EnterFloatstmt is called when entering the floatstmt production.
+	EnterFloatstmt(c *FloatstmtContext)
+
+	// EnterStringstmt is called when entering the stringstmt production.
+	EnterStringstmt(c *StringstmtContext)
+
 	// EnterFuncionNormal is called when entering the FuncionNormal production.
 	EnterFuncionNormal(c *FuncionNormalContext)
 
@@ -33,9 +45,6 @@ type SwiftGrammarListener interface {
 
 	// EnterParametroscall is called when entering the parametroscall production.
 	EnterParametroscall(c *ParametroscallContext)
-
-	// EnterPrintstmt is called when entering the printstmt production.
-	EnterPrintstmt(c *PrintstmtContext)
 
 	// EnterBreakstmt is called when entering the breakstmt production.
 	EnterBreakstmt(c *BreakstmtContext)
@@ -82,8 +91,14 @@ type SwiftGrammarListener interface {
 	// EnterBoolExpr is called when entering the BoolExpr production.
 	EnterBoolExpr(c *BoolExprContext)
 
+	// EnterStringExpr is called when entering the StringExpr production.
+	EnterStringExpr(c *StringExprContext)
+
 	// EnterNilExpr is called when entering the NilExpr production.
 	EnterNilExpr(c *NilExprContext)
+
+	// EnterFloatExpr is called when entering the FloatExpr production.
+	EnterFloatExpr(c *FloatExprContext)
 
 	// EnterIdExpr is called when entering the IdExpr production.
 	EnterIdExpr(c *IdExprContext)
@@ -99,6 +114,9 @@ type SwiftGrammarListener interface {
 
 	// EnterAccFuncExpr is called when entering the AccFuncExpr production.
 	EnterAccFuncExpr(c *AccFuncExprContext)
+
+	// EnterIntExpr is called when entering the IntExpr production.
+	EnterIntExpr(c *IntExprContext)
 
 	// EnterOpExpr is called when entering the OpExpr production.
 	EnterOpExpr(c *OpExprContext)
@@ -118,6 +136,18 @@ type SwiftGrammarListener interface {
 	// ExitReturnstmt is called when exiting the returnstmt production.
 	ExitReturnstmt(c *ReturnstmtContext)
 
+	// ExitPrintstmt is called when exiting the printstmt production.
+	ExitPrintstmt(c *PrintstmtContext)
+
+	// ExitIntstmt is called when exiting the intstmt production.
+	ExitIntstmt(c *IntstmtContext)
+
+	// ExitFloatstmt is called when exiting the floatstmt production.
+	ExitFloatstmt(c *FloatstmtContext)
+
+	// ExitStringstmt is called when exiting the stringstmt production.
+	ExitStringstmt(c *StringstmtContext)
+
 	// ExitFuncionNormal is called when exiting the FuncionNormal production.
 	ExitFuncionNormal(c *FuncionNormalContext)
 
@@ -132,9 +162,6 @@ type SwiftGrammarListener interface {
 
 	// ExitParametroscall is called when exiting the parametroscall production.
 	ExitParametroscall(c *ParametroscallContext)
-
-	// ExitPrintstmt is called when exiting the printstmt production.
-	ExitPrintstmt(c *PrintstmtContext)
 
 	// ExitBreakstmt is called when exiting the breakstmt production.
 	ExitBreakstmt(c *BreakstmtContext)
@@ -181,8 +208,14 @@ type SwiftGrammarListener interface {
 	// ExitBoolExpr is called when exiting the BoolExpr production.
 	ExitBoolExpr(c *BoolExprContext)
 
+	// ExitStringExpr is called when exiting the StringExpr production.
+	ExitStringExpr(c *StringExprContext)
+
 	// ExitNilExpr is called when exiting the NilExpr production.
 	ExitNilExpr(c *NilExprContext)
+
+	// ExitFloatExpr is called when exiting the FloatExpr production.
+	ExitFloatExpr(c *FloatExprContext)
 
 	// ExitIdExpr is called when exiting the IdExpr production.
 	ExitIdExpr(c *IdExprContext)
@@ -198,6 +231,9 @@ type SwiftGrammarListener interface {
 
 	// ExitAccFuncExpr is called when exiting the AccFuncExpr production.
 	ExitAccFuncExpr(c *AccFuncExprContext)
+
+	// ExitIntExpr is called when exiting the IntExpr production.
+	ExitIntExpr(c *IntExprContext)
 
 	// ExitOpExpr is called when exiting the OpExpr production.
 	ExitOpExpr(c *OpExprContext)
