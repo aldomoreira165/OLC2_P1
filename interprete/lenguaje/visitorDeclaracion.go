@@ -115,8 +115,14 @@ func (l *Visitor) VisitDefVector(ctx *parser.DefVectorContext) interface{} {
 	}
 }
 
+
+//asignar a vector los valores de otro vector
 func (l *Visitor) VisitDefVectorID(ctx *parser.DefVectorIDContext) interface{} {
-	return nil
+	id := ctx.ID().GetText()
+	if vector, ok := l.currentEnvironment.Vectores[id]; ok {
+		return vector.Valores
+	}
+	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)
 }
 
 //lista de valores

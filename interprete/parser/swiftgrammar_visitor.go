@@ -31,8 +31,17 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#accesovectorstmt.
 	VisitAccesovectorstmt(ctx *AccesovectorstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#asignvectorstmt.
+	VisitAsignvectorstmt(ctx *AsignvectorstmtContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#appendvectorstmt.
 	VisitAppendvectorstmt(ctx *AppendvectorstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#removeatvectorstmt.
+	VisitRemoveatvectorstmt(ctx *RemoveatvectorstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#removelastvectorstmt.
+	VisitRemovelastvectorstmt(ctx *RemovelastvectorstmtContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#countvectorstmt.
 	VisitCountvectorstmt(ctx *CountvectorstmtContext) interface{}

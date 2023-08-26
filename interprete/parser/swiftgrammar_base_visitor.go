@@ -39,7 +39,19 @@ func (v *BaseSwiftGrammarVisitor) VisitAccesovectorstmt(ctx *AccesovectorstmtCon
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitAsignvectorstmt(ctx *AsignvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitAppendvectorstmt(ctx *AppendvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitRemoveatvectorstmt(ctx *RemoveatvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitRemovelastvectorstmt(ctx *RemovelastvectorstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

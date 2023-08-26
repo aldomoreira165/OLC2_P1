@@ -22,6 +22,9 @@ stmt: printstmt
     | declvectorstmt
     | accesovectorstmt
     | appendvectorstmt
+    | removelastvectorstmt
+    | removeatvectorstmt
+    | asignvectorstmt
     ;
 
 //vectores
@@ -43,8 +46,20 @@ accesovectorstmt
     : ID CORCHIZQ expr CORCHDER
     ;
 
+asignvectorstmt
+    : ID CORCHIZQ expr CORCHDER IG expr
+    ;
+
 appendvectorstmt
     : ID PUNTO APPEND PARIZQ expr PARDER
+    ;
+
+removeatvectorstmt
+    : ID PUNTO REMOVE PARIZQ AT DOSPUNTOS expr PARDER
+    ;
+
+removelastvectorstmt
+    : ID PUNTO REMOVE_LAST PARIZQ PARDER
     ;
 
 countvectorstmt

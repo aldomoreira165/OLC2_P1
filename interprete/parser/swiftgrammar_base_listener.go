@@ -68,11 +68,29 @@ func (s *BaseSwiftGrammarListener) EnterAccesovectorstmt(ctx *AccesovectorstmtCo
 // ExitAccesovectorstmt is called when production accesovectorstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitAccesovectorstmt(ctx *AccesovectorstmtContext) {}
 
+// EnterAsignvectorstmt is called when production asignvectorstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterAsignvectorstmt(ctx *AsignvectorstmtContext) {}
+
+// ExitAsignvectorstmt is called when production asignvectorstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitAsignvectorstmt(ctx *AsignvectorstmtContext) {}
+
 // EnterAppendvectorstmt is called when production appendvectorstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterAppendvectorstmt(ctx *AppendvectorstmtContext) {}
 
 // ExitAppendvectorstmt is called when production appendvectorstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitAppendvectorstmt(ctx *AppendvectorstmtContext) {}
+
+// EnterRemoveatvectorstmt is called when production removeatvectorstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterRemoveatvectorstmt(ctx *RemoveatvectorstmtContext) {}
+
+// ExitRemoveatvectorstmt is called when production removeatvectorstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitRemoveatvectorstmt(ctx *RemoveatvectorstmtContext) {}
+
+// EnterRemovelastvectorstmt is called when production removelastvectorstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterRemovelastvectorstmt(ctx *RemovelastvectorstmtContext) {}
+
+// ExitRemovelastvectorstmt is called when production removelastvectorstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitRemovelastvectorstmt(ctx *RemovelastvectorstmtContext) {}
 
 // EnterCountvectorstmt is called when production countvectorstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterCountvectorstmt(ctx *CountvectorstmtContext) {}

@@ -31,6 +31,37 @@ func (l *Visitor) VisitAppendvectorstmt(ctx *parser.AppendvectorstmtContext) int
 	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)
 }
 
+//remove last
+func (l *Visitor) VisitRemovelastvectorstmt(ctx *parser.RemovelastvectorstmtContext) interface{} {
+	id := ctx.ID().GetText()
+	if vector, ok := l.currentEnvironment.Vectores[id]; ok {
+		if len(vector.Valores) > 0 {
+			vector.Valores = vector.Valores[:len(vector.Valores)-1]
+			l.currentEnvironment.Vectores[id] = vector
+			return true
+		}else{
+			return fmt.Sprintf("Error: el vector esta vacio: %s", id)
+		}
+	}
+	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)
+}
+
+//remove at
+func (l *Visitor) VisitRemoveatvectorstmt(ctx *parser.RemoveatvectorstmtContext) interface{}  {
+	id := ctx.ID().GetText()
+	if vector, ok := l.currentEnvironment.Vectores[id]; ok {
+		valor := l.Visit(ctx.Expr())
+		if valor.(int64) < int64(len(vector.Valores)) {
+			vector.Valores = append(vector.Valores[:valor.(int64)], vector.Valores[valor.(int64)+1:]...)
+			l.currentEnvironment.Vectores[id] = vector
+			return true
+		}else{
+			return fmt.Sprintf("Error: el indice esta fuera de rango: %s", id)
+		}
+	}
+	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)
+}
+
 // count
 func (l *Visitor) VisitCountvectorstmt(ctx *parser.CountvectorstmtContext) interface{}  {
 	id := ctx.ID().GetText()
@@ -48,6 +79,24 @@ func (l *Visitor) VisitIsemptyvectorstmt(ctx *parser.IsemptyvectorstmtContext) i
 			return true
 		}else{
 			return false
+		}
+	}
+	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)
+}
+
+//asignacion o modificacion de posicion de vector
+func (l *Visitor) VisitAsignvectorstmt(ctx *parser.AsignvectorstmtContext) interface{}  {
+	id := ctx.ID().GetText()
+	if vector, ok := l.currentEnvironment.Vectores[id]; ok {
+		fmt.Println("dentro del primer if")
+		indice := l.Visit(ctx.Expr(0))
+		if indice.(int64) < int64(len(vector.Valores)) {
+			fmt.Println("dentro del segundo if")
+			vector.Valores[indice.(int64)] = l.Visit(ctx.Expr(1))
+			l.currentEnvironment.Vectores[id] = vector
+			return true
+		}else{
+			return fmt.Sprintf("Error: el indice esta fuera de rango: %s", id)
 		}
 	}
 	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)

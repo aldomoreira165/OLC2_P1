@@ -26,6 +26,9 @@ FUNC: 'func';
 COUNT: 'count';
 ISEMPTY: 'IsEmpty';
 APPEND: 'append';
+REMOVE_LAST: 'removeLast';
+REMOVE: 'remove';
+AT: 'at';
 
 // primitives
 NUMBER : [0-9]+('.'[0-9]+)?;

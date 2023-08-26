@@ -31,8 +31,17 @@ type SwiftGrammarListener interface {
 	// EnterAccesovectorstmt is called when entering the accesovectorstmt production.
 	EnterAccesovectorstmt(c *AccesovectorstmtContext)
 
+	// EnterAsignvectorstmt is called when entering the asignvectorstmt production.
+	EnterAsignvectorstmt(c *AsignvectorstmtContext)
+
 	// EnterAppendvectorstmt is called when entering the appendvectorstmt production.
 	EnterAppendvectorstmt(c *AppendvectorstmtContext)
+
+	// EnterRemoveatvectorstmt is called when entering the removeatvectorstmt production.
+	EnterRemoveatvectorstmt(c *RemoveatvectorstmtContext)
+
+	// EnterRemovelastvectorstmt is called when entering the removelastvectorstmt production.
+	EnterRemovelastvectorstmt(c *RemovelastvectorstmtContext)
 
 	// EnterCountvectorstmt is called when entering the countvectorstmt production.
 	EnterCountvectorstmt(c *CountvectorstmtContext)
@@ -181,8 +190,17 @@ type SwiftGrammarListener interface {
 	// ExitAccesovectorstmt is called when exiting the accesovectorstmt production.
 	ExitAccesovectorstmt(c *AccesovectorstmtContext)
 
+	// ExitAsignvectorstmt is called when exiting the asignvectorstmt production.
+	ExitAsignvectorstmt(c *AsignvectorstmtContext)
+
 	// ExitAppendvectorstmt is called when exiting the appendvectorstmt production.
 	ExitAppendvectorstmt(c *AppendvectorstmtContext)
+
+	// ExitRemoveatvectorstmt is called when exiting the removeatvectorstmt production.
+	ExitRemoveatvectorstmt(c *RemoveatvectorstmtContext)
+
+	// ExitRemovelastvectorstmt is called when exiting the removelastvectorstmt production.
+	ExitRemovelastvectorstmt(c *RemovelastvectorstmtContext)
 
 	// ExitCountvectorstmt is called when exiting the countvectorstmt production.
 	ExitCountvectorstmt(c *CountvectorstmtContext)
