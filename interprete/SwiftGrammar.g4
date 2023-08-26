@@ -21,6 +21,7 @@ stmt: printstmt
     | returnstmt
     | declvectorstmt
     | accesovectorstmt
+    | appendvectorstmt
     ;
 
 //vectores
@@ -30,7 +31,8 @@ declvectorstmt
     ;
 
 defvectorstmt
-    : IG CORCHIZQ listaexpresiones CORCHDER
+    : IG CORCHIZQ listaexpresiones? CORCHDER #DefVector
+    | IG ID                                 #DefVectorID
     ;
 
 listaexpresiones
@@ -39,6 +41,18 @@ listaexpresiones
 
 accesovectorstmt
     : ID CORCHIZQ expr CORCHDER
+    ;
+
+appendvectorstmt
+    : ID PUNTO APPEND PARIZQ expr PARDER
+    ;
+
+countvectorstmt
+    : ID PUNTO COUNT
+    ;
+
+isemptyvectorstmt
+    : ID PUNTO ISEMPTY
     ;
 
 //de flujo
@@ -154,6 +168,8 @@ expr
     | floatstmt                                 # FloatExpr
     | stringstmt                                # StringExpr
     | accesovectorstmt                          # AccesoVectorExpr
+    | countvectorstmt                           # CountVectorExpr
+    | isemptyvectorstmt                         # IsEmptyVectorExpr
     ;
 
 tipo

@@ -19,14 +19,26 @@ type SwiftGrammarListener interface {
 	// EnterDeclvectorstmt is called when entering the declvectorstmt production.
 	EnterDeclvectorstmt(c *DeclvectorstmtContext)
 
-	// EnterDefvectorstmt is called when entering the defvectorstmt production.
-	EnterDefvectorstmt(c *DefvectorstmtContext)
+	// EnterDefVector is called when entering the DefVector production.
+	EnterDefVector(c *DefVectorContext)
+
+	// EnterDefVectorID is called when entering the DefVectorID production.
+	EnterDefVectorID(c *DefVectorIDContext)
 
 	// EnterListaexpresiones is called when entering the listaexpresiones production.
 	EnterListaexpresiones(c *ListaexpresionesContext)
 
 	// EnterAccesovectorstmt is called when entering the accesovectorstmt production.
 	EnterAccesovectorstmt(c *AccesovectorstmtContext)
+
+	// EnterAppendvectorstmt is called when entering the appendvectorstmt production.
+	EnterAppendvectorstmt(c *AppendvectorstmtContext)
+
+	// EnterCountvectorstmt is called when entering the countvectorstmt production.
+	EnterCountvectorstmt(c *CountvectorstmtContext)
+
+	// EnterIsemptyvectorstmt is called when entering the isemptyvectorstmt production.
+	EnterIsemptyvectorstmt(c *IsemptyvectorstmtContext)
 
 	// EnterReturnstmt is called when entering the returnstmt production.
 	EnterReturnstmt(c *ReturnstmtContext)
@@ -109,6 +121,9 @@ type SwiftGrammarListener interface {
 	// EnterFloatExpr is called when entering the FloatExpr production.
 	EnterFloatExpr(c *FloatExprContext)
 
+	// EnterIsEmptyVectorExpr is called when entering the IsEmptyVectorExpr production.
+	EnterIsEmptyVectorExpr(c *IsEmptyVectorExprContext)
+
 	// EnterIdExpr is called when entering the IdExpr production.
 	EnterIdExpr(c *IdExprContext)
 
@@ -120,6 +135,9 @@ type SwiftGrammarListener interface {
 
 	// EnterUnariaExpr is called when entering the UnariaExpr production.
 	EnterUnariaExpr(c *UnariaExprContext)
+
+	// EnterCountVectorExpr is called when entering the CountVectorExpr production.
+	EnterCountVectorExpr(c *CountVectorExprContext)
 
 	// EnterNumExpr is called when entering the NumExpr production.
 	EnterNumExpr(c *NumExprContext)
@@ -151,14 +169,26 @@ type SwiftGrammarListener interface {
 	// ExitDeclvectorstmt is called when exiting the declvectorstmt production.
 	ExitDeclvectorstmt(c *DeclvectorstmtContext)
 
-	// ExitDefvectorstmt is called when exiting the defvectorstmt production.
-	ExitDefvectorstmt(c *DefvectorstmtContext)
+	// ExitDefVector is called when exiting the DefVector production.
+	ExitDefVector(c *DefVectorContext)
+
+	// ExitDefVectorID is called when exiting the DefVectorID production.
+	ExitDefVectorID(c *DefVectorIDContext)
 
 	// ExitListaexpresiones is called when exiting the listaexpresiones production.
 	ExitListaexpresiones(c *ListaexpresionesContext)
 
 	// ExitAccesovectorstmt is called when exiting the accesovectorstmt production.
 	ExitAccesovectorstmt(c *AccesovectorstmtContext)
+
+	// ExitAppendvectorstmt is called when exiting the appendvectorstmt production.
+	ExitAppendvectorstmt(c *AppendvectorstmtContext)
+
+	// ExitCountvectorstmt is called when exiting the countvectorstmt production.
+	ExitCountvectorstmt(c *CountvectorstmtContext)
+
+	// ExitIsemptyvectorstmt is called when exiting the isemptyvectorstmt production.
+	ExitIsemptyvectorstmt(c *IsemptyvectorstmtContext)
 
 	// ExitReturnstmt is called when exiting the returnstmt production.
 	ExitReturnstmt(c *ReturnstmtContext)
@@ -241,6 +271,9 @@ type SwiftGrammarListener interface {
 	// ExitFloatExpr is called when exiting the FloatExpr production.
 	ExitFloatExpr(c *FloatExprContext)
 
+	// ExitIsEmptyVectorExpr is called when exiting the IsEmptyVectorExpr production.
+	ExitIsEmptyVectorExpr(c *IsEmptyVectorExprContext)
+
 	// ExitIdExpr is called when exiting the IdExpr production.
 	ExitIdExpr(c *IdExprContext)
 
@@ -252,6 +285,9 @@ type SwiftGrammarListener interface {
 
 	// ExitUnariaExpr is called when exiting the UnariaExpr production.
 	ExitUnariaExpr(c *UnariaExprContext)
+
+	// ExitCountVectorExpr is called when exiting the CountVectorExpr production.
+	ExitCountVectorExpr(c *CountVectorExprContext)
 
 	// ExitNumExpr is called when exiting the NumExpr production.
 	ExitNumExpr(c *NumExprContext)

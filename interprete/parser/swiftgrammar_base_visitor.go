@@ -23,7 +23,11 @@ func (v *BaseSwiftGrammarVisitor) VisitDeclvectorstmt(ctx *DeclvectorstmtContext
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitDefvectorstmt(ctx *DefvectorstmtContext) interface{} {
+func (v *BaseSwiftGrammarVisitor) VisitDefVector(ctx *DefVectorContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitDefVectorID(ctx *DefVectorIDContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -32,6 +36,18 @@ func (v *BaseSwiftGrammarVisitor) VisitListaexpresiones(ctx *ListaexpresionesCon
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitAccesovectorstmt(ctx *AccesovectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAppendvectorstmt(ctx *AppendvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitCountvectorstmt(ctx *CountvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitIsemptyvectorstmt(ctx *IsemptyvectorstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -143,6 +159,10 @@ func (v *BaseSwiftGrammarVisitor) VisitFloatExpr(ctx *FloatExprContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitIsEmptyVectorExpr(ctx *IsEmptyVectorExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitIdExpr(ctx *IdExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -156,6 +176,10 @@ func (v *BaseSwiftGrammarVisitor) VisitAccesoVectorExpr(ctx *AccesoVectorExprCon
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitUnariaExpr(ctx *UnariaExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitCountVectorExpr(ctx *CountVectorExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

@@ -23,6 +23,9 @@ VAR: 'var';
 BREAK: 'break';
 RETURN: 'return';
 FUNC: 'func';
+COUNT: 'count';
+ISEMPTY: 'IsEmpty';
+APPEND: 'append';
 
 // primitives
 NUMBER : [0-9]+('.'[0-9]+)?;
@@ -56,6 +59,7 @@ DOSPUNTOS:      ':';
 COMA:           ',';
 PTCOMA:      ';';
 INTERROGACION:  '?';
+PUNTO:          '.';
 
 // skip
 WHITESPACE: [ \\\r\n\t]+ -> skip;

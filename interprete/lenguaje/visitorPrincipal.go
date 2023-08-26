@@ -91,6 +91,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Accesovectorstmt() != nil {
 		return l.Visit(ctx.Accesovectorstmt())
 	}
+	if ctx.Appendvectorstmt() != nil {
+		return l.Visit(ctx.Appendvectorstmt())
+	}
 	return nil
 }
 

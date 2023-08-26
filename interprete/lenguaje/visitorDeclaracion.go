@@ -2,7 +2,7 @@ package lenguaje
 
 import (
 	"fmt"
-	parser "interprete/Parser"
+	"interprete/Parser"
 )
 
 
@@ -100,17 +100,24 @@ func (l *Visitor) VisitDeclvectorstmt(ctx *parser.DeclvectorstmtContext) interfa
 			return fmt.Sprintf("Error de tipo en la declaración: %s", varName)
 		}
 	}
-
 	l.agregarVector(varName, tipo, valores)
 	return true
 }
 
 //definicicion de vector
-func (l *Visitor) VisitDefvectorstmt(ctx *parser.DefvectorstmtContext) interface{} {
-	valores := l.Visit(ctx.Listaexpresiones()).([]interface{})
-	return valores
+func (l *Visitor) VisitDefVector(ctx *parser.DefVectorContext) interface{} {
+	if ctx.Listaexpresiones() != nil {
+		valores := l.Visit(ctx.Listaexpresiones()).([]interface{})
+		return valores
+	}else{
+		valores := []interface{}{}
+		return valores
+	}
 }
 
+func (l *Visitor) VisitDefVectorID(ctx *parser.DefVectorIDContext) interface{} {
+	return nil
+}
 
 //lista de valores
 func (l *Visitor) VisitListaexpresiones(ctx *parser.ListaexpresionesContext) interface{} {

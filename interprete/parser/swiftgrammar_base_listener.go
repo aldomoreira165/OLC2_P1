@@ -44,11 +44,17 @@ func (s *BaseSwiftGrammarListener) EnterDeclvectorstmt(ctx *DeclvectorstmtContex
 // ExitDeclvectorstmt is called when production declvectorstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitDeclvectorstmt(ctx *DeclvectorstmtContext) {}
 
-// EnterDefvectorstmt is called when production defvectorstmt is entered.
-func (s *BaseSwiftGrammarListener) EnterDefvectorstmt(ctx *DefvectorstmtContext) {}
+// EnterDefVector is called when production DefVector is entered.
+func (s *BaseSwiftGrammarListener) EnterDefVector(ctx *DefVectorContext) {}
 
-// ExitDefvectorstmt is called when production defvectorstmt is exited.
-func (s *BaseSwiftGrammarListener) ExitDefvectorstmt(ctx *DefvectorstmtContext) {}
+// ExitDefVector is called when production DefVector is exited.
+func (s *BaseSwiftGrammarListener) ExitDefVector(ctx *DefVectorContext) {}
+
+// EnterDefVectorID is called when production DefVectorID is entered.
+func (s *BaseSwiftGrammarListener) EnterDefVectorID(ctx *DefVectorIDContext) {}
+
+// ExitDefVectorID is called when production DefVectorID is exited.
+func (s *BaseSwiftGrammarListener) ExitDefVectorID(ctx *DefVectorIDContext) {}
 
 // EnterListaexpresiones is called when production listaexpresiones is entered.
 func (s *BaseSwiftGrammarListener) EnterListaexpresiones(ctx *ListaexpresionesContext) {}
@@ -61,6 +67,24 @@ func (s *BaseSwiftGrammarListener) EnterAccesovectorstmt(ctx *AccesovectorstmtCo
 
 // ExitAccesovectorstmt is called when production accesovectorstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitAccesovectorstmt(ctx *AccesovectorstmtContext) {}
+
+// EnterAppendvectorstmt is called when production appendvectorstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterAppendvectorstmt(ctx *AppendvectorstmtContext) {}
+
+// ExitAppendvectorstmt is called when production appendvectorstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitAppendvectorstmt(ctx *AppendvectorstmtContext) {}
+
+// EnterCountvectorstmt is called when production countvectorstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterCountvectorstmt(ctx *CountvectorstmtContext) {}
+
+// ExitCountvectorstmt is called when production countvectorstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitCountvectorstmt(ctx *CountvectorstmtContext) {}
+
+// EnterIsemptyvectorstmt is called when production isemptyvectorstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterIsemptyvectorstmt(ctx *IsemptyvectorstmtContext) {}
+
+// ExitIsemptyvectorstmt is called when production isemptyvectorstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitIsemptyvectorstmt(ctx *IsemptyvectorstmtContext) {}
 
 // EnterReturnstmt is called when production returnstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterReturnstmt(ctx *ReturnstmtContext) {}
@@ -224,6 +248,12 @@ func (s *BaseSwiftGrammarListener) EnterFloatExpr(ctx *FloatExprContext) {}
 // ExitFloatExpr is called when production FloatExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitFloatExpr(ctx *FloatExprContext) {}
 
+// EnterIsEmptyVectorExpr is called when production IsEmptyVectorExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterIsEmptyVectorExpr(ctx *IsEmptyVectorExprContext) {}
+
+// ExitIsEmptyVectorExpr is called when production IsEmptyVectorExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitIsEmptyVectorExpr(ctx *IsEmptyVectorExprContext) {}
+
 // EnterIdExpr is called when production IdExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterIdExpr(ctx *IdExprContext) {}
 
@@ -247,6 +277,12 @@ func (s *BaseSwiftGrammarListener) EnterUnariaExpr(ctx *UnariaExprContext) {}
 
 // ExitUnariaExpr is called when production UnariaExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitUnariaExpr(ctx *UnariaExprContext) {}
+
+// EnterCountVectorExpr is called when production CountVectorExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterCountVectorExpr(ctx *CountVectorExprContext) {}
+
+// ExitCountVectorExpr is called when production CountVectorExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitCountVectorExpr(ctx *CountVectorExprContext) {}
 
 // EnterNumExpr is called when production NumExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterNumExpr(ctx *NumExprContext) {}

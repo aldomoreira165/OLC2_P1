@@ -19,14 +19,26 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#declvectorstmt.
 	VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#defvectorstmt.
-	VisitDefvectorstmt(ctx *DefvectorstmtContext) interface{}
+	// Visit a parse tree produced by SwiftGrammarParser#DefVector.
+	VisitDefVector(ctx *DefVectorContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#DefVectorID.
+	VisitDefVectorID(ctx *DefVectorIDContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#listaexpresiones.
 	VisitListaexpresiones(ctx *ListaexpresionesContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#accesovectorstmt.
 	VisitAccesovectorstmt(ctx *AccesovectorstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#appendvectorstmt.
+	VisitAppendvectorstmt(ctx *AppendvectorstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#countvectorstmt.
+	VisitCountvectorstmt(ctx *CountvectorstmtContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#isemptyvectorstmt.
+	VisitIsemptyvectorstmt(ctx *IsemptyvectorstmtContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#returnstmt.
 	VisitReturnstmt(ctx *ReturnstmtContext) interface{}
@@ -109,6 +121,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#FloatExpr.
 	VisitFloatExpr(ctx *FloatExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#IsEmptyVectorExpr.
+	VisitIsEmptyVectorExpr(ctx *IsEmptyVectorExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#IdExpr.
 	VisitIdExpr(ctx *IdExprContext) interface{}
 
@@ -120,6 +135,9 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#UnariaExpr.
 	VisitUnariaExpr(ctx *UnariaExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#CountVectorExpr.
+	VisitCountVectorExpr(ctx *CountVectorExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#NumExpr.
 	VisitNumExpr(ctx *NumExprContext) interface{}

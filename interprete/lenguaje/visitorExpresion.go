@@ -326,3 +326,11 @@ func (l *Visitor) VisitStringExpr(ctx *parser.StringExprContext) interface{} {
 func (l *Visitor) VisitAccesoVectorExpr(ctx *parser.AccesoVectorExprContext) interface{} {
 	return l.Visit(ctx.Accesovectorstmt())
 }
+
+func (l *Visitor) VisitCountVectorExpr(ctx *parser.CountVectorExprContext) interface{} {
+	return l.Visit(ctx.Countvectorstmt())
+}
+
+func (l *Visitor) VisitIsEmptyVectorExpr(ctx *parser.IsEmptyVectorExprContext) interface{} {
+	return l.Visit(ctx.Isemptyvectorstmt())
+}
