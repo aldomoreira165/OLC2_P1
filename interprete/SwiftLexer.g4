@@ -50,6 +50,8 @@ PARIZQ:         '(';
 PARDER:         ')';
 LLAVEIZQ:       '{';
 LLAVEDER:       '}';
+CORCHIZQ:       '[';
+CORCHDER:       ']';
 DOSPUNTOS:      ':';
 COMA:           ',';
 PTCOMA:      ';';

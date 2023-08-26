@@ -85,6 +85,12 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Accfuncstm() != nil {
 		return l.Visit(ctx.Accfuncstm())
 	}
+	if ctx.Declvectorstmt() != nil {
+		return l.Visit(ctx.Declvectorstmt())
+	}
+	if ctx.Accesovectorstmt() != nil {
+		return l.Visit(ctx.Accesovectorstmt())
+	}
 	return nil
 }
 

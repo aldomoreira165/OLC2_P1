@@ -322,3 +322,7 @@ func (l *Visitor) VisitFloatExpr(ctx *parser.FloatExprContext) interface{} {
 func (l *Visitor) VisitStringExpr(ctx *parser.StringExprContext) interface{} {
 	return l.Visit(ctx.Stringstmt())
 }
+
+func (l *Visitor) VisitAccesoVectorExpr(ctx *parser.AccesoVectorExprContext) interface{} {
+	return l.Visit(ctx.Accesovectorstmt())
+}

@@ -19,6 +19,26 @@ stmt: printstmt
     | funcdclstmt
     | accfuncstm
     | returnstmt
+    | declvectorstmt
+    | accesovectorstmt
+    ;
+
+//vectores
+
+declvectorstmt
+    : VAR ID DOSPUNTOS CORCHIZQ tipo CORCHDER defvectorstmt
+    ;
+
+defvectorstmt
+    : IG CORCHIZQ listaexpresiones CORCHDER
+    ;
+
+listaexpresiones
+    : expr (COMA expr)*
+    ;
+
+accesovectorstmt
+    : ID CORCHIZQ expr CORCHDER
     ;
 
 //de flujo
@@ -132,7 +152,8 @@ expr
     | accfuncstm                                # AccFuncExpr
     | intstmt                                   # IntExpr
     | floatstmt                                 # FloatExpr
-    | stringstmt                                 # StringExpr
+    | stringstmt                                # StringExpr
+    | accesovectorstmt                          # AccesoVectorExpr
     ;
 
 tipo

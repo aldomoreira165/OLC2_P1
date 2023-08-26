@@ -19,6 +19,22 @@ func (v *BaseSwiftGrammarVisitor) VisitStmt(ctx *StmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitDefvectorstmt(ctx *DefvectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitListaexpresiones(ctx *ListaexpresionesContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccesovectorstmt(ctx *AccesovectorstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitReturnstmt(ctx *ReturnstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -111,10 +127,6 @@ func (v *BaseSwiftGrammarVisitor) VisitDecremento(ctx *DecrementoContext) interf
 	return v.VisitChildren(ctx)
 }
 
-func (v *BaseSwiftGrammarVisitor) VisitUnariaExpr(ctx *UnariaExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
 func (v *BaseSwiftGrammarVisitor) VisitBoolExpr(ctx *BoolExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -135,6 +147,18 @@ func (v *BaseSwiftGrammarVisitor) VisitIdExpr(ctx *IdExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitOpExpr(ctx *OpExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccesoVectorExpr(ctx *AccesoVectorExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitUnariaExpr(ctx *UnariaExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitNumExpr(ctx *NumExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -152,10 +176,6 @@ func (v *BaseSwiftGrammarVisitor) VisitAccFuncExpr(ctx *AccFuncExprContext) inte
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitIntExpr(ctx *IntExprContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSwiftGrammarVisitor) VisitOpExpr(ctx *OpExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

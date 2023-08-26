@@ -7,6 +7,7 @@ import (
 type Environment struct {
 	parent    *Environment
 	variables map[string]Variable
+	Vectores  map[string]Vector
 	funciones map[string]Funcion
 }
 
@@ -14,6 +15,7 @@ func NewEnvironment(parent *Environment) *Environment {
 	return &Environment{
 		parent:    parent,
 		variables: make(map[string]Variable),
+		Vectores:  make(map[string]Vector),
 		funciones: make(map[string]Funcion),
 	}
 }
@@ -46,4 +48,18 @@ func (l *Visitor) agregarVariable(name string, tipo string, value interface{}) i
 		l.currentEnvironment.variables[name] = nuevaVariable
 	}
 	return nil
+}
+
+func (l *Visitor) agregarVector(id string, tipo string, valores []interface{}) interface{} {
+	if _, ok := l.currentEnvironment.Vectores[id]; ok {
+		return fmt.Sprintf("Error vector ya existente en el entorno actual: %s",id)
+	}
+
+	nuevoVector := Vector{
+		Id:  id,
+		Tipo:  tipo,
+		Valores: valores,
+	}
+	l.currentEnvironment.Vectores[id] = nuevoVector
+	return true
 }

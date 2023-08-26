@@ -16,6 +16,18 @@ type SwiftGrammarListener interface {
 	// EnterStmt is called when entering the stmt production.
 	EnterStmt(c *StmtContext)
 
+	// EnterDeclvectorstmt is called when entering the declvectorstmt production.
+	EnterDeclvectorstmt(c *DeclvectorstmtContext)
+
+	// EnterDefvectorstmt is called when entering the defvectorstmt production.
+	EnterDefvectorstmt(c *DefvectorstmtContext)
+
+	// EnterListaexpresiones is called when entering the listaexpresiones production.
+	EnterListaexpresiones(c *ListaexpresionesContext)
+
+	// EnterAccesovectorstmt is called when entering the accesovectorstmt production.
+	EnterAccesovectorstmt(c *AccesovectorstmtContext)
+
 	// EnterReturnstmt is called when entering the returnstmt production.
 	EnterReturnstmt(c *ReturnstmtContext)
 
@@ -85,9 +97,6 @@ type SwiftGrammarListener interface {
 	// EnterDecremento is called when entering the Decremento production.
 	EnterDecremento(c *DecrementoContext)
 
-	// EnterUnariaExpr is called when entering the UnariaExpr production.
-	EnterUnariaExpr(c *UnariaExprContext)
-
 	// EnterBoolExpr is called when entering the BoolExpr production.
 	EnterBoolExpr(c *BoolExprContext)
 
@@ -102,6 +111,15 @@ type SwiftGrammarListener interface {
 
 	// EnterIdExpr is called when entering the IdExpr production.
 	EnterIdExpr(c *IdExprContext)
+
+	// EnterOpExpr is called when entering the OpExpr production.
+	EnterOpExpr(c *OpExprContext)
+
+	// EnterAccesoVectorExpr is called when entering the AccesoVectorExpr production.
+	EnterAccesoVectorExpr(c *AccesoVectorExprContext)
+
+	// EnterUnariaExpr is called when entering the UnariaExpr production.
+	EnterUnariaExpr(c *UnariaExprContext)
 
 	// EnterNumExpr is called when entering the NumExpr production.
 	EnterNumExpr(c *NumExprContext)
@@ -118,9 +136,6 @@ type SwiftGrammarListener interface {
 	// EnterIntExpr is called when entering the IntExpr production.
 	EnterIntExpr(c *IntExprContext)
 
-	// EnterOpExpr is called when entering the OpExpr production.
-	EnterOpExpr(c *OpExprContext)
-
 	// EnterTipo is called when entering the tipo production.
 	EnterTipo(c *TipoContext)
 
@@ -132,6 +147,18 @@ type SwiftGrammarListener interface {
 
 	// ExitStmt is called when exiting the stmt production.
 	ExitStmt(c *StmtContext)
+
+	// ExitDeclvectorstmt is called when exiting the declvectorstmt production.
+	ExitDeclvectorstmt(c *DeclvectorstmtContext)
+
+	// ExitDefvectorstmt is called when exiting the defvectorstmt production.
+	ExitDefvectorstmt(c *DefvectorstmtContext)
+
+	// ExitListaexpresiones is called when exiting the listaexpresiones production.
+	ExitListaexpresiones(c *ListaexpresionesContext)
+
+	// ExitAccesovectorstmt is called when exiting the accesovectorstmt production.
+	ExitAccesovectorstmt(c *AccesovectorstmtContext)
 
 	// ExitReturnstmt is called when exiting the returnstmt production.
 	ExitReturnstmt(c *ReturnstmtContext)
@@ -202,9 +229,6 @@ type SwiftGrammarListener interface {
 	// ExitDecremento is called when exiting the Decremento production.
 	ExitDecremento(c *DecrementoContext)
 
-	// ExitUnariaExpr is called when exiting the UnariaExpr production.
-	ExitUnariaExpr(c *UnariaExprContext)
-
 	// ExitBoolExpr is called when exiting the BoolExpr production.
 	ExitBoolExpr(c *BoolExprContext)
 
@@ -220,6 +244,15 @@ type SwiftGrammarListener interface {
 	// ExitIdExpr is called when exiting the IdExpr production.
 	ExitIdExpr(c *IdExprContext)
 
+	// ExitOpExpr is called when exiting the OpExpr production.
+	ExitOpExpr(c *OpExprContext)
+
+	// ExitAccesoVectorExpr is called when exiting the AccesoVectorExpr production.
+	ExitAccesoVectorExpr(c *AccesoVectorExprContext)
+
+	// ExitUnariaExpr is called when exiting the UnariaExpr production.
+	ExitUnariaExpr(c *UnariaExprContext)
+
 	// ExitNumExpr is called when exiting the NumExpr production.
 	ExitNumExpr(c *NumExprContext)
 
@@ -234,9 +267,6 @@ type SwiftGrammarListener interface {
 
 	// ExitIntExpr is called when exiting the IntExpr production.
 	ExitIntExpr(c *IntExprContext)
-
-	// ExitOpExpr is called when exiting the OpExpr production.
-	ExitOpExpr(c *OpExprContext)
 
 	// ExitTipo is called when exiting the tipo production.
 	ExitTipo(c *TipoContext)
