@@ -230,6 +230,18 @@ func (s *BaseSwiftGrammarListener) EnterWhilestmt(ctx *WhilestmtContext) {}
 // ExitWhilestmt is called when production whilestmt is exited.
 func (s *BaseSwiftGrammarListener) ExitWhilestmt(ctx *WhilestmtContext) {}
 
+// EnterForstmt is called when production forstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterForstmt(ctx *ForstmtContext) {}
+
+// ExitForstmt is called when production forstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitForstmt(ctx *ForstmtContext) {}
+
+// EnterRangostmt is called when production rangostmt is entered.
+func (s *BaseSwiftGrammarListener) EnterRangostmt(ctx *RangostmtContext) {}
+
+// ExitRangostmt is called when production rangostmt is exited.
+func (s *BaseSwiftGrammarListener) ExitRangostmt(ctx *RangostmtContext) {}
+
 // EnterIncremento is called when production Incremento is entered.
 func (s *BaseSwiftGrammarListener) EnterIncremento(ctx *IncrementoContext) {}
 

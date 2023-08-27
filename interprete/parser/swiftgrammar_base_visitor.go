@@ -147,6 +147,14 @@ func (v *BaseSwiftGrammarVisitor) VisitWhilestmt(ctx *WhilestmtContext) interfac
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitForstmt(ctx *ForstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitRangostmt(ctx *RangostmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitIncremento(ctx *IncrementoContext) interface{} {
 	return v.VisitChildren(ctx)
 }

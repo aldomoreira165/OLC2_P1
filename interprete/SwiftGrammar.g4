@@ -14,6 +14,7 @@ stmt: printstmt
     | ifstmt
     | switchstmt
     | whilestmt
+    | forstmt
     | opasignstmt
     | breakstmt
     | funcdclstmt
@@ -156,6 +157,14 @@ asignstmt
 
 whilestmt
     : WHILE expr LLAVEIZQ block LLAVEDER
+    ;
+
+forstmt
+    : FOR ID IN RANGE (expr|rangostmt) LLAVEIZQ block LLAVEDER
+    ;
+
+rangostmt
+    : expr PUNTO PUNTO PUNTO expr
     ;
 
 opasignstmt

@@ -70,6 +70,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Whilestmt() != nil {
 		return l.Visit(ctx.Whilestmt())
 	}
+	if ctx.Forstmt() != nil {
+		return l.Visit(ctx.Forstmt())
+	}
 	if ctx.Opasignstmt() != nil {
 		return l.Visit(ctx.Opasignstmt())
 	}

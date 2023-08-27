@@ -1,6 +1,7 @@
 package lenguaje
 
 import (
+	"fmt"
 	"interprete/Parser"
 )
 
@@ -80,21 +81,50 @@ func (l *Visitor) VisitDefaultCase(ctx *parser.DefaultCaseContext) interface{} {
 
 // visit del while (arreglar) break no jala todavia
 func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
-	previousEnvironment := CrearEntorno(l)
 	var out string
 
 	for {
 		expresion := l.Visit(ctx.Expr())
 
 		if expresion == true {
+			previousEnvironment := CrearEntorno(l)
+			defer EliminarEntorno(l, previousEnvironment)
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)
 		} else {
-			EliminarEntorno(l, previousEnvironment)
 			l.shouldBreak = false
 			return out
 		}
 	}
+}
+
+//for
+func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
+	var out string
+	if ctx.Rangostmt() != nil {
+		posiciones := l.Visit(ctx.Rangostmt()).([]int64)
+		inicio := posiciones[0]
+		fin := posiciones[1]
+		fmt.Println(inicio, fin)
+		for i := inicio; i <= fin; i++ {
+			fmt.Println("en ciclo")
+			previousEnvironment := CrearEntorno(l)
+			defer EliminarEntorno(l, previousEnvironment)
+			resultado := l.Visit(ctx.Block())
+			out += resultado.(string)
+		}
+		return out
+	}
+	return nil
+}
+
+//rango
+func (l *Visitor) VisitRangostmt(ctx *parser.RangostmtContext) interface{} {
+	inicio := l.Visit(ctx.Expr(0)).(int64)
+	fin := l.Visit(ctx.Expr(1)).(int64)
+	//agregar en un arreglo de dos posiciones
+	recorrido := []int64{inicio, fin}
+	return recorrido
 }
 
 func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
