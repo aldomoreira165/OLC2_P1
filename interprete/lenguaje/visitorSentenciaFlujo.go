@@ -106,14 +106,74 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 		inicio := posiciones[0]
 		fin := posiciones[1]
 		fmt.Println(inicio, fin)
+
+		if inicio > fin {
+			return ("Error: el inicio del rango es mayor que el fin del rango \n")
+		}
+
+		//crear la variable a iterar en el entorno
+		varName := ctx.ID().GetText()
+		l.agregarVariable(varName, "nil", nil)
+
 		for i := inicio; i <= fin; i++ {
-			fmt.Println("en ciclo")
+			variable := Variable{
+				Name: varName,
+				Type:   determineType(i),
+				Value:  i,
+			}
+			l.currentEnvironment.variables[varName] = variable
+
 			previousEnvironment := CrearEntorno(l)
 			defer EliminarEntorno(l, previousEnvironment)
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)
 		}
 		return out
+	}
+
+	if ctx.Expr() != nil {
+		expresion := l.Visit(ctx.Expr())
+		if determineType(expresion) == "String" {
+			//crear la variable a iterar en el entorno
+			varName := ctx.ID().GetText()
+			l.agregarVariable(varName, "nil", nil)
+
+			for _, char := range expresion.(string) {
+				variable := Variable{
+					Name: varName,
+					Type:   "character",
+					Value:  string(char),
+				}
+				l.currentEnvironment.variables[varName] = variable
+
+				previousEnvironment := CrearEntorno(l)
+				defer EliminarEntorno(l, previousEnvironment)
+				resultado := l.Visit(ctx.Block())
+				out += resultado.(string)
+			}
+			return out
+		}
+		//buscar si es un vector buscando el id de la variable en la lista de vectores del entorno
+		if vector, ok := l.currentEnvironment.Vectores[ctx.Expr().GetText()]; ok {
+			//crear la variable a iterar en el entorno
+			varName := ctx.ID().GetText()
+			l.agregarVariable(varName, "nil", nil)
+
+			for _, valor := range vector.Valores {
+				variable := Variable{
+					Name: varName,
+					Type:   determineType(valor),
+					Value:  valor,
+				}
+				l.currentEnvironment.variables[varName] = variable
+
+				previousEnvironment := CrearEntorno(l)
+				defer EliminarEntorno(l, previousEnvironment)
+				resultado := l.Visit(ctx.Block())
+				out += resultado.(string)
+			}
+			return out
+		}
 	}
 	return nil
 }

@@ -268,6 +268,16 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
+	//buscar en la lista de vectores del entorno
+	currentEnv = l.currentEnvironment
+	for currentEnv != nil {
+		vector, ok := currentEnv.Vectores[id]
+		if ok {
+			return vector.Valores
+		}
+		currentEnv = currentEnv.parent
+	}
+
 	// Devolver un mensaje de error en lugar de lanzar una excepción
 	return fmt.Sprintf("Error variable no encontrada: %s", id)
 }

@@ -18,7 +18,6 @@ ELSE: 'else';
 WHILE: 'while';
 FOR: 'for';
 IN: 'in';
-RANGE: 'range';
 SWITCH: 'switch';
 CASE: 'case';
 DEFAULT: 'default';

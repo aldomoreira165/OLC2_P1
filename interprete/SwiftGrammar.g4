@@ -160,7 +160,7 @@ whilestmt
     ;
 
 forstmt
-    : FOR ID IN RANGE (expr|rangostmt) LLAVEIZQ block LLAVEDER
+    : FOR ID IN (expr|rangostmt) LLAVEIZQ block LLAVEDER
     ;
 
 rangostmt
