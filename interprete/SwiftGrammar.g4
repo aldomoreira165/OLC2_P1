@@ -26,7 +26,12 @@ stmt: printstmt
     | removelastvectorstmt
     | removeatvectorstmt
     | asignvectorstmt
+    | declmatrizstmt
+    | asignmatrizstmt
     ;
+
+// struct
+
 
 //vectores
 
@@ -69,6 +74,28 @@ countvectorstmt
 
 isemptyvectorstmt
     : ID PUNTO ISEMPTY
+    ;
+
+//matrices
+
+declmatrizstmt
+    : VAR ID (DOSPUNTOS tipomatriz)? IG listavaloresmatriz #declmatrizstmt2
+    ;
+
+tipomatriz
+    : CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER #tipomatriz2
+    ;
+
+listavaloresmatriz
+    : CORCHIZQ CORCHIZQ listaexpresiones CORCHDER (COMA CORCHIZQ listaexpresiones CORCHDER)+ CORCHDER #listavaloresmatriz2
+    ;
+
+accesomatriz
+    : ID CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER #accesomatriz2
+    ;
+
+asignmatrizstmt
+    : ID CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER IG expr #asignmatrizstmt2
     ;
 
 //de flujo
@@ -194,6 +221,7 @@ expr
     | accesovectorstmt                          # AccesoVectorExpr
     | countvectorstmt                           # CountVectorExpr
     | isemptyvectorstmt                         # IsEmptyVectorExpr
+    | accesomatriz                              # AccesoMatrizExpr
     ;
 
 tipo

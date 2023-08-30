@@ -49,6 +49,21 @@ type SwiftGrammarListener interface {
 	// EnterIsemptyvectorstmt is called when entering the isemptyvectorstmt production.
 	EnterIsemptyvectorstmt(c *IsemptyvectorstmtContext)
 
+	// EnterDeclmatrizstmt2 is called when entering the declmatrizstmt2 production.
+	EnterDeclmatrizstmt2(c *Declmatrizstmt2Context)
+
+	// EnterTipomatriz2 is called when entering the tipomatriz2 production.
+	EnterTipomatriz2(c *Tipomatriz2Context)
+
+	// EnterListavaloresmatriz2 is called when entering the listavaloresmatriz2 production.
+	EnterListavaloresmatriz2(c *Listavaloresmatriz2Context)
+
+	// EnterAccesomatriz2 is called when entering the accesomatriz2 production.
+	EnterAccesomatriz2(c *Accesomatriz2Context)
+
+	// EnterAsignmatrizstmt2 is called when entering the asignmatrizstmt2 production.
+	EnterAsignmatrizstmt2(c *Asignmatrizstmt2Context)
+
 	// EnterReturnstmt is called when entering the returnstmt production.
 	EnterReturnstmt(c *ReturnstmtContext)
 
@@ -151,6 +166,9 @@ type SwiftGrammarListener interface {
 	// EnterUnariaExpr is called when entering the UnariaExpr production.
 	EnterUnariaExpr(c *UnariaExprContext)
 
+	// EnterAccesoMatrizExpr is called when entering the AccesoMatrizExpr production.
+	EnterAccesoMatrizExpr(c *AccesoMatrizExprContext)
+
 	// EnterCountVectorExpr is called when entering the CountVectorExpr production.
 	EnterCountVectorExpr(c *CountVectorExprContext)
 
@@ -213,6 +231,21 @@ type SwiftGrammarListener interface {
 
 	// ExitIsemptyvectorstmt is called when exiting the isemptyvectorstmt production.
 	ExitIsemptyvectorstmt(c *IsemptyvectorstmtContext)
+
+	// ExitDeclmatrizstmt2 is called when exiting the declmatrizstmt2 production.
+	ExitDeclmatrizstmt2(c *Declmatrizstmt2Context)
+
+	// ExitTipomatriz2 is called when exiting the tipomatriz2 production.
+	ExitTipomatriz2(c *Tipomatriz2Context)
+
+	// ExitListavaloresmatriz2 is called when exiting the listavaloresmatriz2 production.
+	ExitListavaloresmatriz2(c *Listavaloresmatriz2Context)
+
+	// ExitAccesomatriz2 is called when exiting the accesomatriz2 production.
+	ExitAccesomatriz2(c *Accesomatriz2Context)
+
+	// ExitAsignmatrizstmt2 is called when exiting the asignmatrizstmt2 production.
+	ExitAsignmatrizstmt2(c *Asignmatrizstmt2Context)
 
 	// ExitReturnstmt is called when exiting the returnstmt production.
 	ExitReturnstmt(c *ReturnstmtContext)
@@ -315,6 +348,9 @@ type SwiftGrammarListener interface {
 
 	// ExitUnariaExpr is called when exiting the UnariaExpr production.
 	ExitUnariaExpr(c *UnariaExprContext)
+
+	// ExitAccesoMatrizExpr is called when exiting the AccesoMatrizExpr production.
+	ExitAccesoMatrizExpr(c *AccesoMatrizExprContext)
 
 	// ExitCountVectorExpr is called when exiting the CountVectorExpr production.
 	ExitCountVectorExpr(c *CountVectorExprContext)

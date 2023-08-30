@@ -344,3 +344,7 @@ func (l *Visitor) VisitCountVectorExpr(ctx *parser.CountVectorExprContext) inter
 func (l *Visitor) VisitIsEmptyVectorExpr(ctx *parser.IsEmptyVectorExprContext) interface{} {
 	return l.Visit(ctx.Isemptyvectorstmt())
 }
+
+func (l *Visitor) VisitAccesoMatrizExpr(ctx *parser.AccesoMatrizExprContext) interface{} {
+	return l.Visit(ctx.Accesomatriz())
+}

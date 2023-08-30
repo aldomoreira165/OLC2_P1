@@ -106,6 +106,12 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Asignvectorstmt() != nil {
 		return l.Visit(ctx.Asignvectorstmt())
 	}
+	if ctx.Declmatrizstmt() != nil {
+		return l.Visit(ctx.Declmatrizstmt())
+	}
+	if ctx.Asignmatrizstmt() != nil {
+		return l.Visit(ctx.Asignmatrizstmt())
+	}
 	return nil
 }
 

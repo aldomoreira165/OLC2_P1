@@ -104,6 +104,36 @@ func (s *BaseSwiftGrammarListener) EnterIsemptyvectorstmt(ctx *Isemptyvectorstmt
 // ExitIsemptyvectorstmt is called when production isemptyvectorstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitIsemptyvectorstmt(ctx *IsemptyvectorstmtContext) {}
 
+// EnterDeclmatrizstmt2 is called when production declmatrizstmt2 is entered.
+func (s *BaseSwiftGrammarListener) EnterDeclmatrizstmt2(ctx *Declmatrizstmt2Context) {}
+
+// ExitDeclmatrizstmt2 is called when production declmatrizstmt2 is exited.
+func (s *BaseSwiftGrammarListener) ExitDeclmatrizstmt2(ctx *Declmatrizstmt2Context) {}
+
+// EnterTipomatriz2 is called when production tipomatriz2 is entered.
+func (s *BaseSwiftGrammarListener) EnterTipomatriz2(ctx *Tipomatriz2Context) {}
+
+// ExitTipomatriz2 is called when production tipomatriz2 is exited.
+func (s *BaseSwiftGrammarListener) ExitTipomatriz2(ctx *Tipomatriz2Context) {}
+
+// EnterListavaloresmatriz2 is called when production listavaloresmatriz2 is entered.
+func (s *BaseSwiftGrammarListener) EnterListavaloresmatriz2(ctx *Listavaloresmatriz2Context) {}
+
+// ExitListavaloresmatriz2 is called when production listavaloresmatriz2 is exited.
+func (s *BaseSwiftGrammarListener) ExitListavaloresmatriz2(ctx *Listavaloresmatriz2Context) {}
+
+// EnterAccesomatriz2 is called when production accesomatriz2 is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesomatriz2(ctx *Accesomatriz2Context) {}
+
+// ExitAccesomatriz2 is called when production accesomatriz2 is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesomatriz2(ctx *Accesomatriz2Context) {}
+
+// EnterAsignmatrizstmt2 is called when production asignmatrizstmt2 is entered.
+func (s *BaseSwiftGrammarListener) EnterAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) {}
+
+// ExitAsignmatrizstmt2 is called when production asignmatrizstmt2 is exited.
+func (s *BaseSwiftGrammarListener) ExitAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) {}
+
 // EnterReturnstmt is called when production returnstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterReturnstmt(ctx *ReturnstmtContext) {}
 
@@ -307,6 +337,12 @@ func (s *BaseSwiftGrammarListener) EnterUnariaExpr(ctx *UnariaExprContext) {}
 
 // ExitUnariaExpr is called when production UnariaExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitUnariaExpr(ctx *UnariaExprContext) {}
+
+// EnterAccesoMatrizExpr is called when production AccesoMatrizExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesoMatrizExpr(ctx *AccesoMatrizExprContext) {}
+
+// ExitAccesoMatrizExpr is called when production AccesoMatrizExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesoMatrizExpr(ctx *AccesoMatrizExprContext) {}
 
 // EnterCountVectorExpr is called when production CountVectorExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterCountVectorExpr(ctx *CountVectorExprContext) {}

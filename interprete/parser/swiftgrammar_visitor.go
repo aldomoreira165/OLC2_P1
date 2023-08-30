@@ -49,6 +49,21 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#isemptyvectorstmt.
 	VisitIsemptyvectorstmt(ctx *IsemptyvectorstmtContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#declmatrizstmt2.
+	VisitDeclmatrizstmt2(ctx *Declmatrizstmt2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#tipomatriz2.
+	VisitTipomatriz2(ctx *Tipomatriz2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#listavaloresmatriz2.
+	VisitListavaloresmatriz2(ctx *Listavaloresmatriz2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#accesomatriz2.
+	VisitAccesomatriz2(ctx *Accesomatriz2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#asignmatrizstmt2.
+	VisitAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#returnstmt.
 	VisitReturnstmt(ctx *ReturnstmtContext) interface{}
 
@@ -150,6 +165,9 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#UnariaExpr.
 	VisitUnariaExpr(ctx *UnariaExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#AccesoMatrizExpr.
+	VisitAccesoMatrizExpr(ctx *AccesoMatrizExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#CountVectorExpr.
 	VisitCountVectorExpr(ctx *CountVectorExprContext) interface{}
