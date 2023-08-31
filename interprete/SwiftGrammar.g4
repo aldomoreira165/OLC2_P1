@@ -175,11 +175,11 @@ caseStmt: CASE expr DOSPUNTOS block;
 defaultCase: DEFAULT DOSPUNTOS block;
 
 typedDeclstmt
-    : VAR ID DOSPUNTOS tipo IG expr 
+    : (VAR|LET) ID DOSPUNTOS tipo IG expr 
     ;
 
 untypedDeclstmt
-    : VAR ID IG expr                         
+    : (VAR|LET) ID IG expr                         
     ;
 
 optionalTypedDeclstmt

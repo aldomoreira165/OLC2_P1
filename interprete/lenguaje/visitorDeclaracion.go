@@ -11,11 +11,6 @@ func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface
 	declType := l.Visit(ctx.Tipo()).(string)
 	value := l.Visit(ctx.Expr())
 
-	// Verificar si la variable ya existe en el entorno
-	if _, ok := l.currentEnvironment.variables[varName]; ok {
-		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", varName)
-	}
-
 	// Comprobar si el tipo de la expresión coincide con el tipo declarado
 	if !validateType(value, declType) {
 		//se  toma como error y obtiene el valor de nil para fines practicos
@@ -28,16 +23,13 @@ func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface
 		return fmt.Sprintf("Error de tipo en la declaración: %s", varName)
 	}
 
-	// Crear una instancia de Variable y almacenarla en el entorno actual
-	nuevaVariable := Variable{
-		Name:  varName,
-		Type:  declType,
-		Value: value,
+	if ctx.LET() != nil {
+		variable := l.agregarVariable(varName, declType, true, value)
+		return variable
+	} else {
+		variable := l.agregarVariable(varName, declType, false, value)
+		return variable
 	}
-
-	// Almacenar la información de la declaración en el entorno
-	l.currentEnvironment.variables[varName] = nuevaVariable
-	return true
 }
 
 func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtContext) interface{} {
@@ -53,6 +45,7 @@ func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtCo
 	nuevaVariable := Variable{
 		Name:  varName,
 		Type:  declType,
+		Constante: false,
 		Value: nil,
 	}
 
@@ -65,26 +58,15 @@ func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtCo
 func (l *Visitor) VisitUntypedDeclstmt(ctx *parser.UntypedDeclstmtContext) interface{} {
 	varName := ctx.ID().GetText()
 	value := l.Visit(ctx.Expr())
-
-	// Verificar si la variable ya existe en el entorno
-	if _, ok := l.currentEnvironment.variables[varName]; ok {
-		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", varName)
-	}
-
-	// Determinar el tipo de la expresión
 	valueType := determineType(value)
-	fmt.Println(valueType)
-
-	// Crear una instancia de Variable y almacenarla en el entorno actual
-	nuevaVariable := Variable{
-		Name:  varName,
-		Type:  valueType, // Asignar el tipo de la expresión
-		Value: value,
+	
+	if ctx.LET() != nil {
+		variable := l.agregarVariable(varName, valueType, true, value)
+		return variable
+	} else {
+		variable := l.agregarVariable(varName, valueType, false, value)
+		return variable
 	}
-
-	// Almacenar la información de la declaración en el entorno
-	l.currentEnvironment.variables[varName] = nuevaVariable
-	return true
 }
 
 // vectores

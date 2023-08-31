@@ -113,12 +113,13 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 
 		//crear la variable a iterar en el entorno
 		varName := ctx.ID().GetText()
-		l.agregarVariable(varName, "nil", nil)
+		l.agregarVariable(varName, "nil", true,nil)
 
 		for i := inicio; i <= fin; i++ {
 			variable := Variable{
 				Name: varName,
 				Type:   determineType(i),
+				Constante: true,
 				Value:  i,
 			}
 			l.currentEnvironment.variables[varName] = variable
@@ -136,7 +137,7 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 		if determineType(expresion) == "String" {
 			//crear la variable a iterar en el entorno
 			varName := ctx.ID().GetText()
-			l.agregarVariable(varName, "nil", nil)
+			l.agregarVariable(varName, "nil", true,nil)
 
 			for _, char := range expresion.(string) {
 				variable := Variable{
@@ -157,7 +158,7 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 		if vector, ok := l.currentEnvironment.Vectores[ctx.Expr().GetText()]; ok {
 			//crear la variable a iterar en el entorno
 			varName := ctx.ID().GetText()
-			l.agregarVariable(varName, "nil", nil)
+			l.agregarVariable(varName, "nil", true,nil)
 
 			for _, valor := range vector.Valores {
 				variable := Variable{

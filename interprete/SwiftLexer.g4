@@ -22,6 +22,7 @@ SWITCH: 'switch';
 CASE: 'case';
 DEFAULT: 'default';
 VAR: 'var';
+LET: 'let';
 BREAK: 'break';
 RETURN: 'return';
 FUNC: 'func';

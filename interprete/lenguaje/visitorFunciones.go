@@ -75,7 +75,7 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					defer EliminarEntorno(l, previousEnvironment)
 					for paramName, paramValue := range argValues {
 						fmt.Println(paramValue)
-						l.agregarVariable(paramName, determineType(paramValue), paramValue)
+						l.agregarVariable(paramName, determineType(paramValue), false,paramValue)
 					}
 					retValue := l.Visit(function.Sentencias)
 					retornarInterface := interface{}(retValue)
@@ -97,7 +97,7 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					defer EliminarEntorno(l, previousEnvironment)
 					for paramName, paramValue := range argValues {
 						fmt.Println(paramValue)
-						l.agregarVariable(paramName, determineType(paramValue), paramValue)
+						l.agregarVariable(paramName, determineType(paramValue), false,paramValue)
 					}
 					fmt.Println("entorno actual", l.currentEnvironment.variables)
 					return l.Visit(function.Sentencias)

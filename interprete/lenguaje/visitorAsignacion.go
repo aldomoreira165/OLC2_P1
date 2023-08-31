@@ -16,23 +16,26 @@ func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
 	for currentEnv != nil {
 		// Verificar si la variable ya existe en el entorno
 		if variableExistente, ok := currentEnv.variables[varName]; ok {
+			if !variableExistente.Constante {
+				// Determinar el tipo de la expresión y el tipo de la variable existente
+				exprType := determineType(value)
+				existingVarType := variableExistente.Type
 
-			// Determinar el tipo de la expresión y el tipo de la variable existente
-			exprType := determineType(value)
-			existingVarType := variableExistente.Type
+				if exprType == existingVarType {
 
-			if exprType == existingVarType {
+					variableActualizada := Variable{
+						Name:  varName,
+						Type:  exprType, // Asignar el tipo de la expresión
+						Value: value,
+					}
 
-				variableActualizada := Variable{
-					Name:  varName,
-					Type:  exprType, // Asignar el tipo de la expresión
-					Value: value,
+					currentEnv.variables[varName] = variableActualizada
+					return true // La asignación fue exitosa
+				} else {
+					return fmt.Sprintf("Error de tipo en la asignacion para la variable: %s", varName)
 				}
-
-				currentEnv.variables[varName] = variableActualizada
-				return true // La asignación fue exitosa
 			} else {
-				return fmt.Sprintf("Error de tipo en la asignacion para la variable: %s", varName)
+				return fmt.Sprintf("Error la variable: %s es una constante", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
@@ -53,46 +56,50 @@ func (l *Visitor) VisitIncremento(ctx *parser.IncrementoContext) interface{} {
 		// Verificar si la variable ya existe en el entorno
 		if variableExistente, ok := currentEnv.variables[varName]; ok {
 
-			// Determinar el tipo de la expresión y el tipo de la variable existente
-			exprType := determineType(value)
-			existingVarType := variableExistente.Type
+			if !variableExistente.Constante {
+				// Determinar el tipo de la expresión y el tipo de la variable existente
+				exprType := determineType(value)
+				existingVarType := variableExistente.Type
 
-			if exprType == existingVarType {
+				if exprType == existingVarType {
 
-				if existingVarType == "int" || existingVarType == "float" || existingVarType == "String" {
-					if existingVarType == "int" {
-						nuevoValor := value.(int64) + variableExistente.Value.(int64)
-						variableActualizada := Variable{
-							Name:  varName,
-							Type:  exprType, // Asignar el tipo de la expresión
-							Value: nuevoValor,
+					if existingVarType == "int" || existingVarType == "float" || existingVarType == "String" {
+						if existingVarType == "int" {
+							nuevoValor := value.(int64) + variableExistente.Value.(int64)
+							variableActualizada := Variable{
+								Name:  varName,
+								Type:  exprType, // Asignar el tipo de la expresión
+								Value: nuevoValor,
+							}
+							currentEnv.variables[varName] = variableActualizada
+							return true // La asignación fue exitosa
+						} else if existingVarType == "float" {
+							nuevoValor := value.(float64) + variableExistente.Value.(float64)
+							variableActualizada := Variable{
+								Name:  varName,
+								Type:  exprType, // Asignar el tipo de la expresión
+								Value: nuevoValor,
+							}
+							currentEnv.variables[varName] = variableActualizada
+							return true // La asignación fue exitosa
+						} else if existingVarType == "String" {
+							nuevoValor := value.(string) + variableExistente.Value.(string)
+							variableActualizada := Variable{
+								Name:  varName,
+								Type:  exprType, // Asignar el tipo de la expresión
+								Value: nuevoValor,
+							}
+							currentEnv.variables[varName] = variableActualizada
+							return true // La asignación fue exitosa
 						}
-						currentEnv.variables[varName] = variableActualizada
-						return true // La asignación fue exitosa
-					}else if existingVarType == "float" {
-						nuevoValor := value.(float64) + variableExistente.Value.(float64)
-						variableActualizada := Variable{
-							Name:  varName,
-							Type:  exprType, // Asignar el tipo de la expresión
-							Value: nuevoValor,
-						}
-						currentEnv.variables[varName] = variableActualizada
-						return true // La asignación fue exitosa
-					}else if existingVarType == "String" {
-						nuevoValor := value.(string) + variableExistente.Value.(string)
-						variableActualizada := Variable{
-							Name:  varName,
-							Type:  exprType, // Asignar el tipo de la expresión
-							Value: nuevoValor,
-						}
-						currentEnv.variables[varName] = variableActualizada
-						return true // La asignación fue exitosa
+					} else {
+						return fmt.Sprintf("Error: Operacion invalida")
 					}
-				}else {
-					return fmt.Sprintf("Error: Operacion invalida")
+				} else {
+					return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
 				}
 			} else {
-				return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
+				return fmt.Sprintf("Error la variable: %s es una constante", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
@@ -111,39 +118,43 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 		// Verificar si la variable ya existe en el entorno
 		if variableExistente, ok := currentEnv.variables[varName]; ok {
 
-			// Determinar el tipo de la expresión y el tipo de la variable existente
-			exprType := determineType(value)
-			existingVarType := variableExistente.Type
+			if !variableExistente.Constante {
+				// Determinar el tipo de la expresión y el tipo de la variable existente
+				exprType := determineType(value)
+				existingVarType := variableExistente.Type
 
-			if exprType == existingVarType {
+				if exprType == existingVarType {
 
-				if existingVarType == "int" || existingVarType == "float"  {
-					if existingVarType == "int" {
-						nuevoValor := -(value.(int64) - variableExistente.Value.(int64))
-						fmt.Print(nuevoValor)
-						variableActualizada := Variable{
-							Name:  varName,
-							Type:  exprType, // Asignar el tipo de la expresión
-							Value: nuevoValor,
+					if existingVarType == "int" || existingVarType == "float" {
+						if existingVarType == "int" {
+							nuevoValor := -(value.(int64) - variableExistente.Value.(int64))
+							fmt.Print(nuevoValor)
+							variableActualizada := Variable{
+								Name:  varName,
+								Type:  exprType, // Asignar el tipo de la expresión
+								Value: nuevoValor,
+							}
+							currentEnv.variables[varName] = variableActualizada
+							return true // La asignación fue exitosa
+						} else if existingVarType == "float" {
+							nuevoValor := value.(float64) - variableExistente.Value.(float64)
+							variableActualizada := Variable{
+								Name:  varName,
+								Type:  exprType, // Asignar el tipo de la expresión
+								Value: nuevoValor,
+							}
+							currentEnv.variables[varName] = variableActualizada
+							return true // La asignación fue exitosa
 						}
-						currentEnv.variables[varName] = variableActualizada
-						return true // La asignación fue exitosa
-					}else if existingVarType == "float" {
-						nuevoValor := value.(float64) - variableExistente.Value.(float64)
-						variableActualizada := Variable{
-							Name:  varName,
-							Type:  exprType, // Asignar el tipo de la expresión
-							Value: nuevoValor,
-						}
-						currentEnv.variables[varName] = variableActualizada
-						return true // La asignación fue exitosa
+					} else {
+						return fmt.Sprintf("Error: Operacion invalida") // La asignación falló debido a un error de tipo
 					}
-				}else {
-					return fmt.Sprintf("Error: Operacion invalida") // La asignación falló debido a un error de tipo
-				}
 
-			} else {
-				return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
+				} else {
+					return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
+				}
+			}else{
+				return fmt.Sprintf("Error la variable: %s es una constante", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
