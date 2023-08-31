@@ -3,7 +3,7 @@ import SwiftLexer;
 
 s: block EOF;
 
-block: (stmt)*
+block: (stmt PTCOMA?)*
      ;
 
 stmt: printstmt
@@ -80,22 +80,30 @@ isemptyvectorstmt
 
 declmatrizstmt
     : VAR ID (DOSPUNTOS tipomatriz)? IG listavaloresmatriz #declmatrizstmt2
+    | VAR ID (DOSPUNTOS tipomatriz)? IG listavaloresmatriz3 #declmatrizstmt3
     ;
 
 tipomatriz
     : CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER #tipomatriz2
+    | CORCHIZQ CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER CORCHDER #tipomatriz3
     ;
 
 listavaloresmatriz
     : CORCHIZQ CORCHIZQ listaexpresiones CORCHDER (COMA CORCHIZQ listaexpresiones CORCHDER)+ CORCHDER #listavaloresmatriz2
     ;
 
+listavaloresmatriz3
+    : CORCHIZQ listavaloresmatriz (COMA listavaloresmatriz)* CORCHDER
+    ;
+
 accesomatriz
     : ID CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER #accesomatriz2
+    | ID CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER #accesomatriz3
     ;
 
 asignmatrizstmt
     : ID CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER IG expr #asignmatrizstmt2
+    | ID CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER CORCHIZQ expr CORCHDER IG expr #asignmatrizstmt3
     ;
 
 //de flujo

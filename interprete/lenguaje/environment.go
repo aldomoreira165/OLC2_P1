@@ -9,6 +9,7 @@ type Environment struct {
 	variables map[string]Variable
 	Vectores  map[string]Vector
 	Matrices map[string]Matriz
+	Matrices3D map[string]Matriz3D
 	funciones map[string]Funcion
 }
 
@@ -18,6 +19,7 @@ func NewEnvironment(parent *Environment) *Environment {
 		variables: make(map[string]Variable),
 		Vectores:  make(map[string]Vector),
 		Matrices: make(map[string]Matriz),
+		Matrices3D: make(map[string]Matriz3D),
 		funciones: make(map[string]Funcion),
 	}
 }

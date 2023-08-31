@@ -110,11 +110,23 @@ func (s *BaseSwiftGrammarListener) EnterDeclmatrizstmt2(ctx *Declmatrizstmt2Cont
 // ExitDeclmatrizstmt2 is called when production declmatrizstmt2 is exited.
 func (s *BaseSwiftGrammarListener) ExitDeclmatrizstmt2(ctx *Declmatrizstmt2Context) {}
 
+// EnterDeclmatrizstmt3 is called when production declmatrizstmt3 is entered.
+func (s *BaseSwiftGrammarListener) EnterDeclmatrizstmt3(ctx *Declmatrizstmt3Context) {}
+
+// ExitDeclmatrizstmt3 is called when production declmatrizstmt3 is exited.
+func (s *BaseSwiftGrammarListener) ExitDeclmatrizstmt3(ctx *Declmatrizstmt3Context) {}
+
 // EnterTipomatriz2 is called when production tipomatriz2 is entered.
 func (s *BaseSwiftGrammarListener) EnterTipomatriz2(ctx *Tipomatriz2Context) {}
 
 // ExitTipomatriz2 is called when production tipomatriz2 is exited.
 func (s *BaseSwiftGrammarListener) ExitTipomatriz2(ctx *Tipomatriz2Context) {}
+
+// EnterTipomatriz3 is called when production tipomatriz3 is entered.
+func (s *BaseSwiftGrammarListener) EnterTipomatriz3(ctx *Tipomatriz3Context) {}
+
+// ExitTipomatriz3 is called when production tipomatriz3 is exited.
+func (s *BaseSwiftGrammarListener) ExitTipomatriz3(ctx *Tipomatriz3Context) {}
 
 // EnterListavaloresmatriz2 is called when production listavaloresmatriz2 is entered.
 func (s *BaseSwiftGrammarListener) EnterListavaloresmatriz2(ctx *Listavaloresmatriz2Context) {}
@@ -122,17 +134,35 @@ func (s *BaseSwiftGrammarListener) EnterListavaloresmatriz2(ctx *Listavaloresmat
 // ExitListavaloresmatriz2 is called when production listavaloresmatriz2 is exited.
 func (s *BaseSwiftGrammarListener) ExitListavaloresmatriz2(ctx *Listavaloresmatriz2Context) {}
 
+// EnterListavaloresmatriz3 is called when production listavaloresmatriz3 is entered.
+func (s *BaseSwiftGrammarListener) EnterListavaloresmatriz3(ctx *Listavaloresmatriz3Context) {}
+
+// ExitListavaloresmatriz3 is called when production listavaloresmatriz3 is exited.
+func (s *BaseSwiftGrammarListener) ExitListavaloresmatriz3(ctx *Listavaloresmatriz3Context) {}
+
 // EnterAccesomatriz2 is called when production accesomatriz2 is entered.
 func (s *BaseSwiftGrammarListener) EnterAccesomatriz2(ctx *Accesomatriz2Context) {}
 
 // ExitAccesomatriz2 is called when production accesomatriz2 is exited.
 func (s *BaseSwiftGrammarListener) ExitAccesomatriz2(ctx *Accesomatriz2Context) {}
 
+// EnterAccesomatriz3 is called when production accesomatriz3 is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesomatriz3(ctx *Accesomatriz3Context) {}
+
+// ExitAccesomatriz3 is called when production accesomatriz3 is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesomatriz3(ctx *Accesomatriz3Context) {}
+
 // EnterAsignmatrizstmt2 is called when production asignmatrizstmt2 is entered.
 func (s *BaseSwiftGrammarListener) EnterAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) {}
 
 // ExitAsignmatrizstmt2 is called when production asignmatrizstmt2 is exited.
 func (s *BaseSwiftGrammarListener) ExitAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) {}
+
+// EnterAsignmatrizstmt3 is called when production asignmatrizstmt3 is entered.
+func (s *BaseSwiftGrammarListener) EnterAsignmatrizstmt3(ctx *Asignmatrizstmt3Context) {}
+
+// ExitAsignmatrizstmt3 is called when production asignmatrizstmt3 is exited.
+func (s *BaseSwiftGrammarListener) ExitAsignmatrizstmt3(ctx *Asignmatrizstmt3Context) {}
 
 // EnterReturnstmt is called when production returnstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterReturnstmt(ctx *ReturnstmtContext) {}

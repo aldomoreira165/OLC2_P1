@@ -52,17 +52,32 @@ type SwiftGrammarListener interface {
 	// EnterDeclmatrizstmt2 is called when entering the declmatrizstmt2 production.
 	EnterDeclmatrizstmt2(c *Declmatrizstmt2Context)
 
+	// EnterDeclmatrizstmt3 is called when entering the declmatrizstmt3 production.
+	EnterDeclmatrizstmt3(c *Declmatrizstmt3Context)
+
 	// EnterTipomatriz2 is called when entering the tipomatriz2 production.
 	EnterTipomatriz2(c *Tipomatriz2Context)
+
+	// EnterTipomatriz3 is called when entering the tipomatriz3 production.
+	EnterTipomatriz3(c *Tipomatriz3Context)
 
 	// EnterListavaloresmatriz2 is called when entering the listavaloresmatriz2 production.
 	EnterListavaloresmatriz2(c *Listavaloresmatriz2Context)
 
+	// EnterListavaloresmatriz3 is called when entering the listavaloresmatriz3 production.
+	EnterListavaloresmatriz3(c *Listavaloresmatriz3Context)
+
 	// EnterAccesomatriz2 is called when entering the accesomatriz2 production.
 	EnterAccesomatriz2(c *Accesomatriz2Context)
 
+	// EnterAccesomatriz3 is called when entering the accesomatriz3 production.
+	EnterAccesomatriz3(c *Accesomatriz3Context)
+
 	// EnterAsignmatrizstmt2 is called when entering the asignmatrizstmt2 production.
 	EnterAsignmatrizstmt2(c *Asignmatrizstmt2Context)
+
+	// EnterAsignmatrizstmt3 is called when entering the asignmatrizstmt3 production.
+	EnterAsignmatrizstmt3(c *Asignmatrizstmt3Context)
 
 	// EnterReturnstmt is called when entering the returnstmt production.
 	EnterReturnstmt(c *ReturnstmtContext)
@@ -235,17 +250,32 @@ type SwiftGrammarListener interface {
 	// ExitDeclmatrizstmt2 is called when exiting the declmatrizstmt2 production.
 	ExitDeclmatrizstmt2(c *Declmatrizstmt2Context)
 
+	// ExitDeclmatrizstmt3 is called when exiting the declmatrizstmt3 production.
+	ExitDeclmatrizstmt3(c *Declmatrizstmt3Context)
+
 	// ExitTipomatriz2 is called when exiting the tipomatriz2 production.
 	ExitTipomatriz2(c *Tipomatriz2Context)
+
+	// ExitTipomatriz3 is called when exiting the tipomatriz3 production.
+	ExitTipomatriz3(c *Tipomatriz3Context)
 
 	// ExitListavaloresmatriz2 is called when exiting the listavaloresmatriz2 production.
 	ExitListavaloresmatriz2(c *Listavaloresmatriz2Context)
 
+	// ExitListavaloresmatriz3 is called when exiting the listavaloresmatriz3 production.
+	ExitListavaloresmatriz3(c *Listavaloresmatriz3Context)
+
 	// ExitAccesomatriz2 is called when exiting the accesomatriz2 production.
 	ExitAccesomatriz2(c *Accesomatriz2Context)
 
+	// ExitAccesomatriz3 is called when exiting the accesomatriz3 production.
+	ExitAccesomatriz3(c *Accesomatriz3Context)
+
 	// ExitAsignmatrizstmt2 is called when exiting the asignmatrizstmt2 production.
 	ExitAsignmatrizstmt2(c *Asignmatrizstmt2Context)
+
+	// ExitAsignmatrizstmt3 is called when exiting the asignmatrizstmt3 production.
+	ExitAsignmatrizstmt3(c *Asignmatrizstmt3Context)
 
 	// ExitReturnstmt is called when exiting the returnstmt production.
 	ExitReturnstmt(c *ReturnstmtContext)

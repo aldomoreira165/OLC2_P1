@@ -67,7 +67,15 @@ func (v *BaseSwiftGrammarVisitor) VisitDeclmatrizstmt2(ctx *Declmatrizstmt2Conte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitDeclmatrizstmt3(ctx *Declmatrizstmt3Context) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitTipomatriz2(ctx *Tipomatriz2Context) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitTipomatriz3(ctx *Tipomatriz3Context) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -75,11 +83,23 @@ func (v *BaseSwiftGrammarVisitor) VisitListavaloresmatriz2(ctx *Listavaloresmatr
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitListavaloresmatriz3(ctx *Listavaloresmatriz3Context) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitAccesomatriz2(ctx *Accesomatriz2Context) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitAccesomatriz3(ctx *Accesomatriz3Context) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAsignmatrizstmt3(ctx *Asignmatrizstmt3Context) interface{} {
 	return v.VisitChildren(ctx)
 }
 

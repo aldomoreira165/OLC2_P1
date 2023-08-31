@@ -52,17 +52,32 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#declmatrizstmt2.
 	VisitDeclmatrizstmt2(ctx *Declmatrizstmt2Context) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#declmatrizstmt3.
+	VisitDeclmatrizstmt3(ctx *Declmatrizstmt3Context) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#tipomatriz2.
 	VisitTipomatriz2(ctx *Tipomatriz2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#tipomatriz3.
+	VisitTipomatriz3(ctx *Tipomatriz3Context) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#listavaloresmatriz2.
 	VisitListavaloresmatriz2(ctx *Listavaloresmatriz2Context) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#listavaloresmatriz3.
+	VisitListavaloresmatriz3(ctx *Listavaloresmatriz3Context) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#accesomatriz2.
 	VisitAccesomatriz2(ctx *Accesomatriz2Context) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#accesomatriz3.
+	VisitAccesomatriz3(ctx *Accesomatriz3Context) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#asignmatrizstmt2.
 	VisitAsignmatrizstmt2(ctx *Asignmatrizstmt2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#asignmatrizstmt3.
+	VisitAsignmatrizstmt3(ctx *Asignmatrizstmt3Context) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#returnstmt.
 	VisitReturnstmt(ctx *ReturnstmtContext) interface{}

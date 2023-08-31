@@ -153,80 +153,6 @@ func (l *Visitor) VisitAccesovectorstmt(ctx *parser.AccesovectorstmtContext) int
 }
 
 // matrices
-/*
-5.2. Matrices
-Las matrices en T-Swift nos permiten almacenar solamente datos de tipo primitivo, la
-diferencia principal entre el vector y la matriz es que esta última organiza sus elementos en
-n dimensiones y la manipulación de datos es con la notación [ ] además que su tamaño
-no puede cambiar en tiempo de ejecución.
-5.2.1. Creación de matrices
-Las matrices en T-Swift pueden ser de 2 a n dimensiones pero solo de un tipo específico,
-además su tamaño será constante y será definido durante su declaración.
-Consideraciones:
-● La declaración del tamaño puede ser explícita o en base a se definición.
-● Si la declaración es explícita pero su definición no es acorde a esta declaración se
-debe marcar como un error. Por lo tanto se deben verificar que la cantidad de
-dimensiones sea acorde a la definida.
-● La asignación y lectura valores se realizará con la notación [ ]
-● Los índices de declaración comienzan a partir de 1
-● Los índices de acceso comienzan a partir de 0
-● Las matrices no van a cambiar su tamaño durante la ejecución.
-● Si se hace un acceso con índices en fuera de rango se devuelve nil y se debe
-notificar como un error.
-● Si se declara una matriz con índices negativos o 0, será considerado un error
-● El atributo count solo recibirá número enteros en forma de literales, no podrán ser
-asignadas ni variables ni elementos de otras estructuras a este atributo.
-*/
-
-/*
-gramatica
-declmatrizstmt
-    : VAR ID (DOSPUNTOS tipomatriz)? IG definicionmatriz
-    ;
-
-tipomatriz
-    : CORCHIZQ tipomatriz CORCHDER
-    | CORCHIZQ tipo CORCHDER
-    ;
-
-definicionmatriz
-    : listavaloresmatriz
-    ;
-
-listavaloresmatriz
-    : CORCHIZQ listavaloresmatriz2 CORCHDER
-    ;
-
-listavaloresmatriz2
-    : listavaloresmatriz2 COMA listavaloresmatriz
-    | listavaloresmatriz
-    | listaexpresiones
-    ;
-
-*/
-
-/*
-	struct Matriz {
-		Id      string
-		Tipo    string
-		Dimensiones []int64
-		Valores [][]interface{}
-	}
-*/
-
-/*
-ejemplos de expresiones a evaluar
-var mtx1 : [[Int]] = [[1,2,3],[4,5,6],[7,8,9]]
-
-var mtx2 : [[[Int]]] = [[[1,2,3],[4,5,6],[7,8,9]],
-[[10,11,12],[13,14,15],[16,17,18]],
-[[19,20,21],[22,23,24],[25,26,2print(mtx1)7]]]
-
-acceso a matriz
-print(mtx1[0][0])
-print(mtx2[0][0][0])
-*/
-
 func (l *Visitor) VisitDeclmatrizstmt2(ctx *parser.Declmatrizstmt2Context) interface{} {
 	matrizId := ctx.ID().GetText()
 	tipo := l.Visit(ctx.Tipomatriz()).(string)
@@ -256,7 +182,6 @@ func (l *Visitor) VisitTipomatriz2(ctx *parser.Tipomatriz2Context) interface{} {
 	return ctx.Tipo().GetText()
 }
 
-
 func (l *Visitor) VisitListavaloresmatriz2(ctx *parser.Listavaloresmatriz2Context) interface{} {
 	matrizValores := [][]interface{}{}
 
@@ -268,7 +193,7 @@ func (l *Visitor) VisitListavaloresmatriz2(ctx *parser.Listavaloresmatriz2Contex
 	return matrizValores
 }
 
-//acceso matriz 
+// acceso matriz
 func (l *Visitor) VisitAccesomatriz2(ctx *parser.Accesomatriz2Context) interface{} {
 	matrizId := ctx.ID().GetText()
 	filaIdx := l.Visit(ctx.Expr(0)).(int64)
@@ -276,7 +201,7 @@ func (l *Visitor) VisitAccesomatriz2(ctx *parser.Accesomatriz2Context) interface
 
 	// Acceder a la matriz y obtener el valor en la posición indicada
 	matriz := l.currentEnvironment.Matrices[matrizId]
-	if filaIdx >= 0 && filaIdx <  int64(len(matriz.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0])) {
+	if filaIdx >= 0 && filaIdx < int64(len(matriz.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0])) {
 		valor := matriz.Valores[filaIdx][columnaIdx]
 		return valor
 	} else {
@@ -285,7 +210,7 @@ func (l *Visitor) VisitAccesomatriz2(ctx *parser.Accesomatriz2Context) interface
 	}
 }
 
-//asignmatrizstmt
+// asignmatrizstmt
 func (l *Visitor) VisitAsignmatrizstmt2(ctx *parser.Asignmatrizstmt2Context) interface{} {
 	matrizId := ctx.ID().GetText()
 	filaIdx := l.Visit(ctx.Expr(0)).(int64)
@@ -298,7 +223,7 @@ func (l *Visitor) VisitAsignmatrizstmt2(ctx *parser.Asignmatrizstmt2Context) int
 		return fmt.Sprintf("Error de tipo en la asignacion: %s", matrizId)
 	}
 
-	if filaIdx >= 0 && filaIdx <  int64(len(matriz.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0])) {
+	if filaIdx >= 0 && filaIdx < int64(len(matriz.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0])) {
 		matriz.Valores[filaIdx][columnaIdx] = valor
 		l.currentEnvironment.Matrices[matrizId] = matriz
 	} else {
@@ -306,3 +231,87 @@ func (l *Visitor) VisitAsignmatrizstmt2(ctx *parser.Asignmatrizstmt2Context) int
 	}
 	return true
 }
+
+//matrices de 3 dimensiones
+
+func (l *Visitor) VisitDeclmatrizstmt3(ctx *parser.Declmatrizstmt3Context) interface{} {
+	matrizId := ctx.ID().GetText()
+	tipo := l.Visit(ctx.Tipomatriz()).(string)
+	valores := l.Visit(ctx.Listavaloresmatriz3()).([][][]interface{})
+	fmt.Println("matrizId:", matrizId)
+	fmt.Println("tipo:", tipo)
+	fmt.Println("valores:", valores)
+
+	for _, nivelMatriz := range valores {
+		for _, fila := range nivelMatriz {
+			for _, valor := range fila {
+				if !validateType(valor, tipo) {
+					return fmt.Sprintf("Error de tipo en la declaración: %s", matrizId)
+				}
+			}
+		}
+	}
+
+	matrizNueva := Matriz3D{
+		Id:      matrizId,
+		Tipo:    tipo,
+		Valores: valores,
+	}
+	l.currentEnvironment.Matrices3D[matrizId] = matrizNueva
+	return true
+}
+
+func (l *Visitor) VisitTipomatriz3(ctx *parser.Tipomatriz3Context) interface{} {
+	return ctx.Tipo().GetText()
+}
+
+func (l *Visitor) VisitListavaloresmatriz3(ctx *parser.Listavaloresmatriz3Context) interface{} {
+	matrizValores := [][][]interface{}{}
+
+	for _, nivelMatriz := range ctx.AllListavaloresmatriz() {
+		nivel := l.Visit(nivelMatriz).([][]interface{})
+		matrizValores = append(matrizValores, nivel)
+	}
+
+	return matrizValores
+}
+
+func (l *Visitor) VisitAccesomatriz3(ctx *parser.Accesomatriz3Context) interface{} {
+	matrizId := ctx.ID().GetText()
+	nivelIdx := l.Visit(ctx.Expr(0)).(int64)
+	filaIdx := l.Visit(ctx.Expr(1)).(int64)
+	columnaIdx := l.Visit(ctx.Expr(2)).(int64)
+
+	// Acceder a la matriz y obtener el valor en la posición indicada
+	matriz := l.currentEnvironment.Matrices3D[matrizId]
+	if nivelIdx >= 0 && nivelIdx < int64(len(matriz.Valores)) && filaIdx >= 0 && filaIdx < int64(len(matriz.Valores[0])) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0][0])) {
+		valor := matriz.Valores[nivelIdx][filaIdx][columnaIdx]
+		return valor
+	} else {
+		// Manejar el caso de índices fuera de rango
+		return "Error: Índices fuera de rango"
+	}
+}
+
+func (l *Visitor) VisitAsignmatrizstmt3(ctx *parser.Asignmatrizstmt3Context) interface{} {
+	matrizId := ctx.ID().GetText()
+	nivelIdx := l.Visit(ctx.Expr(0)).(int64)
+	filaIdx := l.Visit(ctx.Expr(1)).(int64)
+	columnaIdx := l.Visit(ctx.Expr(2)).(int64)
+	valor := l.Visit(ctx.Expr(3))
+	matriz := l.currentEnvironment.Matrices3D[matrizId]
+	tipo := matriz.Tipo
+
+	if !validateType(valor, tipo) {
+		return fmt.Sprintf("Error de tipo en la asignacion: %s", matrizId)
+	}
+
+	if nivelIdx >= 0 && nivelIdx < int64(len(matriz.Valores)) && filaIdx >= 0 && filaIdx < int64(len(matriz.Valores[0])) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0][0])) {
+		matriz.Valores[nivelIdx][filaIdx][columnaIdx] = valor
+		l.currentEnvironment.Matrices3D[matrizId] = matriz
+	} else {
+		return "Error: Índices fuera de rango"
+	}
+	return true
+}
+
