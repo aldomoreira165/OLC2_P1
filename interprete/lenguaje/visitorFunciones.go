@@ -32,7 +32,6 @@ func (l *Visitor) VisitFuncionNormal(ctx *parser.FuncionNormalContext) interface
 	return nil
 }
 
-// funcion sin parametros y con retorno
 func (l *Visitor) VisitFuncionRetorno(ctx *parser.FuncionRetornoContext) interface{} {
 	funcId := ctx.ID().GetText()
 	funcBlock := ctx.Block()
@@ -73,9 +72,13 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					argValues = l.Visit(ctx.Parametroscall()).(map[string]interface{})
 					previousEnvironment := CrearEntorno(l)
 					defer EliminarEntorno(l, previousEnvironment)
+					parametros := function.Parametros
 					for paramName, paramValue := range argValues {
-						fmt.Println(paramValue)
-						l.agregarVariable(paramName, determineType(paramValue), false,paramValue)
+						for _, param := range parametros {
+							if param.Externo == paramName {
+								l.agregarVariable(param.Interno, determineType(paramValue), false,paramValue)
+							}
+						}
 					}
 					retValue := l.Visit(function.Sentencias)
 					retornarInterface := interface{}(retValue)
@@ -95,9 +98,13 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					argValues = l.Visit(ctx.Parametroscall()).(map[string]interface{})
 					previousEnvironment := CrearEntorno(l)
 					defer EliminarEntorno(l, previousEnvironment)
+					parametros := function.Parametros
 					for paramName, paramValue := range argValues {
-						fmt.Println(paramValue)
-						l.agregarVariable(paramName, determineType(paramValue), false,paramValue)
+						for _, param := range parametros {
+							if param.Externo == paramName {
+								l.agregarVariable(param.Interno, determineType(paramValue), false,paramValue)
+							}
+						}
 					}
 					fmt.Println("entorno actual", l.currentEnvironment.variables)
 					return l.Visit(function.Sentencias)
@@ -121,13 +128,13 @@ func (l *Visitor) VisitParametros(ctx *parser.ParametrosContext) interface{} {
 	params := make([]ParametroDef, 0)
 
 	for i := 0; i < len(paramList); i += 2 {
-		interno := paramList[i].GetText()
-		externo := paramList[i+1].GetText()
+		externo := paramList[i].GetText()
+		interno := paramList[i+1].GetText()
 		tipo := l.Visit(ctx.Tipo(i / 2)).(string)
 
 		param := ParametroDef{
-			Interno: interno,
 			Externo: externo,
+			Interno: interno,
 			Tipo:    tipo,
 		}
 		params = append(params, param)
