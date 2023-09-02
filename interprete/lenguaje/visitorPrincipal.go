@@ -78,6 +78,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Forstmt() != nil {
 		return l.Visit(ctx.Forstmt())
 	}
+	if ctx.Guardstmt() != nil {
+		return l.Visit(ctx.Guardstmt())
+	}
 	if ctx.Opasignstmt() != nil {
 		return l.Visit(ctx.Opasignstmt())
 	}

@@ -17,6 +17,7 @@ IF: 'if';
 ELSE: 'else';
 WHILE: 'while';
 FOR: 'for';
+GUARD: 'guard';
 IN: 'in';
 SWITCH: 'switch';
 CASE: 'case';

@@ -163,6 +163,9 @@ type SwiftGrammarListener interface {
 	// EnterForstmt is called when entering the forstmt production.
 	EnterForstmt(c *ForstmtContext)
 
+	// EnterGuardstmt is called when entering the guardstmt production.
+	EnterGuardstmt(c *GuardstmtContext)
+
 	// EnterRangostmt is called when entering the rangostmt production.
 	EnterRangostmt(c *RangostmtContext)
 
@@ -381,6 +384,9 @@ type SwiftGrammarListener interface {
 
 	// ExitForstmt is called when exiting the forstmt production.
 	ExitForstmt(c *ForstmtContext)
+
+	// ExitGuardstmt is called when exiting the guardstmt production.
+	ExitGuardstmt(c *GuardstmtContext)
 
 	// ExitRangostmt is called when exiting the rangostmt production.
 	ExitRangostmt(c *RangostmtContext)

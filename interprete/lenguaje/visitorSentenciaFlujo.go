@@ -207,6 +207,19 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 	return nil
 }
 
+//guard
+func (l *Visitor) VisitGuardstmt(ctx *parser.GuardstmtContext) interface{} {
+	condicion := l.Visit(ctx.Expr())
+	if condicion == false{
+		if ctx.Block() != nil{
+			return l.Visit(ctx.Block())
+		}else{
+			return nil
+		}
+	}
+	return nil
+}
+
 //rango
 func (l *Visitor) VisitRangostmt(ctx *parser.RangostmtContext) interface{} {
 	inicio := l.Visit(ctx.Expr(0)).(int64)

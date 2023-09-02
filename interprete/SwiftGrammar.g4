@@ -15,6 +15,7 @@ stmt: printstmt
     | switchstmt
     | whilestmt
     | forstmt
+    | guardstmt
     | opasignstmt
     | funcdclstmt
     | accfuncstm
@@ -218,6 +219,10 @@ whilestmt
 
 forstmt
     : FOR ID IN (expr|rangostmt) LLAVEIZQ block LLAVEDER
+    ;
+
+guardstmt
+    : GUARD expr ELSE LLAVEIZQ block LLAVEDER
     ;
 
 rangostmt
