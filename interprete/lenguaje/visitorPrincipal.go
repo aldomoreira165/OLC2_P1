@@ -11,14 +11,16 @@ import (
 type Visitor struct {
 	antlr.ParseTreeVisitor
 	currentEnvironment *Environment
-	shouldBreak bool
+	shouldBreak        bool
+	shouldContinue	 	bool
 }
 
 func NewVisitor() parser.SwiftGrammarVisitor {
 	globalEnvironment := NewEnvironment(nil)
 	return &Visitor{
 		currentEnvironment: globalEnvironment,
-		shouldBreak: false,
+		shouldBreak:        false,
+		shouldContinue:		false,
 	}
 }
 
@@ -29,16 +31,19 @@ func (l *Visitor) VisitS(ctx *parser.SContext) interface{} {
 // visit de block
 func (l *Visitor) VisitBlock(ctx *parser.BlockContext) interface{} {
 	var out string
-
 	for i := 0; ctx.Stmt(i) != nil; i++ {
-		stmtResult := l.Visit(ctx.Stmt(i))
-		switch stmtResult.(type) {
-		case int64:
-			out += strconv.FormatInt(stmtResult.(int64), 10)
-		case float64:
-			out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64)
-		case string:
-			out += stmtResult.(string)
+		if !l.shouldBreak && !l.shouldContinue{
+			stmtResult := l.Visit(ctx.Stmt(i))
+			switch stmtResult.(type) {
+			case int64:
+				out += strconv.FormatInt(stmtResult.(int64), 10)
+			case float64:
+				out += strconv.FormatFloat(stmtResult.(float64), 'f', -1, 64)
+			case string:
+				out += stmtResult.(string)
+			}
+		}else{
+			break
 		}
 	}
 	return out
@@ -79,6 +84,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Breakstmt() != nil {
 		return l.Visit(ctx.Breakstmt())
 	}
+	if ctx.Continuestmt() != nil {
+		return l.Visit(ctx.Continuestmt())
+	}
 	if ctx.Returnstmt() != nil {
 		return l.Visit(ctx.Returnstmt())
 	}
@@ -112,6 +120,12 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Asignmatrizstmt() != nil {
 		return l.Visit(ctx.Asignmatrizstmt())
 	}
+	if ctx.Defstructstmt() != nil {
+		return l.Visit(ctx.Defstructstmt())
+	}
+	if ctx.Struct_expr() != nil {
+		return l.Visit(ctx.Struct_expr())
+	}
 	return nil
 }
 
@@ -126,4 +140,3 @@ func (l *Visitor) Visit(tree antlr.ParseTree) interface{} {
 		return nodo
 	}
 }
-

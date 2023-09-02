@@ -38,6 +38,36 @@ func (s *BaseSwiftGrammarListener) EnterStmt(ctx *StmtContext) {}
 // ExitStmt is called when production stmt is exited.
 func (s *BaseSwiftGrammarListener) ExitStmt(ctx *StmtContext) {}
 
+// EnterDefStruct is called when production DefStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterDefStruct(ctx *DefStructContext) {}
+
+// ExitDefStruct is called when production DefStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitDefStruct(ctx *DefStructContext) {}
+
+// EnterAtributoStruct is called when production AtributoStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterAtributoStruct(ctx *AtributoStructContext) {}
+
+// ExitAtributoStruct is called when production AtributoStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitAtributoStruct(ctx *AtributoStructContext) {}
+
+// EnterStructExpr is called when production StructExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterStructExpr(ctx *StructExprContext) {}
+
+// ExitStructExpr is called when production StructExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitStructExpr(ctx *StructExprContext) {}
+
+// EnterDuplastruct is called when production Duplastruct is entered.
+func (s *BaseSwiftGrammarListener) EnterDuplastruct(ctx *DuplastructContext) {}
+
+// ExitDuplastruct is called when production Duplastruct is exited.
+func (s *BaseSwiftGrammarListener) ExitDuplastruct(ctx *DuplastructContext) {}
+
+// EnterAccesoStruct is called when production AccesoStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesoStruct(ctx *AccesoStructContext) {}
+
+// ExitAccesoStruct is called when production AccesoStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesoStruct(ctx *AccesoStructContext) {}
+
 // EnterDeclvectorstmt is called when production declvectorstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterDeclvectorstmt(ctx *DeclvectorstmtContext) {}
 
@@ -170,6 +200,18 @@ func (s *BaseSwiftGrammarListener) EnterReturnstmt(ctx *ReturnstmtContext) {}
 // ExitReturnstmt is called when production returnstmt is exited.
 func (s *BaseSwiftGrammarListener) ExitReturnstmt(ctx *ReturnstmtContext) {}
 
+// EnterBreakstmt is called when production breakstmt is entered.
+func (s *BaseSwiftGrammarListener) EnterBreakstmt(ctx *BreakstmtContext) {}
+
+// ExitBreakstmt is called when production breakstmt is exited.
+func (s *BaseSwiftGrammarListener) ExitBreakstmt(ctx *BreakstmtContext) {}
+
+// EnterContinuestmt is called when production continuestmt is entered.
+func (s *BaseSwiftGrammarListener) EnterContinuestmt(ctx *ContinuestmtContext) {}
+
+// ExitContinuestmt is called when production continuestmt is exited.
+func (s *BaseSwiftGrammarListener) ExitContinuestmt(ctx *ContinuestmtContext) {}
+
 // EnterPrintstmt is called when production printstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterPrintstmt(ctx *PrintstmtContext) {}
 
@@ -223,12 +265,6 @@ func (s *BaseSwiftGrammarListener) EnterParametroscall(ctx *ParametroscallContex
 
 // ExitParametroscall is called when production parametroscall is exited.
 func (s *BaseSwiftGrammarListener) ExitParametroscall(ctx *ParametroscallContext) {}
-
-// EnterBreakstmt is called when production breakstmt is entered.
-func (s *BaseSwiftGrammarListener) EnterBreakstmt(ctx *BreakstmtContext) {}
-
-// ExitBreakstmt is called when production breakstmt is exited.
-func (s *BaseSwiftGrammarListener) ExitBreakstmt(ctx *BreakstmtContext) {}
 
 // EnterIfstmt is called when production ifstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterIfstmt(ctx *IfstmtContext) {}
@@ -409,6 +445,12 @@ func (s *BaseSwiftGrammarListener) EnterIntExpr(ctx *IntExprContext) {}
 
 // ExitIntExpr is called when production IntExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitIntExpr(ctx *IntExprContext) {}
+
+// EnterAccesoStructExpr is called when production AccesoStructExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesoStructExpr(ctx *AccesoStructExprContext) {}
+
+// ExitAccesoStructExpr is called when production AccesoStructExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesoStructExpr(ctx *AccesoStructExprContext) {}
 
 // EnterTipo is called when production tipo is entered.
 func (s *BaseSwiftGrammarListener) EnterTipo(ctx *TipoContext) {}

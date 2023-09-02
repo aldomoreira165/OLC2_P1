@@ -91,8 +91,15 @@ func (l *Visitor) VisitWhilestmt(ctx *parser.WhilestmtContext) interface{} {
 			defer EliminarEntorno(l, previousEnvironment)
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)
+			if l.shouldBreak {
+				l.shouldBreak = false
+				return out
+			}
+			if l.shouldContinue {
+				l.shouldContinue = false
+				continue
+			}
 		} else {
-			l.shouldBreak = false
 			return out
 		}
 	}
@@ -128,6 +135,13 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 			defer EliminarEntorno(l, previousEnvironment)
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)
+			if l.shouldBreak {
+				l.shouldBreak = false
+				return out
+			}else if l.shouldContinue {
+				l.shouldContinue = false
+				continue		
+			}
 		}
 		return out
 	}
@@ -151,6 +165,13 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 				defer EliminarEntorno(l, previousEnvironment)
 				resultado := l.Visit(ctx.Block())
 				out += resultado.(string)
+				if l.shouldBreak {
+					l.shouldBreak = false
+					return out
+				}else if l.shouldContinue {
+					l.shouldContinue = false
+					continue
+				}
 			}
 			return out
 		}
@@ -172,6 +193,13 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 				defer EliminarEntorno(l, previousEnvironment)
 				resultado := l.Visit(ctx.Block())
 				out += resultado.(string)
+				if l.shouldBreak {
+					l.shouldBreak = false
+					return out
+				}else if l.shouldContinue {
+					l.shouldContinue = false
+					continue
+				}
 			}
 			return out
 		}

@@ -16,9 +16,10 @@ stmt: printstmt
     | whilestmt
     | forstmt
     | opasignstmt
-    | breakstmt
     | funcdclstmt
     | accfuncstm
+    | breakstmt
+    | continuestmt
     | returnstmt
     | declvectorstmt
     | accesovectorstmt
@@ -28,10 +29,30 @@ stmt: printstmt
     | asignvectorstmt
     | declmatrizstmt
     | asignmatrizstmt
+    | defstructstmt
+    | struct_expr
     ;
 
 // struct
+defstructstmt
+    : STRUCT ID LLAVEIZQ lista_atributos* LLAVEDER #DefStruct
+    ;
 
+lista_atributos
+    : (STRUCT_VAR|STRUCT_LET) ID (DOSPUNTOS tipo)? (IG expr)? #AtributoStruct
+    ;
+
+struct_expr
+    : (LET|VAR) ID IG ID (l_dupla)? #StructExpr
+    ;
+
+l_dupla
+    : ID DOSPUNTOS expr (COMA ID DOSPUNTOS expr)* #Duplastruct
+    ;
+
+accesostructstmt
+    : ID (PUNTO ID)+ #AccesoStruct
+    ;
 
 //vectores
 
@@ -112,6 +133,13 @@ returnstmt
     : RETURN expr PTCOMA
     ;
 
+breakstmt
+    : BREAK
+    ;
+
+continuestmt
+    : CONTINUE
+    ;
 
 //funciones embebidas
 
@@ -153,12 +181,6 @@ parametroscall
     ;
 
 //=============================
-
-//sententencias de transferencia
-
-breakstmt
-    : BREAK
-    ;
 
 //sentencias de control de flujo
 
@@ -230,6 +252,7 @@ expr
     | countvectorstmt                           # CountVectorExpr
     | isemptyvectorstmt                         # IsEmptyVectorExpr
     | accesomatriz                              # AccesoMatrizExpr
+    | accesostructstmt                          # AccesoStructExpr
     ;
 
 tipo

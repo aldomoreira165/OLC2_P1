@@ -16,6 +16,21 @@ type SwiftGrammarListener interface {
 	// EnterStmt is called when entering the stmt production.
 	EnterStmt(c *StmtContext)
 
+	// EnterDefStruct is called when entering the DefStruct production.
+	EnterDefStruct(c *DefStructContext)
+
+	// EnterAtributoStruct is called when entering the AtributoStruct production.
+	EnterAtributoStruct(c *AtributoStructContext)
+
+	// EnterStructExpr is called when entering the StructExpr production.
+	EnterStructExpr(c *StructExprContext)
+
+	// EnterDuplastruct is called when entering the Duplastruct production.
+	EnterDuplastruct(c *DuplastructContext)
+
+	// EnterAccesoStruct is called when entering the AccesoStruct production.
+	EnterAccesoStruct(c *AccesoStructContext)
+
 	// EnterDeclvectorstmt is called when entering the declvectorstmt production.
 	EnterDeclvectorstmt(c *DeclvectorstmtContext)
 
@@ -82,6 +97,12 @@ type SwiftGrammarListener interface {
 	// EnterReturnstmt is called when entering the returnstmt production.
 	EnterReturnstmt(c *ReturnstmtContext)
 
+	// EnterBreakstmt is called when entering the breakstmt production.
+	EnterBreakstmt(c *BreakstmtContext)
+
+	// EnterContinuestmt is called when entering the continuestmt production.
+	EnterContinuestmt(c *ContinuestmtContext)
+
 	// EnterPrintstmt is called when entering the printstmt production.
 	EnterPrintstmt(c *PrintstmtContext)
 
@@ -108,9 +129,6 @@ type SwiftGrammarListener interface {
 
 	// EnterParametroscall is called when entering the parametroscall production.
 	EnterParametroscall(c *ParametroscallContext)
-
-	// EnterBreakstmt is called when entering the breakstmt production.
-	EnterBreakstmt(c *BreakstmtContext)
 
 	// EnterIfstmt is called when entering the ifstmt production.
 	EnterIfstmt(c *IfstmtContext)
@@ -202,6 +220,9 @@ type SwiftGrammarListener interface {
 	// EnterIntExpr is called when entering the IntExpr production.
 	EnterIntExpr(c *IntExprContext)
 
+	// EnterAccesoStructExpr is called when entering the AccesoStructExpr production.
+	EnterAccesoStructExpr(c *AccesoStructExprContext)
+
 	// EnterTipo is called when entering the tipo production.
 	EnterTipo(c *TipoContext)
 
@@ -213,6 +234,21 @@ type SwiftGrammarListener interface {
 
 	// ExitStmt is called when exiting the stmt production.
 	ExitStmt(c *StmtContext)
+
+	// ExitDefStruct is called when exiting the DefStruct production.
+	ExitDefStruct(c *DefStructContext)
+
+	// ExitAtributoStruct is called when exiting the AtributoStruct production.
+	ExitAtributoStruct(c *AtributoStructContext)
+
+	// ExitStructExpr is called when exiting the StructExpr production.
+	ExitStructExpr(c *StructExprContext)
+
+	// ExitDuplastruct is called when exiting the Duplastruct production.
+	ExitDuplastruct(c *DuplastructContext)
+
+	// ExitAccesoStruct is called when exiting the AccesoStruct production.
+	ExitAccesoStruct(c *AccesoStructContext)
 
 	// ExitDeclvectorstmt is called when exiting the declvectorstmt production.
 	ExitDeclvectorstmt(c *DeclvectorstmtContext)
@@ -280,6 +316,12 @@ type SwiftGrammarListener interface {
 	// ExitReturnstmt is called when exiting the returnstmt production.
 	ExitReturnstmt(c *ReturnstmtContext)
 
+	// ExitBreakstmt is called when exiting the breakstmt production.
+	ExitBreakstmt(c *BreakstmtContext)
+
+	// ExitContinuestmt is called when exiting the continuestmt production.
+	ExitContinuestmt(c *ContinuestmtContext)
+
 	// ExitPrintstmt is called when exiting the printstmt production.
 	ExitPrintstmt(c *PrintstmtContext)
 
@@ -306,9 +348,6 @@ type SwiftGrammarListener interface {
 
 	// ExitParametroscall is called when exiting the parametroscall production.
 	ExitParametroscall(c *ParametroscallContext)
-
-	// ExitBreakstmt is called when exiting the breakstmt production.
-	ExitBreakstmt(c *BreakstmtContext)
 
 	// ExitIfstmt is called when exiting the ifstmt production.
 	ExitIfstmt(c *IfstmtContext)
@@ -399,6 +438,9 @@ type SwiftGrammarListener interface {
 
 	// ExitIntExpr is called when exiting the IntExpr production.
 	ExitIntExpr(c *IntExprContext)
+
+	// ExitAccesoStructExpr is called when exiting the AccesoStructExpr production.
+	ExitAccesoStructExpr(c *AccesoStructExprContext)
 
 	// ExitTipo is called when exiting the tipo production.
 	ExitTipo(c *TipoContext)

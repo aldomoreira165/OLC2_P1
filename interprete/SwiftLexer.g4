@@ -25,12 +25,16 @@ VAR: 'var';
 LET: 'let';
 BREAK: 'break';
 RETURN: 'return';
+CONTINUE: 'continue';
 FUNC: 'func';
 COUNT: 'count';
 ISEMPTY: 'IsEmpty';
 APPEND: 'append';
 REMOVE_LAST: 'removeLast';
 REMOVE: 'remove';
+STRUCT: 'struct';
+STRUCT_VAR : 'varst';
+STRUCT_LET : 'letst';
 AT: 'at';
 
 // primitives

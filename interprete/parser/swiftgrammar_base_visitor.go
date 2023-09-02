@@ -19,6 +19,26 @@ func (v *BaseSwiftGrammarVisitor) VisitStmt(ctx *StmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitDefStruct(ctx *DefStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAtributoStruct(ctx *AtributoStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitStructExpr(ctx *StructExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitDuplastruct(ctx *DuplastructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccesoStruct(ctx *AccesoStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -107,6 +127,14 @@ func (v *BaseSwiftGrammarVisitor) VisitReturnstmt(ctx *ReturnstmtContext) interf
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitBreakstmt(ctx *BreakstmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitContinuestmt(ctx *ContinuestmtContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitPrintstmt(ctx *PrintstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -140,10 +168,6 @@ func (v *BaseSwiftGrammarVisitor) VisitParametros(ctx *ParametrosContext) interf
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitParametroscall(ctx *ParametroscallContext) interface{} {
-	return v.VisitChildren(ctx)
-}
-
-func (v *BaseSwiftGrammarVisitor) VisitBreakstmt(ctx *BreakstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
@@ -264,6 +288,10 @@ func (v *BaseSwiftGrammarVisitor) VisitAccFuncExpr(ctx *AccFuncExprContext) inte
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitIntExpr(ctx *IntExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccesoStructExpr(ctx *AccesoStructExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
