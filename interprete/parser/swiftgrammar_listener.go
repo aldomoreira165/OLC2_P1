@@ -220,6 +220,9 @@ type SwiftGrammarListener interface {
 	// EnterAccFuncExpr is called when entering the AccFuncExpr production.
 	EnterAccFuncExpr(c *AccFuncExprContext)
 
+	// EnterNotExpr is called when entering the NotExpr production.
+	EnterNotExpr(c *NotExprContext)
+
 	// EnterIntExpr is called when entering the IntExpr production.
 	EnterIntExpr(c *IntExprContext)
 
@@ -441,6 +444,9 @@ type SwiftGrammarListener interface {
 
 	// ExitAccFuncExpr is called when exiting the AccFuncExpr production.
 	ExitAccFuncExpr(c *AccFuncExprContext)
+
+	// ExitNotExpr is called when exiting the NotExpr production.
+	ExitNotExpr(c *NotExprContext)
 
 	// ExitIntExpr is called when exiting the IntExpr production.
 	ExitIntExpr(c *IntExprContext)

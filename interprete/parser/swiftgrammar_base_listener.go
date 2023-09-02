@@ -446,6 +446,12 @@ func (s *BaseSwiftGrammarListener) EnterAccFuncExpr(ctx *AccFuncExprContext) {}
 // ExitAccFuncExpr is called when production AccFuncExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitAccFuncExpr(ctx *AccFuncExprContext) {}
 
+// EnterNotExpr is called when production NotExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterNotExpr(ctx *NotExprContext) {}
+
+// ExitNotExpr is called when production NotExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitNotExpr(ctx *NotExprContext) {}
+
 // EnterIntExpr is called when production IntExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterIntExpr(ctx *IntExprContext) {}
 

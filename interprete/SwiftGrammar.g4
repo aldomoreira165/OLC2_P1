@@ -237,7 +237,8 @@ opasignstmt
 expr
     : PARIZQ expr PARDER                        # ParExpr
     | SUB expr                                  # UnariaExpr
-    | left=expr op=(MUL|DIV|MOD) right=expr     # OpExpr
+    | NOT expr                                  # NotExpr
+    | left=expr op=(DIV|MOD|MUL) right=expr     # OpExpr
     | left=expr op=(ADD|SUB) right=expr         # OpExpr
     | left=expr op=(MAY_IG|MAYOR) right=expr    # OpExpr
     | left=expr op=(MEN_IG|MENOR) right=expr    # OpExpr

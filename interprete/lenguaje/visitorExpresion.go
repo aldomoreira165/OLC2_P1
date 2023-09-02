@@ -55,6 +55,10 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			return leftValue.(float64) * rightValue.(float64)
 		}
 	case "/":
+		//verificar que no se divida entre 0
+		if rightValue.(int64) == 0 {
+			return fmt.Sprintf("Error: division entre 0")
+		}
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
 			return leftValue.(int64) / rightValue.(int64)
 		} else if leftType == "int" && rightType == "float" {
@@ -65,6 +69,10 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			return leftValue.(float64) / rightValue.(float64)
 		}
 	case "%":
+		//verificar que no se divida entre 0
+		if rightValue.(int64) == 0 {
+			return fmt.Sprintf("Error: division entre 0")
+		}
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
 			return leftValue.(int64) % rightValue.(int64)
 		}
@@ -139,6 +147,12 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			} else {
 				return false
 			}
+		} else if leftType == "character" && rightType == "character" {
+			if leftValue.(string) > rightValue.(string) {
+				return true
+			} else {
+				return false
+			}
 		}
 	case ">=":
 		if leftType == "int" && rightType == "int" {
@@ -154,6 +168,12 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 				return false
 			}
 		} else if leftType == "String" && rightType == "String" {
+			if leftValue.(string) >= rightValue.(string) {
+				return true
+			} else {
+				return false
+			}
+		} else if leftType == "character" && rightType == "character" {
 			if leftValue.(string) >= rightValue.(string) {
 				return true
 			} else {
@@ -179,6 +199,12 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			} else {
 				return false
 			}
+		} else if leftType == "character" && rightType == "character" {
+			if leftValue.(string) < rightValue.(string) {
+				return true
+			} else {
+				return false
+			}
 		}
 	case "<=":
 		if leftType == "int" && rightType == "int" {
@@ -199,8 +225,13 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			} else {
 				return false
 			}
+		} else if leftType == "character" && rightType == "character" {
+			if leftValue.(string) <= rightValue.(string) {
+				return true
+			} else {
+				return false
+			}
 		}
-
 	case "&&":
 		if leftType == "bool" && rightType == "bool" {
 			valorA := leftValue.(bool)
@@ -309,6 +340,18 @@ func (l *Visitor) VisitUnariaExpr(ctx *parser.UnariaExprContext) interface{} {
 	} else if tipo == "float" {
 		valor, _ := exp.(float64)
 		return -valor
+	}
+	return false
+}
+
+//not expr
+func (l *Visitor) VisitNotExpr(ctx *parser.NotExprContext) interface{} {
+	exp := l.Visit(ctx.Expr())
+
+	if exp == true {
+		return false
+	} else if exp == false {
+		return true
 	}
 	return false
 }

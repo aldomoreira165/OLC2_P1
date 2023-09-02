@@ -56,7 +56,12 @@ func (l *Visitor) VisitSwitchstmt(ctx *parser.SwitchstmtContext) interface{} {
 		if valorExpresion == valorCase && exprType == caseSwitchType {
 			previousEnvironment := CrearEntorno(l)
 			defer EliminarEntorno(l, previousEnvironment)
-			return l.Visit(caseCtx.Block())               // Salir del switch después de ejecutar un caso válido
+			contenido := l.Visit(caseCtx.Block())  
+			if l.shouldBreak {
+				l.shouldBreak = false
+				return contenido
+			}
+			return contenido
 		}
 	}
 
@@ -64,7 +69,12 @@ func (l *Visitor) VisitSwitchstmt(ctx *parser.SwitchstmtContext) interface{} {
 	if ctx.DefaultCase() != nil {
 		previousEnvironment := CrearEntorno(l)
 		defer EliminarEntorno(l, previousEnvironment)
-		return l.Visit(ctx.DefaultCase().Block())
+		contenido := l.Visit(ctx.DefaultCase().Block())
+		if l.shouldBreak {
+			l.shouldBreak = false
+			return contenido
+		}
+		return contenido
 	}
 	return nil
 }

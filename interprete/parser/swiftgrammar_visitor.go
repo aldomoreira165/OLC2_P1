@@ -220,6 +220,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#AccFuncExpr.
 	VisitAccFuncExpr(ctx *AccFuncExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#NotExpr.
+	VisitNotExpr(ctx *NotExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#IntExpr.
 	VisitIntExpr(ctx *IntExprContext) interface{}
 

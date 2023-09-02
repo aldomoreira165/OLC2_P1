@@ -291,6 +291,10 @@ func (v *BaseSwiftGrammarVisitor) VisitAccFuncExpr(ctx *AccFuncExprContext) inte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitNotExpr(ctx *NotExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitIntExpr(ctx *IntExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
