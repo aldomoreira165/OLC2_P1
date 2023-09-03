@@ -309,6 +309,16 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 		currentEnv = currentEnv.parent
 	}
 
+	//buscar en la lista de matrices
+	currentEnv = l.currentEnvironment
+	for currentEnv != nil {
+		matriz, ok := currentEnv.Matrices[id]
+		if ok {
+			return matriz.Valores
+		}
+		currentEnv = currentEnv.parent
+	}
+	
 	// Devolver un mensaje de error en lugar de lanzar una excepción
 	return fmt.Sprintf("Error variable no encontrada: %s", id)
 }
@@ -394,4 +404,9 @@ func (l *Visitor) VisitAccesoMatrizExpr(ctx *parser.AccesoMatrizExprContext) int
 
 func (l *Visitor) VisitAccesoStructExpr(ctx *parser.AccesoStructExprContext) interface{} {
 	return l.Visit(ctx.Accesostructstmt())
+}
+
+//AccesoValorStructExpr
+func (l *Visitor) VisitAccesoValorStructExpr(ctx *parser.AccesoValorStructExprContext) interface{} {
+	return l.Visit(ctx.Valor_struct_expr())
 }

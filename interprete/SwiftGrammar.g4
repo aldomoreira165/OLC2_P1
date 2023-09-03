@@ -44,11 +44,11 @@ lista_atributos
     ;
 
 struct_expr
-    : (STRUCT_VAR|STRUCT_LET) ID (DOSPUNTOS ID)? IG valor_struct_expr #StructExpr
+    : ST (VAR|LET) ID (DOSPUNTOS ID)? IG valor_struct_expr #StructExpr
     ;
 
 valor_struct_expr
-    : ID ( PARIZQ l_dupla PARDER)? #ValorStructExpr
+    : ST ID ( PARIZQ l_dupla PARDER)? #ValorStructExpr
     ;
 
 l_dupla
@@ -263,6 +263,7 @@ expr
     | isemptyvectorstmt                         # IsEmptyVectorExpr
     | accesomatriz                              # AccesoMatrizExpr
     | accesostructstmt                          # AccesoStructExpr
+    | valor_struct_expr                         # AccesoValorStructExpr
     ;
 
 tipo
@@ -270,5 +271,14 @@ tipo
     | FLOAT                                     
     | BOOL                                      
     | CHARACTER                                 
-    | PSTRING                                  
+    | PSTRING
+    | tipo_vector                                  
+    ;
+
+tipo_vector
+    : CORCHIZQ INT CORCHDER                                      
+    | CORCHIZQ FLOAT CORCHDER                                     
+    | CORCHIZQ BOOL CORCHDER                                      
+    | CORCHIZQ CHARACTER CORCHDER                                 
+    | CORCHIZQ PSTRING CORCHDER                                  
     ;

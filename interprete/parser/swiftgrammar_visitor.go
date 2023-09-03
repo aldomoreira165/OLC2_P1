@@ -223,6 +223,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#AccFuncExpr.
 	VisitAccFuncExpr(ctx *AccFuncExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#AccesoValorStructExpr.
+	VisitAccesoValorStructExpr(ctx *AccesoValorStructExprContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#NotExpr.
 	VisitNotExpr(ctx *NotExprContext) interface{}
 
@@ -234,4 +237,7 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#tipo.
 	VisitTipo(ctx *TipoContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#tipo_vector.
+	VisitTipo_vector(ctx *Tipo_vectorContext) interface{}
 }

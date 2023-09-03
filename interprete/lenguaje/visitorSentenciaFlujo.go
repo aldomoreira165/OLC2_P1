@@ -250,6 +250,22 @@ func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
 		return "character"
 	} else if ctx.PSTRING() != nil {
 		return "String"
+	} else if ctx.Tipo_vector() != nil {
+		fmt.Println("tipo vector en produccion tipo")
+		return "vector"
+	}
+	return nil
+}
+
+func (l *Visitor) VisitTipo_vector(ctx *parser.Tipo_vectorContext) interface{} {
+	if ctx.INT() != nil {
+		return "vector"
+	} else if ctx.FLOAT() != nil {
+		return "vector"
+	} else if ctx.BOOL() != nil {
+		return "vector"
+	} else if ctx.CHARACTER() != nil {
+		return "vector"
 	}
 	return nil
 }

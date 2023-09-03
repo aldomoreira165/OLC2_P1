@@ -452,6 +452,12 @@ func (s *BaseSwiftGrammarListener) EnterAccFuncExpr(ctx *AccFuncExprContext) {}
 // ExitAccFuncExpr is called when production AccFuncExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitAccFuncExpr(ctx *AccFuncExprContext) {}
 
+// EnterAccesoValorStructExpr is called when production AccesoValorStructExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesoValorStructExpr(ctx *AccesoValorStructExprContext) {}
+
+// ExitAccesoValorStructExpr is called when production AccesoValorStructExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesoValorStructExpr(ctx *AccesoValorStructExprContext) {}
+
 // EnterNotExpr is called when production NotExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterNotExpr(ctx *NotExprContext) {}
 
@@ -475,3 +481,9 @@ func (s *BaseSwiftGrammarListener) EnterTipo(ctx *TipoContext) {}
 
 // ExitTipo is called when production tipo is exited.
 func (s *BaseSwiftGrammarListener) ExitTipo(ctx *TipoContext) {}
+
+// EnterTipo_vector is called when production tipo_vector is entered.
+func (s *BaseSwiftGrammarListener) EnterTipo_vector(ctx *Tipo_vectorContext) {}
+
+// ExitTipo_vector is called when production tipo_vector is exited.
+func (s *BaseSwiftGrammarListener) ExitTipo_vector(ctx *Tipo_vectorContext) {}

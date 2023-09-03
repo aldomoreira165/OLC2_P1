@@ -20,14 +20,14 @@ func (l *Visitor) VisitFuncionNormal(ctx *parser.FuncionNormalContext) interface
 			Tipo:       "nil",
 			Sentencias: funcBlock,
 			Parametros: params,
-		}	
-	}else{
+		}
+	} else {
 		l.currentEnvironment.funciones[funcId] = Funcion{
 			Id:         funcId,
 			Tipo:       "nil",
-			Sentencias: funcBlock,	
+			Sentencias: funcBlock,
 			Parametros: nil,
-	}		
+		}
 	}
 	return nil
 }
@@ -47,14 +47,14 @@ func (l *Visitor) VisitFuncionRetorno(ctx *parser.FuncionRetornoContext) interfa
 			Tipo:       tipo,
 			Sentencias: funcBlock,
 			Parametros: params,
-		}	
-	}else{
+		}
+	} else {
 		l.currentEnvironment.funciones[funcId] = Funcion{
 			Id:         funcId,
 			Tipo:       tipo,
 			Sentencias: funcBlock,
 			Parametros: nil,
-	}		
+		}
 	}
 	return nil
 }
@@ -75,8 +75,16 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					parametros := function.Parametros
 					for paramName, paramValue := range argValues {
 						for _, param := range parametros {
+							fmt.Println(param)
 							if param.Externo == paramName {
-								l.agregarVariable(param.Interno, determineType(paramValue), false,paramValue)
+								if param.Tipo == "vector" {
+									fmt.Println("entro a vector para la funcion XDDDDD")
+									valores := paramValue.([]interface{})
+									tipo := determineType(valores[0])
+									l.agregarVector(param.Interno, tipo, valores)
+								} else {
+									l.agregarVariable(param.Interno, determineType(paramValue), false, paramValue)
+								}
 							}
 						}
 					}
@@ -84,7 +92,7 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					retornarInterface := interface{}(retValue)
 					retorno := convertirExpresionD(function.Tipo, retornarInterface)
 					return retorno
-				}else{
+				} else {
 					previousEnvironment := CrearEntorno(l)
 					defer EliminarEntorno(l, previousEnvironment)
 					retValue := l.Visit(function.Sentencias)
@@ -102,13 +110,22 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					for paramName, paramValue := range argValues {
 						for _, param := range parametros {
 							if param.Externo == paramName {
-								l.agregarVariable(param.Interno, determineType(paramValue), false,paramValue)
+								//validar si es una variable, vector o matriz
+								if param.Tipo == "vector" {
+									fmt.Println("entro a vector para la funcion XDDDDD")
+									valores := paramValue.([]interface{})
+									tipo := determineType(valores[0])
+									l.agregarVector(param.Interno, tipo, valores)
+								} else {
+									fmt.Println("entro a variable para la funcion XDDDDD")
+									l.agregarVariable(param.Interno, determineType(paramValue), false, paramValue)
+								}
 							}
 						}
 					}
 					fmt.Println("entorno actual", l.currentEnvironment.variables)
 					return l.Visit(function.Sentencias)
-				}else{
+				} else {
 					fmt.Println("dentro de funcion normal sin parametros")
 					previousEnvironment := CrearEntorno(l)
 					defer EliminarEntorno(l, previousEnvironment)
@@ -131,6 +148,7 @@ func (l *Visitor) VisitParametros(ctx *parser.ParametrosContext) interface{} {
 		externo := paramList[i].GetText()
 		interno := paramList[i+1].GetText()
 		tipo := l.Visit(ctx.Tipo(i / 2)).(string)
+
 
 		param := ParametroDef{
 			Externo: externo,

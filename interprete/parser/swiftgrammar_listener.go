@@ -223,6 +223,9 @@ type SwiftGrammarListener interface {
 	// EnterAccFuncExpr is called when entering the AccFuncExpr production.
 	EnterAccFuncExpr(c *AccFuncExprContext)
 
+	// EnterAccesoValorStructExpr is called when entering the AccesoValorStructExpr production.
+	EnterAccesoValorStructExpr(c *AccesoValorStructExprContext)
+
 	// EnterNotExpr is called when entering the NotExpr production.
 	EnterNotExpr(c *NotExprContext)
 
@@ -234,6 +237,9 @@ type SwiftGrammarListener interface {
 
 	// EnterTipo is called when entering the tipo production.
 	EnterTipo(c *TipoContext)
+
+	// EnterTipo_vector is called when entering the tipo_vector production.
+	EnterTipo_vector(c *Tipo_vectorContext)
 
 	// ExitS is called when exiting the s production.
 	ExitS(c *SContext)
@@ -451,6 +457,9 @@ type SwiftGrammarListener interface {
 	// ExitAccFuncExpr is called when exiting the AccFuncExpr production.
 	ExitAccFuncExpr(c *AccFuncExprContext)
 
+	// ExitAccesoValorStructExpr is called when exiting the AccesoValorStructExpr production.
+	ExitAccesoValorStructExpr(c *AccesoValorStructExprContext)
+
 	// ExitNotExpr is called when exiting the NotExpr production.
 	ExitNotExpr(c *NotExprContext)
 
@@ -462,4 +471,7 @@ type SwiftGrammarListener interface {
 
 	// ExitTipo is called when exiting the tipo production.
 	ExitTipo(c *TipoContext)
+
+	// ExitTipo_vector is called when exiting the tipo_vector production.
+	ExitTipo_vector(c *Tipo_vectorContext)
 }

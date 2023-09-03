@@ -295,6 +295,10 @@ func (v *BaseSwiftGrammarVisitor) VisitAccFuncExpr(ctx *AccFuncExprContext) inte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitAccesoValorStructExpr(ctx *AccesoValorStructExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitNotExpr(ctx *NotExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -308,5 +312,9 @@ func (v *BaseSwiftGrammarVisitor) VisitAccesoStructExpr(ctx *AccesoStructExprCon
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitTipo(ctx *TipoContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitTipo_vector(ctx *Tipo_vectorContext) interface{} {
 	return v.VisitChildren(ctx)
 }

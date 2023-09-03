@@ -37,6 +37,7 @@ STRUCT: 'struct';
 STRUCT_VAR : 'varst';
 STRUCT_LET : 'letst';
 AT: 'at';
+ST: 'st';
 
 // primitives
 NUMBER : [0-9]+('.'[0-9]+)?;
@@ -71,6 +72,7 @@ COMA:           ',';
 PTCOMA:      ';';
 INTERROGACION:  '?';
 PUNTO:          '.';
+GUIONBAJO:      '_';
 
 // skip
 WHITESPACE: [ \\\r\n\t]+ -> skip;

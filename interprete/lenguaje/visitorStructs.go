@@ -111,21 +111,8 @@ func (l *Visitor) VisitDuplastruct(ctx *parser.DuplastructContext) interface{} {
 	for i := 0; i < len(ctx.AllID()); i++ {
 		attributeName := ctx.ID(i).GetText()
 		attributeValue := l.Visit(ctx.Expr(i))
-		fmt.Println("attributeValue: ", attributeValue)
 		attriType := determineType(attributeValue)
-		fmt.Println("attriType: ", attriType)
-		
-		if attriType == "Error" {
-			fmt.Println("entro al error", attributeName)
-			//verificar si es un struct
-			if structInstance, ok := l.currentEnvironment.Instancias[attributeValue.(string)]; ok {
-				attributeValue = structInstance
-				fmt.Println("structInstance: ", structInstance)
-				attriType = "struct"
-			} else {
-				return fmt.Sprintf("Error: el atributo %s no tiene un valor valido asignado", attributeName)
-			}
-		}
+		fmt.Println("attributeName: ", attributeName, "attributeValue: ", attributeValue, "attriType: ", attriType)
 
 		// Agregar la dupla actual al arreglo de duplas
 		duplas = append(duplas, Dupla{
@@ -134,19 +121,26 @@ func (l *Visitor) VisitDuplastruct(ctx *parser.DuplastructContext) interface{} {
 			AttributeValue: attributeValue,
 		})
 	}
-	fmt.Println("DUPLAAAAAAAAAAAAAAAAS: ", duplas)
 	return duplas
 }
 
 func (l *Visitor) VisitAccesoStruct(ctx *parser.AccesoStructContext) interface{} {
-	structName := ctx.ID(0).GetText()
-	attributeName := ctx.ID(1).GetText()
+	//structName := ctx.ID(0).GetText()
+	atributteNames := []string{}
 
-	if structInstance, ok := l.currentEnvironment.Instancias[structName]; ok {
-		if attributeValue, ok := structInstance.Attributes[attributeName]; ok {
-			return attributeValue
-		}
-		return fmt.Sprintf("Error: el atributo %s no existe en la instancia de %s", attributeName, structName)
+	for _, id := range ctx.AllID()[1:] {
+		atributteNames = append(atributteNames, id.GetText())
 	}
-	return fmt.Sprintf("Error: la instancia de %s no existe", structName)
+
+	/*if structInstance, ok := l.currentEnvironment.Instancias[structName]; ok {
+		//atributos := structInstance.Attributes
+		//recorrer atributteNames para ver los id ingresados e ir avanzando en la estructura hasta llegar al atributo final
+		for _, attrName := range atributteNames {
+			
+		}
+	}*/
+
+	return true
+
 }
+
