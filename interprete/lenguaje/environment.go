@@ -11,6 +11,8 @@ type Environment struct {
 	Matrices map[string]Matriz
 	Matrices3D map[string]Matriz3D
 	funciones map[string]Funcion
+	Structs map[string]Struct
+	Instancias map[string]StructInstance
 }
 
 func NewEnvironment(parent *Environment) *Environment {
@@ -21,6 +23,8 @@ func NewEnvironment(parent *Environment) *Environment {
 		Matrices: make(map[string]Matriz),
 		Matrices3D: make(map[string]Matriz3D),
 		funciones: make(map[string]Funcion),
+		Structs: make(map[string]Struct),
+		Instancias: make(map[string]StructInstance),
 	}
 }
 

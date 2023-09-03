@@ -25,6 +25,9 @@ type SwiftGrammarListener interface {
 	// EnterStructExpr is called when entering the StructExpr production.
 	EnterStructExpr(c *StructExprContext)
 
+	// EnterValorStructExpr is called when entering the ValorStructExpr production.
+	EnterValorStructExpr(c *ValorStructExprContext)
+
 	// EnterDuplastruct is called when entering the Duplastruct production.
 	EnterDuplastruct(c *DuplastructContext)
 
@@ -249,6 +252,9 @@ type SwiftGrammarListener interface {
 
 	// ExitStructExpr is called when exiting the StructExpr production.
 	ExitStructExpr(c *StructExprContext)
+
+	// ExitValorStructExpr is called when exiting the ValorStructExpr production.
+	ExitValorStructExpr(c *ValorStructExprContext)
 
 	// ExitDuplastruct is called when exiting the Duplastruct production.
 	ExitDuplastruct(c *DuplastructContext)

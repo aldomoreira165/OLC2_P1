@@ -40,11 +40,15 @@ defstructstmt
     ;
 
 lista_atributos
-    : (STRUCT_VAR|STRUCT_LET) ID (DOSPUNTOS tipo)? (IG expr)? #AtributoStruct
+    : (LET|VAR) ID (DOSPUNTOS (tipo|ID))? (IG expr)? #AtributoStruct
     ;
 
 struct_expr
-    : (LET|VAR) ID IG ID (l_dupla)? #StructExpr
+    : (STRUCT_VAR|STRUCT_LET) ID (DOSPUNTOS ID)? IG valor_struct_expr #StructExpr
+    ;
+
+valor_struct_expr
+    : ID ( PARIZQ l_dupla PARDER)? #ValorStructExpr
     ;
 
 l_dupla
