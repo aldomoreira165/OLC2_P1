@@ -250,13 +250,17 @@ func (l *Visitor) VisitTipo(ctx *parser.TipoContext) interface{} {
 	} else if ctx.PSTRING() != nil {
 		return "String"
 	} else if ctx.Tipo_vector() != nil {
-		fmt.Println("tipo vector en produccion tipo")
 		return "vector"
+	} else if ctx.Tipo_matriz2() != nil {
+		return "matriz2"
+	} else if ctx.Tipo_matriz3() != nil {
+		return "matriz3"
 	}
 	return nil
 }
 
 func (l *Visitor) VisitTipo_vector(ctx *parser.Tipo_vectorContext) interface{} {
+	fmt.Println("se esta visitando tipo vector")
 	if ctx.INT() != nil {
 		return "vector"
 	} else if ctx.FLOAT() != nil {
@@ -265,6 +269,34 @@ func (l *Visitor) VisitTipo_vector(ctx *parser.Tipo_vectorContext) interface{} {
 		return "vector"
 	} else if ctx.CHARACTER() != nil {
 		return "vector"
+	}
+	return nil
+}
+
+func (l *Visitor) VisitTipo_matriz2(ctx *parser.Tipo_matriz2Context) interface{} {
+	fmt.Println("se esta visitando tipo matriz")
+	if ctx.INT() != nil {
+		return "matriz2"
+	} else if ctx.FLOAT() != nil {
+		return "matriz2"
+	} else if ctx.BOOL() != nil {
+		return "matriz2"
+	} else if ctx.CHARACTER() != nil {
+		return "matriz2"
+	}
+	return nil
+}
+
+func (l *Visitor) VisitTipo_matriz3(ctx *parser.Tipo_matriz3Context) interface{} {
+	fmt.Println("se esta visitando tipo matriz")
+	if ctx.INT() != nil {
+		return "matriz3"
+	} else if ctx.FLOAT() != nil {
+		return "matriz3"
+	} else if ctx.BOOL() != nil {
+		return "matriz3"
+	} else if ctx.CHARACTER() != nil {
+		return "matriz3"
 	}
 	return nil
 }

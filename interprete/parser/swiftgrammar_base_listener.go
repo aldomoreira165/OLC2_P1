@@ -152,17 +152,17 @@ func (s *BaseSwiftGrammarListener) EnterDeclmatrizstmt3(ctx *Declmatrizstmt3Cont
 // ExitDeclmatrizstmt3 is called when production declmatrizstmt3 is exited.
 func (s *BaseSwiftGrammarListener) ExitDeclmatrizstmt3(ctx *Declmatrizstmt3Context) {}
 
-// EnterTipomatriz2 is called when production tipomatriz2 is entered.
-func (s *BaseSwiftGrammarListener) EnterTipomatriz2(ctx *Tipomatriz2Context) {}
-
-// ExitTipomatriz2 is called when production tipomatriz2 is exited.
-func (s *BaseSwiftGrammarListener) ExitTipomatriz2(ctx *Tipomatriz2Context) {}
-
 // EnterTipomatriz3 is called when production tipomatriz3 is entered.
 func (s *BaseSwiftGrammarListener) EnterTipomatriz3(ctx *Tipomatriz3Context) {}
 
 // ExitTipomatriz3 is called when production tipomatriz3 is exited.
 func (s *BaseSwiftGrammarListener) ExitTipomatriz3(ctx *Tipomatriz3Context) {}
+
+// EnterTipomatriz2 is called when production tipomatriz2 is entered.
+func (s *BaseSwiftGrammarListener) EnterTipomatriz2(ctx *Tipomatriz2Context) {}
+
+// ExitTipomatriz2 is called when production tipomatriz2 is exited.
+func (s *BaseSwiftGrammarListener) ExitTipomatriz2(ctx *Tipomatriz2Context) {}
 
 // EnterListavaloresmatriz2 is called when production listavaloresmatriz2 is entered.
 func (s *BaseSwiftGrammarListener) EnterListavaloresmatriz2(ctx *Listavaloresmatriz2Context) {}
@@ -487,3 +487,15 @@ func (s *BaseSwiftGrammarListener) EnterTipo_vector(ctx *Tipo_vectorContext) {}
 
 // ExitTipo_vector is called when production tipo_vector is exited.
 func (s *BaseSwiftGrammarListener) ExitTipo_vector(ctx *Tipo_vectorContext) {}
+
+// EnterTipo_matriz2 is called when production tipo_matriz2 is entered.
+func (s *BaseSwiftGrammarListener) EnterTipo_matriz2(ctx *Tipo_matriz2Context) {}
+
+// ExitTipo_matriz2 is called when production tipo_matriz2 is exited.
+func (s *BaseSwiftGrammarListener) ExitTipo_matriz2(ctx *Tipo_matriz2Context) {}
+
+// EnterTipo_matriz3 is called when production tipo_matriz3 is entered.
+func (s *BaseSwiftGrammarListener) EnterTipo_matriz3(ctx *Tipo_matriz3Context) {}
+
+// ExitTipo_matriz3 is called when production tipo_matriz3 is exited.
+func (s *BaseSwiftGrammarListener) ExitTipo_matriz3(ctx *Tipo_matriz3Context) {}

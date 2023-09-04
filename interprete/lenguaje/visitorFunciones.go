@@ -78,7 +78,6 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 							fmt.Println(param)
 							if param.Externo == paramName {
 								if param.Tipo == "vector" {
-									fmt.Println("entro a vector para la funcion XDDDDD")
 									valores := paramValue.(ParametroCall).Valor.([]interface{})
 									tipo := determineType(valores[0])
 									l.agregarVector(param.Interno, tipo, valores)
@@ -152,14 +151,38 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					for paramName, paramValue := range argValues {
 						for _, param := range parametros {
 							if param.Externo == paramName {
+								fmt.Println("TIPPPPPPPPPPPPPPOOOOOOOOO", param.Tipo)
 								//validar si es una variable, vector o matriz
 								if param.Tipo == "vector" {
 									valores := paramValue.(ParametroCall).Valor.([]interface{})
 									tipo := determineType(valores[0])
 									l.agregarVector(param.Interno, tipo, valores)
+								} else if param.Tipo == "matriz2" {
+									fmt.Println("es matriz2")
+									valores := paramValue.(ParametroCall).Valor.([][]interface{})
+									tipo := determineType(valores[0][0])
+									matrizNueva := Matriz{
+										Id:        param.Interno,
+										Tipo:      tipo,
+										Dimension: 2,
+										Valores:   valores,
+									}
+									l.currentEnvironment.Matrices[param.Interno] = matrizNueva
+								} else if param.Tipo == "matriz3" {
+									fmt.Println("es matriz3")
+									valores := paramValue.(ParametroCall).Valor.([][][]interface{})
+									tipo := determineType(valores[0][0][0])
+									matrizNueva := Matriz3D{
+										Id:        param.Interno,
+										Tipo:      tipo,
+										Dimension: 3,
+										Valores:   valores,
+									}
+									l.currentEnvironment.Matrices3D[param.Interno] = matrizNueva
 								} else {
 									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor)
 								}
+
 							}
 						}
 					}
@@ -187,7 +210,11 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 												currentEnv.Vectores[nombreVariable] = nuevoVector
 												break
 											}
-										} else {
+										} else if param.Tipo == "matriz2" {
+											return true
+										} else if param.Tipo == "matriz3" {
+											return true
+										}else{
 											if _, ok := currentEnv.variables[nombreVariable]; ok {
 
 												nuevaVariable := Variable{
@@ -263,7 +290,7 @@ func (l *Visitor) VisitParametroscall(ctx *parser.ParametroscallContext) interfa
 			NameVar: ctx.Expr(i).GetText(),
 			Valor:   l.Visit(ctx.Expr(i)),
 		}
-
+		fmt.Println("valorrrrrr", interno)
 		argValues[externo] = interno
 	}
 	return argValues

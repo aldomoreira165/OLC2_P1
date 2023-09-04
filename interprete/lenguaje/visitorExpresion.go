@@ -320,7 +320,17 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
-	
+
+	//buscar en lista de matrices 3d
+	currentEnv = l.currentEnvironment
+	for currentEnv != nil {
+		matriz3d, ok := currentEnv.Matrices3D[id]
+		if ok {
+			return matriz3d.Valores
+		}
+		currentEnv = currentEnv.parent
+	}
+
 	// Devolver un mensaje de error en lugar de lanzar una excepción
 	return fmt.Sprintf("Error variable no encontrada: %s", id)
 }

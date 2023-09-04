@@ -110,8 +110,8 @@ declmatrizstmt
     ;
 
 tipomatriz
-    : CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER #tipomatriz2
-    | CORCHIZQ CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER CORCHDER #tipomatriz3
+    : CORCHIZQ CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER CORCHDER #tipomatriz3
+    | CORCHIZQ CORCHIZQ tipo CORCHDER CORCHDER #tipomatriz2
     ;
 
 listavaloresmatriz
@@ -273,7 +273,8 @@ tipo
     | CHARACTER                                 
     | PSTRING
     | tipo_vector  
-    | tipo_matriz                                
+    | tipo_matriz2
+    | tipo_matriz3                               
     ;
 
 tipo_vector
@@ -284,10 +285,18 @@ tipo_vector
     | CORCHIZQ PSTRING CORCHDER                                  
     ;
 
-tipo_matriz
+tipo_matriz2
     : CORCHIZQ CORCHIZQ INT CORCHDER CORCHDER                                      
     | CORCHIZQ CORCHIZQ FLOAT CORCHDER CORCHDER                                     
     | CORCHIZQ CORCHIZQ BOOL CORCHDER CORCHDER                                      
     | CORCHIZQ CORCHIZQ CHARACTER CORCHDER CORCHDER                                 
     | CORCHIZQ CORCHIZQ PSTRING CORCHDER CORCHDER                                  
+    ;
+
+tipo_matriz3
+    : CORCHIZQ CORCHIZQ CORCHIZQ INT CORCHDER CORCHDER CORCHDER                                      
+    | CORCHIZQ CORCHIZQ CORCHIZQ FLOAT CORCHDER CORCHDER CORCHDER                                     
+    | CORCHIZQ CORCHIZQ CORCHIZQ BOOL CORCHDER CORCHDER CORCHDER                                      
+    | CORCHIZQ CORCHIZQ CORCHIZQ CHARACTER CORCHDER CORCHDER CORCHDER                                 
+    | CORCHIZQ CORCHIZQ CORCHIZQ PSTRING CORCHDER CORCHDER CORCHDER                                  
     ;

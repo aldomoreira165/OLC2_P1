@@ -73,11 +73,11 @@ type SwiftGrammarListener interface {
 	// EnterDeclmatrizstmt3 is called when entering the declmatrizstmt3 production.
 	EnterDeclmatrizstmt3(c *Declmatrizstmt3Context)
 
-	// EnterTipomatriz2 is called when entering the tipomatriz2 production.
-	EnterTipomatriz2(c *Tipomatriz2Context)
-
 	// EnterTipomatriz3 is called when entering the tipomatriz3 production.
 	EnterTipomatriz3(c *Tipomatriz3Context)
+
+	// EnterTipomatriz2 is called when entering the tipomatriz2 production.
+	EnterTipomatriz2(c *Tipomatriz2Context)
 
 	// EnterListavaloresmatriz2 is called when entering the listavaloresmatriz2 production.
 	EnterListavaloresmatriz2(c *Listavaloresmatriz2Context)
@@ -241,6 +241,12 @@ type SwiftGrammarListener interface {
 	// EnterTipo_vector is called when entering the tipo_vector production.
 	EnterTipo_vector(c *Tipo_vectorContext)
 
+	// EnterTipo_matriz2 is called when entering the tipo_matriz2 production.
+	EnterTipo_matriz2(c *Tipo_matriz2Context)
+
+	// EnterTipo_matriz3 is called when entering the tipo_matriz3 production.
+	EnterTipo_matriz3(c *Tipo_matriz3Context)
+
 	// ExitS is called when exiting the s production.
 	ExitS(c *SContext)
 
@@ -307,11 +313,11 @@ type SwiftGrammarListener interface {
 	// ExitDeclmatrizstmt3 is called when exiting the declmatrizstmt3 production.
 	ExitDeclmatrizstmt3(c *Declmatrizstmt3Context)
 
-	// ExitTipomatriz2 is called when exiting the tipomatriz2 production.
-	ExitTipomatriz2(c *Tipomatriz2Context)
-
 	// ExitTipomatriz3 is called when exiting the tipomatriz3 production.
 	ExitTipomatriz3(c *Tipomatriz3Context)
+
+	// ExitTipomatriz2 is called when exiting the tipomatriz2 production.
+	ExitTipomatriz2(c *Tipomatriz2Context)
 
 	// ExitListavaloresmatriz2 is called when exiting the listavaloresmatriz2 production.
 	ExitListavaloresmatriz2(c *Listavaloresmatriz2Context)
@@ -474,4 +480,10 @@ type SwiftGrammarListener interface {
 
 	// ExitTipo_vector is called when exiting the tipo_vector production.
 	ExitTipo_vector(c *Tipo_vectorContext)
+
+	// ExitTipo_matriz2 is called when exiting the tipo_matriz2 production.
+	ExitTipo_matriz2(c *Tipo_matriz2Context)
+
+	// ExitTipo_matriz3 is called when exiting the tipo_matriz3 production.
+	ExitTipo_matriz3(c *Tipo_matriz3Context)
 }

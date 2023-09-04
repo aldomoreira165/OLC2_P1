@@ -73,11 +73,11 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#declmatrizstmt3.
 	VisitDeclmatrizstmt3(ctx *Declmatrizstmt3Context) interface{}
 
-	// Visit a parse tree produced by SwiftGrammarParser#tipomatriz2.
-	VisitTipomatriz2(ctx *Tipomatriz2Context) interface{}
-
 	// Visit a parse tree produced by SwiftGrammarParser#tipomatriz3.
 	VisitTipomatriz3(ctx *Tipomatriz3Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#tipomatriz2.
+	VisitTipomatriz2(ctx *Tipomatriz2Context) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#listavaloresmatriz2.
 	VisitListavaloresmatriz2(ctx *Listavaloresmatriz2Context) interface{}
@@ -240,4 +240,10 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#tipo_vector.
 	VisitTipo_vector(ctx *Tipo_vectorContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#tipo_matriz2.
+	VisitTipo_matriz2(ctx *Tipo_matriz2Context) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#tipo_matriz3.
+	VisitTipo_matriz3(ctx *Tipo_matriz3Context) interface{}
 }

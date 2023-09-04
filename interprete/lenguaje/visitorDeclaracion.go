@@ -154,6 +154,7 @@ func (l *Visitor) VisitDeclmatrizstmt2(ctx *parser.Declmatrizstmt2Context) inter
 	matrizNueva := Matriz{
 		Id:      matrizId,
 		Tipo:    tipo,
+		Dimension: 2,
 		Valores: valores,
 	}
 	l.currentEnvironment.Matrices[matrizId] = matrizNueva
@@ -181,15 +182,28 @@ func (l *Visitor) VisitAccesomatriz2(ctx *parser.Accesomatriz2Context) interface
 	filaIdx := l.Visit(ctx.Expr(0)).(int64)
 	columnaIdx := l.Visit(ctx.Expr(1)).(int64)
 
-	// Acceder a la matriz y obtener el valor en la posición indicada
-	matriz := l.currentEnvironment.Matrices[matrizId]
-	if filaIdx >= 0 && filaIdx < int64(len(matriz.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0])) {
-		valor := matriz.Valores[filaIdx][columnaIdx]
-		return valor
-	} else {
-		// Manejar el caso de índices fuera de rango
-		return "Error: Índices fuera de rango"
+	// si no se encuentra la lista en matrices se busca en matrices3D, si se encuentra en 3d se devuelve la lista de valores []interface{}
+
+	currentEnv := l.currentEnvironment
+	for currentEnv != nil {
+		if matriz, ok := currentEnv.Matrices[matrizId]; ok {
+			if filaIdx >= 0 && filaIdx < int64(len(matriz.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0])) {
+				valor := matriz.Valores[filaIdx][columnaIdx]
+				return valor
+			} else {
+				return "Error: Índices fuera de rango"
+			}
+		} else if matriz3D, ok := currentEnv.Matrices3D[matrizId]; ok {
+			if filaIdx >= 0 && filaIdx < int64(len(matriz3D.Valores)) && columnaIdx >= 0 && columnaIdx < int64(len(matriz3D.Valores[0])) {
+				valor := matriz3D.Valores[filaIdx][columnaIdx]
+				return valor
+			} else {
+				return "Error: Índices fuera de rango"
+			}
+		}
+		currentEnv = currentEnv.parent
 	}
+	return fmt.Sprintf("Error: Matriz no encontrada: %s", matrizId)
 }
 
 // asignmatrizstmt
@@ -237,6 +251,7 @@ func (l *Visitor) VisitDeclmatrizstmt3(ctx *parser.Declmatrizstmt3Context) inter
 	matrizNueva := Matriz3D{
 		Id:      matrizId,
 		Tipo:    tipo,
+		Dimension: 3,
 		Valores: valores,
 	}
 	l.currentEnvironment.Matrices3D[matrizId] = matrizNueva
@@ -264,16 +279,21 @@ func (l *Visitor) VisitAccesomatriz3(ctx *parser.Accesomatriz3Context) interface
 	filaIdx := l.Visit(ctx.Expr(1)).(int64)
 	columnaIdx := l.Visit(ctx.Expr(2)).(int64)
 
-	// Acceder a la matriz y obtener el valor en la posición indicada
-	matriz := l.currentEnvironment.Matrices3D[matrizId]
-	if nivelIdx >= 0 && nivelIdx < int64(len(matriz.Valores)) && filaIdx >= 0 && filaIdx < int64(len(matriz.Valores[0])) && columnaIdx >= 0 && columnaIdx < int64(len(matriz.Valores[0][0])) {
-		valor := matriz.Valores[nivelIdx][filaIdx][columnaIdx]
-		return valor
-	} else {
-		// Manejar el caso de índices fuera de rango
-		return "Error: Índices fuera de rango"
+	currentEnv := l.currentEnvironment
+	for currentEnv != nil {
+		if matriz3D, ok := currentEnv.Matrices3D[matrizId]; ok {
+			if nivelIdx >= 0 && nivelIdx < int64(len(matriz3D.Valores)) && filaIdx >= 0 && filaIdx < int64(len(matriz3D.Valores[0])) && columnaIdx >= 0 && columnaIdx < int64(len(matriz3D.Valores[0][0])) {
+				valor := matriz3D.Valores[nivelIdx][filaIdx][columnaIdx]
+				return valor
+			} else {
+				return "Error: Índices fuera de rango"
+			}
+		}
+		currentEnv = currentEnv.parent
 	}
+	return fmt.Sprintf("Error: Matriz no encontrada: %s", matrizId)
 }
+
 
 func (l *Visitor) VisitAsignmatrizstmt3(ctx *parser.Asignmatrizstmt3Context) interface{} {
 	matrizId := ctx.ID().GetText()
