@@ -1,0 +1,35 @@
+print("--------------------------");
+print("---FUNCIONES EMBEBIDAS----");
+print("--------------------------");
+
+print("");
+let num1 = int("2")
+let num2 = int("2")
+let suma = String(num1 + num2)
+let num3 = float("9.5")
+let num4 = float("3.6")
+let resta = String(num3 - num4)
+let cadena = String(true) + "->" + String(3.504)
+
+print("valor 1: " + String(suma))
+print("valor 2: " + String(resta))
+print("valor true: " + String(true))
+print("valor false: " + String(false))
+print("valor nulo: " + String("nil"))
+print(String(10) + String(3.5))
+print("valor cadena: " + String(cadena));
+
+/*
+--------------------------
+---FUNCIONES EMBEBIDAS----
+--------------------------
+
+valor 1:  4
+valor 2:  5.9
+valor true:  true
+valor false:  false
+valor nulo: nil
+103.5
+true
+valor cadena: true->3.504
+*/
