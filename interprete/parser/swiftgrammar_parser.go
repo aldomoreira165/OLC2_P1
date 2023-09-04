@@ -268,7 +268,7 @@ func swiftgrammarParserInit() {
 		0, 385, 386, 5, 22, 0, 0, 386, 387, 3, 100, 50, 0, 387, 388, 5, 62, 0,
 		0, 388, 51, 1, 0, 0, 0, 389, 390, 5, 21, 0, 0, 390, 53, 1, 0, 0, 0, 391,
 		392, 5, 23, 0, 0, 392, 55, 1, 0, 0, 0, 393, 394, 5, 9, 0, 0, 394, 395,
-		5, 54, 0, 0, 395, 396, 3, 100, 50, 0, 396, 397, 5, 55, 0, 0, 397, 57, 1,
+		5, 54, 0, 0, 395, 396, 3, 22, 11, 0, 396, 397, 5, 55, 0, 0, 397, 57, 1,
 		0, 0, 0, 398, 399, 5, 1, 0, 0, 399, 400, 5, 54, 0, 0, 400, 401, 3, 100,
 		50, 0, 401, 402, 5, 55, 0, 0, 402, 59, 1, 0, 0, 0, 403, 404, 5, 2, 0, 0,
 		404, 405, 5, 54, 0, 0, 405, 406, 3, 100, 50, 0, 406, 407, 5, 55, 0, 0,
@@ -7078,7 +7078,7 @@ type IPrintstmtContext interface {
 	// Getter signatures
 	PRINT() antlr.TerminalNode
 	PARIZQ() antlr.TerminalNode
-	Expr() IExprContext
+	Listaexpresiones() IListaexpresionesContext
 	PARDER() antlr.TerminalNode
 
 	// IsPrintstmtContext differentiates from other interfaces.
@@ -7125,10 +7125,10 @@ func (s *PrintstmtContext) PARIZQ() antlr.TerminalNode {
 	return s.GetToken(SwiftGrammarParserPARIZQ, 0)
 }
 
-func (s *PrintstmtContext) Expr() IExprContext {
+func (s *PrintstmtContext) Listaexpresiones() IListaexpresionesContext {
 	var t antlr.RuleContext
 	for _, ctx := range s.GetChildren() {
-		if _, ok := ctx.(IExprContext); ok {
+		if _, ok := ctx.(IListaexpresionesContext); ok {
 			t = ctx.(antlr.RuleContext)
 			break
 		}
@@ -7138,7 +7138,7 @@ func (s *PrintstmtContext) Expr() IExprContext {
 		return nil
 	}
 
-	return t.(IExprContext)
+	return t.(IListaexpresionesContext)
 }
 
 func (s *PrintstmtContext) PARDER() antlr.TerminalNode {
@@ -7197,7 +7197,7 @@ func (p *SwiftGrammarParser) Printstmt() (localctx IPrintstmtContext) {
 	}
 	{
 		p.SetState(395)
-		p.expr(0)
+		p.Listaexpresiones()
 	}
 	{
 		p.SetState(396)

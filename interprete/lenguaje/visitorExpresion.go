@@ -58,9 +58,6 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 		}
 	case "/":
 		//verificar que no se divida entre 0
-		if rightValue.(int64) == 0 {
-			return fmt.Sprintf("Error: division entre 0")
-		}
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
 			return leftValue.(int64) / rightValue.(int64)
 		} else if leftType == "int" && rightType == "float" {
@@ -71,10 +68,6 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			return leftValue.(float64) / rightValue.(float64)
 		}
 	case "%":
-		//verificar que no se divida entre 0
-		if rightValue.(int64) == 0 {
-			return fmt.Sprintf("Error: division entre 0")
-		}
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
 			return leftValue.(int64) % rightValue.(int64)
 		}

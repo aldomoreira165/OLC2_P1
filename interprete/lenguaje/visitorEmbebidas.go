@@ -9,12 +9,17 @@ import (
 
 // visit del print
 func (l *Visitor) VisitPrintstmt(ctx *parser.PrintstmtContext) interface{} {
-	returnValue := l.Visit(ctx.Expr())
-	stringValue := fmt.Sprint(returnValue)
-	fmt.Println(stringValue + "\n")
-	return stringValue + "\n"
-}
+    expresiones := l.Visit(ctx.Listaexpresiones()).([]interface{})
+    var stringValue string
 
+    for i, expr := range expresiones {
+        if i > 0 {
+            stringValue += " "
+        }
+        stringValue += fmt.Sprint(expr)
+    }
+    return stringValue + "\n"
+}
 // visit del int
 func (l *Visitor) VisitIntstmt(ctx *parser.IntstmtContext) interface{} {
 	value := l.Visit(ctx.Expr())
