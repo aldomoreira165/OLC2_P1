@@ -20,7 +20,7 @@ func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
 				// Determinar el tipo de la expresión y el tipo de la variable existente
 				exprType := determineType(value)
 				existingVarType := variableExistente.Type
-
+				fmt.Println("TIPOSSSS",exprType, existingVarType)
 				if exprType == existingVarType {
 
 					variableActualizada := Variable{

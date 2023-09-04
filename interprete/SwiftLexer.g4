@@ -36,6 +36,7 @@ REMOVE: 'remove';
 STRUCT: 'struct';
 STRUCT_VAR : 'varst';
 STRUCT_LET : 'letst';
+INOUT : 'inout';
 AT: 'at';
 ST: 'st';
 
@@ -73,6 +74,7 @@ PTCOMA:      ';';
 INTERROGACION:  '?';
 PUNTO:          '.';
 GUIONBAJO:      '_';
+AMPERSON:       '&';
 
 // skip
 WHITESPACE: [ \\\r\n\t]+ -> skip;

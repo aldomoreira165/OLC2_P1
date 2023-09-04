@@ -14,6 +14,12 @@ type Funcion struct {
 type ParametroDef struct {
 	Externo string
 	Interno string
+	Inout bool
 	Tipo    string
+}
+
+type ParametroCall struct{
+	NameVar string
+	Valor interface{}
 }
 

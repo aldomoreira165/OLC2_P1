@@ -79,11 +79,11 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 							if param.Externo == paramName {
 								if param.Tipo == "vector" {
 									fmt.Println("entro a vector para la funcion XDDDDD")
-									valores := paramValue.([]interface{})
+									valores := paramValue.(ParametroCall).Valor.([]interface{})
 									tipo := determineType(valores[0])
 									l.agregarVector(param.Interno, tipo, valores)
 								} else {
-									l.agregarVariable(param.Interno, determineType(paramValue), false, paramValue)
+									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor)
 								}
 							}
 						}
@@ -91,6 +91,47 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					retValue := l.Visit(function.Sentencias)
 					retornarInterface := interface{}(retValue)
 					retorno := convertirExpresionD(function.Tipo, retornarInterface)
+					for _, param := range parametros {
+						if param.Inout {
+							fmt.Println("es inout", param)
+							nombreBuscar := param.Externo
+							//buscar en argvalues
+							for paramName, paramValue := range argValues {
+								if paramName == nombreBuscar {
+									nombreVariable := paramValue.(ParametroCall).NameVar
+									//buscar variable y asignar valor de param
+									currentEnv := l.currentEnvironment
+									for currentEnv != nil {
+										if param.Tipo == "vector" {
+											fmt.Println("valores: ", l.currentEnvironment.Vectores[param.Interno].Valores)
+											if _, ok := currentEnv.Vectores[nombreVariable]; ok {
+												nuevoVector := Vector{
+													Id:      nombreVariable,
+													Tipo:    determineType(l.currentEnvironment.Vectores[param.Interno].Valores[0]),
+													Valores: l.currentEnvironment.Vectores[param.Interno].Valores,
+												}
+												currentEnv.Vectores[nombreVariable] = nuevoVector
+												break
+											}
+										} else {
+											if _, ok := currentEnv.variables[nombreVariable]; ok {
+
+												nuevaVariable := Variable{
+													Name:      nombreVariable,
+													Type:      param.Tipo,
+													Constante: false,
+													Value:     l.currentEnvironment.variables[param.Interno].Value,
+												}
+												currentEnv.variables[nombreVariable] = nuevaVariable
+												break
+											}
+										}
+										currentEnv = currentEnv.parent
+									}
+								}
+							}
+						}
+					}
 					return retorno
 				} else {
 					previousEnvironment := CrearEntorno(l)
@@ -104,6 +145,7 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 				var argValues map[string]interface{}
 				if ctx.Parametroscall() != nil {
 					argValues = l.Visit(ctx.Parametroscall()).(map[string]interface{})
+					fmt.Println("argValues: ", argValues)
 					previousEnvironment := CrearEntorno(l)
 					defer EliminarEntorno(l, previousEnvironment)
 					parametros := function.Parametros
@@ -112,19 +154,59 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 							if param.Externo == paramName {
 								//validar si es una variable, vector o matriz
 								if param.Tipo == "vector" {
-									fmt.Println("entro a vector para la funcion XDDDDD")
-									valores := paramValue.([]interface{})
+									valores := paramValue.(ParametroCall).Valor.([]interface{})
 									tipo := determineType(valores[0])
 									l.agregarVector(param.Interno, tipo, valores)
 								} else {
-									fmt.Println("entro a variable para la funcion XDDDDD")
-									l.agregarVariable(param.Interno, determineType(paramValue), false, paramValue)
+									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor)
 								}
 							}
 						}
 					}
-					fmt.Println("entorno actual", l.currentEnvironment.variables)
-					return l.Visit(function.Sentencias)
+					instrucciones := l.Visit(function.Sentencias)
+					//actualizar variables inout en los entornos anteriores
+					for _, param := range parametros {
+						if param.Inout {
+							fmt.Println("es inout", param)
+							nombreBuscar := param.Externo
+							//buscar en argvalues
+							for paramName, paramValue := range argValues {
+								if paramName == nombreBuscar {
+									nombreVariable := paramValue.(ParametroCall).NameVar
+									//buscar variable y asignar valor de param
+									currentEnv := l.currentEnvironment
+									for currentEnv != nil {
+										if param.Tipo == "vector" {
+											fmt.Println("valores: ", l.currentEnvironment.Vectores[param.Interno].Valores)
+											if _, ok := currentEnv.Vectores[nombreVariable]; ok {
+												nuevoVector := Vector{
+													Id:      nombreVariable,
+													Tipo:    determineType(l.currentEnvironment.Vectores[param.Interno].Valores[0]),
+													Valores: l.currentEnvironment.Vectores[param.Interno].Valores,
+												}
+												currentEnv.Vectores[nombreVariable] = nuevoVector
+												break
+											}
+										} else {
+											if _, ok := currentEnv.variables[nombreVariable]; ok {
+
+												nuevaVariable := Variable{
+													Name:      nombreVariable,
+													Type:      param.Tipo,
+													Constante: false,
+													Value:     l.currentEnvironment.variables[param.Interno].Value,
+												}
+												currentEnv.variables[nombreVariable] = nuevaVariable
+												break
+											}
+										}
+										currentEnv = currentEnv.parent
+									}
+								}
+							}
+						}
+					}
+					return instrucciones
 				} else {
 					fmt.Println("dentro de funcion normal sin parametros")
 					previousEnvironment := CrearEntorno(l)
@@ -149,13 +231,24 @@ func (l *Visitor) VisitParametros(ctx *parser.ParametrosContext) interface{} {
 		interno := paramList[i+1].GetText()
 		tipo := l.Visit(ctx.Tipo(i / 2)).(string)
 
-
-		param := ParametroDef{
-			Externo: externo,
-			Interno: interno,
-			Tipo:    tipo,
+		if ctx.INOUT(i/2) != nil {
+			param := ParametroDef{
+				Externo: externo,
+				Interno: interno,
+				Inout:   true,
+				Tipo:    tipo,
+			}
+			params = append(params, param)
+		} else {
+			param := ParametroDef{
+				Externo: externo,
+				Interno: interno,
+				Inout:   false,
+				Tipo:    tipo,
+			}
+			params = append(params, param)
 		}
-		params = append(params, param)
+		fmt.Println(params)
 	}
 	return params
 }
@@ -164,9 +257,14 @@ func (l *Visitor) VisitParametroscall(ctx *parser.ParametroscallContext) interfa
 	argValues := map[string]interface{}{}
 
 	for i := 0; i < len(ctx.AllID()); i++ {
-		interno := ctx.ID(i).GetText()
-		argValue := l.Visit(ctx.Expr(i))
-		argValues[interno] = argValue
+		externo := ctx.ID(i).GetText()
+
+		interno := ParametroCall{
+			NameVar: ctx.Expr(i).GetText(),
+			Valor:   l.Visit(ctx.Expr(i)),
+		}
+
+		argValues[externo] = interno
 	}
 	return argValues
 }

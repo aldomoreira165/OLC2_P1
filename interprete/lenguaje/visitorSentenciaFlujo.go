@@ -139,9 +139,8 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 				Constante: true,
 				Value:  i,
 			}
-			l.currentEnvironment.variables[varName] = variable
-
 			previousEnvironment := CrearEntorno(l)
+			l.currentEnvironment.variables[varName] = variable
 			defer EliminarEntorno(l, previousEnvironment)
 			resultado := l.Visit(ctx.Block())
 			out += resultado.(string)

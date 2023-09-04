@@ -178,11 +178,11 @@ accfuncstm
     ;
 
 parametros
-    : ID ID DOSPUNTOS tipo (COMA ID ID DOSPUNTOS tipo)*
+    : ID ID DOSPUNTOS INOUT? tipo (COMA ID ID DOSPUNTOS INOUT? tipo)*
     ;
 
 parametroscall
-    : ID DOSPUNTOS expr (COMA ID DOSPUNTOS expr)*
+    : ID DOSPUNTOS AMPERSON? expr (COMA ID DOSPUNTOS AMPERSON? expr)*
     ;
 
 //=============================
@@ -272,7 +272,8 @@ tipo
     | BOOL                                      
     | CHARACTER                                 
     | PSTRING
-    | tipo_vector                                  
+    | tipo_vector  
+    | tipo_matriz                                
     ;
 
 tipo_vector
@@ -281,4 +282,12 @@ tipo_vector
     | CORCHIZQ BOOL CORCHDER                                      
     | CORCHIZQ CHARACTER CORCHDER                                 
     | CORCHIZQ PSTRING CORCHDER                                  
+    ;
+
+tipo_matriz
+    : CORCHIZQ CORCHIZQ INT CORCHDER CORCHDER                                      
+    | CORCHIZQ CORCHIZQ FLOAT CORCHDER CORCHDER                                     
+    | CORCHIZQ CORCHIZQ BOOL CORCHDER CORCHDER                                      
+    | CORCHIZQ CORCHIZQ CHARACTER CORCHDER CORCHDER                                 
+    | CORCHIZQ CORCHIZQ PSTRING CORCHDER CORCHDER                                  
     ;

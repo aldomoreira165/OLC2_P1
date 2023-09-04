@@ -33,7 +33,9 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 			return leftValue.(string) + rightValue.(string)
 		} else if leftType == "String" && rightType == "character" || rightType == "character" && leftType == "String" {
 			return leftValue.(string) + rightValue.(string)
-		} 
+		} else if leftType == "character" && rightType == "character" || rightType == "character" && leftType == "character" {
+			return leftValue.(string) + rightValue.(string)
+		}
 	case "-":
 		if leftType == "int" && rightType == "int" || rightType == "int" && leftType == "int" {
 			return leftValue.(int64) - rightValue.(int64)
