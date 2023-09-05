@@ -99,7 +99,7 @@ while a < 5 {
         print("b")
         break
     }
-    print("El valor de a es: " + String(a))
+    print("El valor de a es:", a)
 }
 
 print("Se debió imprimir")
@@ -109,7 +109,7 @@ print("=======================================================================")
 print("==================================FOR===================================")
 print("=======================================================================")
 for i in 0...9 {
-    var output : String = "  "
+    var output = "  "
     for _ in 0...(10 - i) {
         output = output + " "
     }

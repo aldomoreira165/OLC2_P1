@@ -50,17 +50,8 @@ func (l *Visitor) VisitAtributoStruct(ctx *parser.AtributoStructContext) interfa
 
 func (l *Visitor) VisitStructExpr(ctx *parser.StructExprContext) interface{} {
 	structName := ctx.ID(0).GetText()
-	attri := l.Visit(ctx.Valor_struct_expr()).([]Dupla)
-
-	structInstance := StructInstance{
-		StructName: structName,
-		Attributes: make(map[string]interface{}),
-	}
-
-	for _, attr := range attri {
-		structInstance.Attributes[attr.AttributeName] = attr.AttributeValue
-	}
-
+	structInstance := l.Visit(ctx.Valor_struct_expr()).(StructInstance)
+	structInstance.StructName = structName
 	l.currentEnvironment.Instancias[structName] = structInstance
 	return nil
 }
@@ -99,7 +90,17 @@ func (l *Visitor) VisitValorStructExpr(ctx *parser.ValorStructExprContext) inter
 			}
 		}
 
-		return attributes
+		//retornando data con los atributos
+		dataInstance := StructInstance{
+			StructName: "",
+			Attributes: make(map[string]interface{}),
+		}
+
+		for _, attr := range attributes {
+			dataInstance.Attributes[attr.AttributeName] = attr.AttributeValue
+		}
+
+		return dataInstance
 	} else {
 		return fmt.Sprintf("Error: el struct %s no está definido", structName)
 	}
@@ -125,22 +126,31 @@ func (l *Visitor) VisitDuplastruct(ctx *parser.DuplastructContext) interface{} {
 }
 
 func (l *Visitor) VisitAccesoStruct(ctx *parser.AccesoStructContext) interface{} {
-	//structName := ctx.ID(0).GetText()
-	atributteNames := []string{}
+	structID := ctx.ID(0).GetText()
+	attributeNames := ctx.AllID()[1:]
 
-	for _, id := range ctx.AllID()[1:] {
-		atributteNames = append(atributteNames, id.GetText())
-	}
+	// Verificar si el struct existe en el entorno actual
+	if structInstance, ok := l.currentEnvironment.Instancias[structID]; ok {
+		var currentValue interface{} = structInstance
 
-	/*if structInstance, ok := l.currentEnvironment.Instancias[structName]; ok {
-		//atributos := structInstance.Attributes
-		//recorrer atributteNames para ver los id ingresados e ir avanzando en la estructura hasta llegar al atributo final
-		for _, attrName := range atributteNames {
-			
+		for _, attributeNameCtx := range attributeNames {
+			attributeName := attributeNameCtx.GetText()
+
+			// Verificar si el valor actual es una instancia de un struct
+			if currentStructInstance, ok := currentValue.(StructInstance); ok {
+				// Verificar si el struct tiene el atributo
+				if attributeValue, ok := currentStructInstance.Attributes[attributeName]; ok {
+					currentValue = attributeValue
+				} else {
+					return fmt.Sprintf("Error: el atributo %s no existe en el struct %s", attributeName, currentStructInstance.StructName)
+				}
+			} else {
+				return fmt.Sprintf("Error: el valor %v no es una instancia de un struct", currentValue)
+			}
 		}
-	}*/
 
-	return true
-
+		return currentValue
+	} else {
+		return fmt.Sprintf("Error: la instancia del struct con id %s no existe", structID)
+	}
 }
-
