@@ -43,6 +43,10 @@ func (v *BaseSwiftGrammarVisitor) VisitAccesoStruct(ctx *AccesoStructContext) in
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitAsignStruct(ctx *AsignStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }

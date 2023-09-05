@@ -34,6 +34,9 @@ type SwiftGrammarListener interface {
 	// EnterAccesoStruct is called when entering the AccesoStruct production.
 	EnterAccesoStruct(c *AccesoStructContext)
 
+	// EnterAsignStruct is called when entering the AsignStruct production.
+	EnterAsignStruct(c *AsignStructContext)
+
 	// EnterDeclvectorstmt is called when entering the declvectorstmt production.
 	EnterDeclvectorstmt(c *DeclvectorstmtContext)
 
@@ -273,6 +276,9 @@ type SwiftGrammarListener interface {
 
 	// ExitAccesoStruct is called when exiting the AccesoStruct production.
 	ExitAccesoStruct(c *AccesoStructContext)
+
+	// ExitAsignStruct is called when exiting the AsignStruct production.
+	ExitAsignStruct(c *AsignStructContext)
 
 	// ExitDeclvectorstmt is called when exiting the declvectorstmt production.
 	ExitDeclvectorstmt(c *DeclvectorstmtContext)

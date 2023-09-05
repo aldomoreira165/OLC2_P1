@@ -154,3 +154,39 @@ func (l *Visitor) VisitAccesoStruct(ctx *parser.AccesoStructContext) interface{}
 		return fmt.Sprintf("Error: la instancia del struct con id %s no existe", structID)
 	}
 }
+
+/*asignstructstmt
+: ID (PUNTO ID)+ IG expr #AsignStruct
+;*/
+
+func (l *Visitor) VisitAsignStruct(ctx *parser.AsignStructContext) interface{} {
+	structID := ctx.ID(0).GetText()
+	attributeNames := ctx.AllID()[1:]
+	valor := l.Visit(ctx.Expr())
+
+	// Verificar si el struct existe en el entorno actual
+	if structInstance, ok := l.currentEnvironment.Instancias[structID]; ok {
+		var currentValue interface{} = structInstance
+
+		for _, attributeNameCtx := range attributeNames {
+			attributeName := attributeNameCtx.GetText()
+
+			// Verificar si el valor actual es una instancia de un struct
+			if currentStructInstance, ok := currentValue.(StructInstance); ok {
+				// Verificar si el struct tiene el atributo
+				if _, ok := currentStructInstance.Attributes[attributeName]; ok {
+					//actualizar el valor del atributo
+					currentStructInstance.Attributes[attributeName] = valor
+				} else {
+					return fmt.Sprintf("Error: el atributo %s no existe en el struct %s", attributeName, currentStructInstance.StructName)
+				}
+			} else {
+				return fmt.Sprintf("Error: el valor %v no es una instancia de un struct", currentValue)
+			}
+		}
+
+		return currentValue
+	} else {
+		return fmt.Sprintf("Error: la instancia del struct con id %s no existe", structID)
+	}
+}

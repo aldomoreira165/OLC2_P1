@@ -31,6 +31,7 @@ stmt: printstmt
     | declmatrizstmt
     | asignmatrizstmt
     | defstructstmt
+    | asignstructstmt
     | struct_expr
     ;
 
@@ -57,6 +58,10 @@ l_dupla
 
 accesostructstmt
     : ID (PUNTO ID)+ #AccesoStruct
+    ;
+
+asignstructstmt
+    : ID (PUNTO ID)+ IG expr #AsignStruct
     ;
 
 //vectores

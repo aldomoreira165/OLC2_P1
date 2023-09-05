@@ -74,6 +74,12 @@ func (s *BaseSwiftGrammarListener) EnterAccesoStruct(ctx *AccesoStructContext) {
 // ExitAccesoStruct is called when production AccesoStruct is exited.
 func (s *BaseSwiftGrammarListener) ExitAccesoStruct(ctx *AccesoStructContext) {}
 
+// EnterAsignStruct is called when production AsignStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterAsignStruct(ctx *AsignStructContext) {}
+
+// ExitAsignStruct is called when production AsignStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitAsignStruct(ctx *AsignStructContext) {}
+
 // EnterDeclvectorstmt is called when production declvectorstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterDeclvectorstmt(ctx *DeclvectorstmtContext) {}
 

@@ -34,6 +34,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#AccesoStruct.
 	VisitAccesoStruct(ctx *AccesoStructContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#AsignStruct.
+	VisitAsignStruct(ctx *AsignStructContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#declvectorstmt.
 	VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{}
 

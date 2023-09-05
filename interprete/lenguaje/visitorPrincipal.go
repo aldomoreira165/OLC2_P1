@@ -126,6 +126,9 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Defstructstmt() != nil {
 		return l.Visit(ctx.Defstructstmt())
 	}
+	if ctx.Asignstructstmt() != nil {
+		return l.Visit(ctx.Asignstructstmt())
+	}
 	if ctx.Struct_expr() != nil {
 		return l.Visit(ctx.Struct_expr())
 	}
