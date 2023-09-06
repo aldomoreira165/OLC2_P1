@@ -1,74 +1,26 @@
 package main
 
 import (
+	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"interprete/Parser"
 	"interprete/lenguaje"
+	"interprete/reportes"
+	"io/ioutil"
 	"net/http"
 
 	"github.com/antlr4-go/antlr/v4"
 )
 
-var nodeCount int
+type Respuesta struct {
+	Salida string   `json:"salida"`
+	Imagen string `json:"imagen"`
+}
 
 type CodigoEnviado struct {
 	Contenido string `json:"contenido"`
 }
-
-/*func generarCST(code string) (string, error) {
-	// Genera el CST aquí utilizando ANTLR4
-	input := antlr.NewInputStream(code)
-	lexer := parser.NewSwiftLexer(input)
-	tokens := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
-	p := parser.NewSwiftGrammarParser(tokens)
-	p.BuildParseTrees = true
-	tree := p.S()
-
-	// Generar el código DOT del CST
-	dot := generateDOT(tree)
-
-	return dot, nil
-}
-
-func generateDOT(tree antlr.Tree) string {
-	var dotBuilder strings.Builder
-	dotBuilder.WriteString("digraph CST {\n")
-	visitDOT(tree, &dotBuilder)
-	dotBuilder.WriteString("}\n")
-	return dotBuilder.String()
-}
-
-func visitDOT(tree antlr.Tree, dotBuilder *strings.Builder) {
-	if tree == nil {
-		return
-	}
-
-	// Obtener el texto del nodo
-	nodeText := tree.GetText()
-
-	// Escapar comillas dobles en el texto del nodo
-	nodeText = strings.ReplaceAll(nodeText, "\"", "\\\"")
-
-	// Agregar el nodo al código DOT
-	dotBuilder.WriteString("\"")
-	dotBuilder.WriteString(nodeText)
-	dotBuilder.WriteString("\";\n")
-
-	// Conectar el nodo con su padre si lo tiene
-	if parent := tree.GetParent(); parent != nil {
-		parentText := parent
-		dotBuilder.WriteString("\"")
-		dotBuilder.WriteString(parentText)
-		dotBuilder.WriteString("\" -> \"")
-		dotBuilder.WriteString(nodeText)
-		dotBuilder.WriteString("\";\n")
-	}
-
-	// Recorrer los hijos
-	for i := 0; i < tree.GetChildCount(); i++ {
-		visitDOT(tree.GetChild(i), dotBuilder)
-	}
-}*/
 
 func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	// Decodificar el cuerpo JSON en una estructura CodigoEnviado
@@ -78,7 +30,6 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error al leer el contenido JSON", http.StatusBadRequest)
 		return
 	}
-
 	code := codigo.Contenido
 	input := antlr.NewInputStream(code)
 	lexer := parser.NewSwiftLexer(input)
@@ -88,18 +39,27 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	visitor := lenguaje.NewVisitor()
 	tree := p.S()
 	out := visitor.Visit(tree)
-	
-	// Generar el código DOT del CST
-	/*cst, err := generarCST(code)
+
+	//generando tabla de simbolos
+	tablaResult := visitor.(*lenguaje.Visitor).GetSymbolTable()
+	reportes.GenerarTabla(tablaResult)
+
+	pngData, err := ioutil.ReadFile("./reportesPNG/tabla.png")
 	if err != nil {
-		http.Error(w, "Error al generar el CST", http.StatusInternalServerError)
+		fmt.Println("Error al leer el archivo PNG:", err)
+		http.Error(w, "Error interno del servidor", http.StatusInternalServerError)
 		return
 	}
-	fmt.Println(cst) // Imprimir el código DOT en la consola*/
+
+	//preparando respuesta
+	respuesta := Respuesta{
+		Salida: out.(string),
+		Imagen: base64.StdEncoding.EncodeToString(pngData),
+	}
 
 	// enviando respuesta al cliente
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(out)
+	json.NewEncoder(w).Encode(respuesta)
 }
 
 func main() {

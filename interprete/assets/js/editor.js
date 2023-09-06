@@ -2,7 +2,7 @@ const botonAbrirArchivo = document.getElementById("btn-abrir-archivo");
 const botonCrearArchivo = document.getElementById("btn-crear-archivo");
 const botonGuardarArchivo = document.getElementById("btn-guardar-archivo");
 const btnEjecutar = document.getElementById("btn-ejecutar");
-const btnReportes = document.getElementById("btn-reportes");
+const btnTablaSimbolos = document.getElementById("btn-simbolos");
 
 /*funcionalidad de editor de codigo*/
 
@@ -91,14 +91,21 @@ btnEjecutar.addEventListener("click", function () {
       Salida.setValue(data.error);
     } else {
       // Mostrar resultado en la interfaz
-      Salida.setValue(data);
+      Salida.setValue(data.salida);
+
+      // Agregar un enlace para descargar la imagen
+      const link = document.createElement("a");
+      link.href = "data:image/png;base64," + data.imagen;
+      link.download = "tabla.png";
+      link.innerHTML = "Descargar imagen";
+      document.body.appendChild(link);
+
+      btnTablaSimbolos.addEventListener("click", function(){
+        link.click()
+      });
     }
   })
   .catch((error) => {
     console.error("Error:", error);
   });
-});
-
-btnReportes.addEventListener("click", function(){
-  alert("hello")
 });

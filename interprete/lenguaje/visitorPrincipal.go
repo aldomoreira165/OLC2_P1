@@ -13,15 +13,22 @@ type Visitor struct {
 	currentEnvironment *Environment
 	shouldBreak        bool
 	shouldContinue	 	bool
+	simbolos *TablaSimbolos
 }
 
 func NewVisitor() parser.SwiftGrammarVisitor {
 	globalEnvironment := NewEnvironment(nil)
+	simbolosTabla := NewTablaSimbolos()
 	return &Visitor{
 		currentEnvironment: globalEnvironment,
 		shouldBreak:        false,
 		shouldContinue:		false,
+		simbolos: simbolosTabla,
 	}
+}
+
+func (l *Visitor) GetSymbolTable() *TablaSimbolos {
+	return l.simbolos
 }
 
 func (l *Visitor) VisitS(ctx *parser.SContext) interface{} {

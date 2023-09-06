@@ -25,9 +25,11 @@ func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface
 
 	if ctx.LET() != nil {
 		variable := l.agregarVariable(varName, declType, true, value)
+		l.simbolos.InsertarSimbolo(varName, "Variable",declType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	} else {
 		variable := l.agregarVariable(varName, declType, false, value)
+		l.simbolos.InsertarSimbolo(varName, "Variable",declType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	}
 }
@@ -51,6 +53,7 @@ func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtCo
 
 	// Almacenar la información de la declaración en el entorno
 	l.currentEnvironment.variables[varName] = nuevaVariable
+	l.simbolos.InsertarSimbolo(varName, "Variable",declType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return true
 
 }
@@ -62,9 +65,11 @@ func (l *Visitor) VisitUntypedDeclstmt(ctx *parser.UntypedDeclstmtContext) inter
 	
 	if ctx.LET() != nil {
 		variable := l.agregarVariable(varName, valueType, true, value)
+		l.simbolos.InsertarSimbolo(varName, "Variable",valueType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	} else {
 		variable := l.agregarVariable(varName, valueType, false, value)
+		l.simbolos.InsertarSimbolo(varName, "Variable",valueType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	}
 }
@@ -82,6 +87,7 @@ func (l *Visitor) VisitDeclvectorstmt(ctx *parser.DeclvectorstmtContext) interfa
 		}
 	}
 	l.agregarVector(varName, tipo, valores)
+	l.simbolos.InsertarSimbolo(varName, "Vector",tipo, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return true
 }
 
@@ -158,6 +164,7 @@ func (l *Visitor) VisitDeclmatrizstmt2(ctx *parser.Declmatrizstmt2Context) inter
 		Valores: valores,
 	}
 	l.currentEnvironment.Matrices[matrizId] = matrizNueva
+	l.simbolos.InsertarSimbolo(matrizId, "Matriz",tipo, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return true
 }
 
@@ -255,6 +262,7 @@ func (l *Visitor) VisitDeclmatrizstmt3(ctx *parser.Declmatrizstmt3Context) inter
 		Valores: valores,
 	}
 	l.currentEnvironment.Matrices3D[matrizId] = matrizNueva
+	l.simbolos.InsertarSimbolo(matrizId, "Matriz",tipo, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return true
 }
 

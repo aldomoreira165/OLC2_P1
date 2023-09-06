@@ -21,6 +21,7 @@ func (l *Visitor) VisitFuncionNormal(ctx *parser.FuncionNormalContext) interface
 			Sentencias: funcBlock,
 			Parametros: params,
 		}
+		l.simbolos.InsertarSimbolo(funcId, "Funcion", "nil", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	} else {
 		l.currentEnvironment.funciones[funcId] = Funcion{
 			Id:         funcId,
@@ -28,6 +29,7 @@ func (l *Visitor) VisitFuncionNormal(ctx *parser.FuncionNormalContext) interface
 			Sentencias: funcBlock,
 			Parametros: nil,
 		}
+		l.simbolos.InsertarSimbolo(funcId, "Funcion", "nil", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	}
 	return nil
 }
@@ -48,6 +50,7 @@ func (l *Visitor) VisitFuncionRetorno(ctx *parser.FuncionRetornoContext) interfa
 			Sentencias: funcBlock,
 			Parametros: params,
 		}
+		l.simbolos.InsertarSimbolo(funcId, "Funcion", tipo, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	} else {
 		l.currentEnvironment.funciones[funcId] = Funcion{
 			Id:         funcId,
@@ -55,6 +58,7 @@ func (l *Visitor) VisitFuncionRetorno(ctx *parser.FuncionRetornoContext) interfa
 			Sentencias: funcBlock,
 			Parametros: nil,
 		}
+		l.simbolos.InsertarSimbolo(funcId, "Funcion", tipo, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	}
 	return nil
 }
