@@ -1,6 +1,7 @@
 package lenguaje
 
 import (
+	"fmt"
 	"interprete/Parser"
 	"log"
 	"strconv"
@@ -14,21 +15,28 @@ type Visitor struct {
 	shouldBreak        bool
 	shouldContinue	 	bool
 	simbolos *TablaSimbolos
+	errores *TablaErrores
 }
 
 func NewVisitor() parser.SwiftGrammarVisitor {
 	globalEnvironment := NewEnvironment(nil)
 	simbolosTabla := NewTablaSimbolos()
+	errorTabla := NewTablaErrores()
 	return &Visitor{
 		currentEnvironment: globalEnvironment,
 		shouldBreak:        false,
 		shouldContinue:		false,
 		simbolos: simbolosTabla,
+		errores: errorTabla,
 	}
 }
 
 func (l *Visitor) GetSymbolTable() *TablaSimbolos {
 	return l.simbolos
+}
+
+func (l *Visitor) GetErrorTable() *TablaErrores {
+	return l.errores
 }
 
 func (l *Visitor) VisitS(ctx *parser.SContext) interface{} {
@@ -152,4 +160,9 @@ func (l *Visitor) Visit(tree antlr.ParseTree) interface{} {
 		nodo := tree.Accept(l)
 		return nodo
 	}
+}
+
+func (l *Visitor) VisitError(node antlr.ErrorNode) interface{} {
+    l.errores.InsertarError(fmt.Sprintf("Error en la linea %d, columna %d: %s", node.GetSymbol().GetLine(), node.GetSymbol().GetColumn(), node.GetText()), node.GetSymbol().GetLine(), node.GetSymbol().GetColumn())
+	return nil
 }

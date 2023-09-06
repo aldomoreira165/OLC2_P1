@@ -20,15 +20,16 @@ func (l *Visitor) VisitTypedDeclstmt(ctx *parser.TypedDeclstmtContext) interface
 			Value: nil,
 		}
 		l.currentEnvironment.variables[varName] = nuevaVariable
+		l.errores.InsertarError("Error de tipo en la declaración: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error de tipo en la declaración: %s", varName)
 	}
 
 	if ctx.LET() != nil {
-		variable := l.agregarVariable(varName, declType, true, value)
+		variable := l.agregarVariable(varName, declType, true, value, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		l.simbolos.InsertarSimbolo(varName, "Variable",declType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	} else {
-		variable := l.agregarVariable(varName, declType, false, value)
+		variable := l.agregarVariable(varName, declType, false, value, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		l.simbolos.InsertarSimbolo(varName, "Variable",declType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	}
@@ -40,6 +41,7 @@ func (l *Visitor) VisitOptionalTypedDeclstmt(ctx *parser.OptionalTypedDeclstmtCo
 
 	// Verificar si la variable ya existe en el entorno
 	if _, ok := l.currentEnvironment.variables[varName]; ok {
+		l.errores.InsertarError("Error variable ya existente en el entorno actual: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", varName)
 	}
 
@@ -64,11 +66,11 @@ func (l *Visitor) VisitUntypedDeclstmt(ctx *parser.UntypedDeclstmtContext) inter
 	valueType := determineType(value)
 	
 	if ctx.LET() != nil {
-		variable := l.agregarVariable(varName, valueType, true, value)
+		variable := l.agregarVariable(varName, valueType, true, value, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		l.simbolos.InsertarSimbolo(varName, "Variable",valueType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	} else {
-		variable := l.agregarVariable(varName, valueType, false, value)
+		variable := l.agregarVariable(varName, valueType, false, value, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		l.simbolos.InsertarSimbolo(varName, "Variable",valueType, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return variable
 	}
@@ -83,10 +85,11 @@ func (l *Visitor) VisitDeclvectorstmt(ctx *parser.DeclvectorstmtContext) interfa
 	//verificar tipo de cada uno de los valores
 	for _, valor := range valores {
 		if !validateType(valor, tipo) {
+			l.errores.InsertarError("Error de tipo en la declaración: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 			return fmt.Sprintf("Error de tipo en la declaración: %s", varName)
 		}
 	}
-	l.agregarVector(varName, tipo, valores)
+	l.agregarVector(varName, tipo, valores, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	l.simbolos.InsertarSimbolo(varName, "Vector",tipo, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return true
 }
@@ -108,6 +111,7 @@ func (l *Visitor) VisitDefVectorID(ctx *parser.DefVectorIDContext) interface{} {
 	if vector, ok := l.currentEnvironment.Vectores[id]; ok {
 		return vector.Valores
 	}
+	l.errores.InsertarError("Error vector no existente en el entorno actual: " + id, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error vector no existente en el entorno actual: %s", id)
 }
 
@@ -133,10 +137,12 @@ func (l *Visitor) VisitAccesovectorstmt(ctx *parser.AccesovectorstmtContext) int
 			if index >= 0 && index < int64(len(vector.Valores)) {
 				return vector.Valores[index]
 			}
+			l.errores.InsertarError("Error: Índice fuera de rango: " + vectorId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 			return fmt.Sprintf("Error: Índice fuera de rango: %d", index)
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error: Vector no encontrado: " + vectorId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error: Vector no encontrado: %s", vectorId)
 }
 
@@ -152,6 +158,7 @@ func (l *Visitor) VisitDeclmatrizstmt2(ctx *parser.Declmatrizstmt2Context) inter
 	for _, fila := range valores {
 		for _, valor := range fila {
 			if !validateType(valor, tipo) {
+				l.errores.InsertarError("Error de tipo en la declaración: " + matrizId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return fmt.Sprintf("Error de tipo en la declaración: %s", matrizId)
 			}
 		}
@@ -198,6 +205,7 @@ func (l *Visitor) VisitAccesomatriz2(ctx *parser.Accesomatriz2Context) interface
 				valor := matriz.Valores[filaIdx][columnaIdx]
 				return valor
 			} else {
+				l.errores.InsertarError("Error: Índices fuera de rango", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return "Error: Índices fuera de rango"
 			}
 		} else if matriz3D, ok := currentEnv.Matrices3D[matrizId]; ok {
@@ -205,11 +213,13 @@ func (l *Visitor) VisitAccesomatriz2(ctx *parser.Accesomatriz2Context) interface
 				valor := matriz3D.Valores[filaIdx][columnaIdx]
 				return valor
 			} else {
+				l.errores.InsertarError("Error: Índices fuera de rango", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return "Error: Índices fuera de rango"
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error: Matriz no encontrada: " + matrizId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error: Matriz no encontrada: %s", matrizId)
 }
 
@@ -223,6 +233,7 @@ func (l *Visitor) VisitAsignmatrizstmt2(ctx *parser.Asignmatrizstmt2Context) int
 	tipo := matriz.Tipo
 
 	if !validateType(valor, tipo) {
+		l.errores.InsertarError("Error de tipo en la asignacion: " + matrizId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error de tipo en la asignacion: %s", matrizId)
 	}
 
@@ -230,6 +241,7 @@ func (l *Visitor) VisitAsignmatrizstmt2(ctx *parser.Asignmatrizstmt2Context) int
 		matriz.Valores[filaIdx][columnaIdx] = valor
 		l.currentEnvironment.Matrices[matrizId] = matriz
 	} else {
+		l.errores.InsertarError("Error: Índices fuera de rango", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return "Error: Índices fuera de rango"
 	}
 	return true
@@ -249,6 +261,7 @@ func (l *Visitor) VisitDeclmatrizstmt3(ctx *parser.Declmatrizstmt3Context) inter
 		for _, fila := range nivelMatriz {
 			for _, valor := range fila {
 				if !validateType(valor, tipo) {
+					l.errores.InsertarError("Error de tipo en la declaración: " + matrizId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 					return fmt.Sprintf("Error de tipo en la declaración: %s", matrizId)
 				}
 			}
@@ -294,11 +307,13 @@ func (l *Visitor) VisitAccesomatriz3(ctx *parser.Accesomatriz3Context) interface
 				valor := matriz3D.Valores[nivelIdx][filaIdx][columnaIdx]
 				return valor
 			} else {
+				l.errores.InsertarError("Error: Índices fuera de rango", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return "Error: Índices fuera de rango"
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error: Matriz no encontrada: " + matrizId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error: Matriz no encontrada: %s", matrizId)
 }
 
@@ -313,6 +328,7 @@ func (l *Visitor) VisitAsignmatrizstmt3(ctx *parser.Asignmatrizstmt3Context) int
 	tipo := matriz.Tipo
 
 	if !validateType(valor, tipo) {
+		l.errores.InsertarError("Error de tipo en la asignacion: " + matrizId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error de tipo en la asignacion: %s", matrizId)
 	}
 
@@ -320,6 +336,7 @@ func (l *Visitor) VisitAsignmatrizstmt3(ctx *parser.Asignmatrizstmt3Context) int
 		matriz.Valores[nivelIdx][filaIdx][columnaIdx] = valor
 		l.currentEnvironment.Matrices3D[matrizId] = matriz
 	} else {
+		l.errores.InsertarError("Error: Índices fuera de rango", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return "Error: Índices fuera de rango"
 	}
 	return true

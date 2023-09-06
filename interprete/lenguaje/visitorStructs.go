@@ -58,6 +58,7 @@ func (l *Visitor) VisitStructExpr(ctx *parser.StructExprContext) interface{} {
 	//verificar que no hayan atributos nil
 	for key, value := range structInstance.Attributes {
 		if value.Data == nil {
+			l.errores.InsertarError("Error: el atributo " + key + " no puede ser nil", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 			return fmt.Sprintf("Error: el atributo %s no puede ser nil", key)
 		}
 	}
@@ -70,6 +71,7 @@ func (l *Visitor) VisitStructExpr(ctx *parser.StructExprContext) interface{} {
 					fmt.Println("exp", attr.Expression)
 					if instance, ok := structInstance.Attributes[attr.Name]; ok {
 						if instance.Asignado {
+							l.errores.InsertarError("Error: el atributo " + attr.Name + " del struct " + structInstance.StructName + " es inmutable y ya tiene un valor definido", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 							return fmt.Sprintf("Error: el atributo %s del struct %s es inmutable y ya tiene un valor definido", attr.Name, structInstance.StructName)
 						}
 					}
@@ -129,6 +131,7 @@ func (l *Visitor) VisitValorStructExpr(ctx *parser.ValorStructExprContext) inter
 
 		return dataInstance
 	} else {
+		l.errores.InsertarError("Error: el struct " + structName + " no está definido", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error: el struct %s no está definido", structName)
 	}
 }
@@ -153,6 +156,7 @@ func (l *Visitor) VisitStructExprID(ctx *parser.StructExprIDContext) interface{}
 
 		l.currentEnvironment.Instancias[structName] = newStructInstance
 	} else {
+		l.errores.InsertarError("Error: el struct " + structName + " no está definido", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error: el struct %s no está definido", structName)
 	}
 	return nil
@@ -195,15 +199,18 @@ func (l *Visitor) VisitAccesoStruct(ctx *parser.AccesoStructContext) interface{}
 				if attributeValue, ok := currentStructInstance.Attributes[attributeName]; ok {
 					currentValue = attributeValue.Data
 				} else {
+					l.errores.InsertarError("Error: el atributo " + attributeName + " no existe en el struct " + currentStructInstance.StructName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 					return fmt.Sprintf("Error: el atributo %s no existe en el struct %s", attributeName, currentStructInstance.StructName)
 				}
 			} else {
+				l.errores.InsertarError("Error: el valor " + fmt.Sprintf("%v", currentValue) + " no es una instancia de un struct", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return fmt.Sprintf("Error: el valor %v no es una instancia de un struct", currentValue)
 			}
 		}
 
 		return currentValue
 	} else {
+		l.errores.InsertarError("Error: la instancia del struct con id " + structID + " no existe", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error: la instancia del struct con id %s no existe", structID)
 	}
 }
@@ -235,13 +242,16 @@ func (l *Visitor) VisitAsignStruct(ctx *parser.AsignStructContext) interface{} {
 					}
 					currentStructInstance.Attributes[attributeName] = data
 				} else {
+					l.errores.InsertarError("Error: el atributo " + attributeName + " no existe en el struct " + currentStructInstance.StructName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 					return fmt.Sprintf("Error: el atributo %s no existe en el struct %s", attributeName, currentStructInstance.StructName)
 				}
 			} else {
+				l.errores.InsertarError("Error: el valor " + fmt.Sprintf("%v", currentValue) + " no es una instancia de un struct", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return fmt.Sprintf("Error: el valor %v no es una instancia de un struct", currentValue)
 			}
 		}
 	} else {
+		l.errores.InsertarError("Error: la instancia del struct con id " + structID + " no existe", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error: la instancia del struct con id %s no existe", structID)
 	}
 	return nil

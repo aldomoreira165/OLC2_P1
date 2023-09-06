@@ -261,6 +261,7 @@ func (l *Visitor) VisitOpExpr(ctx *parser.OpExprContext) interface{} {
 	}
 
 	//error, verificar como manejarlos
+	l.errores.InsertarError("Error: operacion no valida", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error: operacion no valida")
 }
 
@@ -335,6 +336,7 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 	}
 
 	// Devolver un mensaje de error en lugar de lanzar una excepción
+	l.errores.InsertarError("Error variable no encontrada: " + id, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error variable no encontrada: %s", id)
 }
 

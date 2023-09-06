@@ -125,12 +125,13 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 		fmt.Println(inicio, fin)
 
 		if inicio > fin {
+			l.errores.InsertarError("Error: el inicio del rango es mayor que el fin del rango", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 			return ("Error: el inicio del rango es mayor que el fin del rango \n")
 		}
 
 		//crear la variable a iterar en el entorno
 		varName := ctx.ID().GetText()
-		l.agregarVariable(varName, "nil", true,nil)
+		l.agregarVariable(varName, "nil", true,nil, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 
 		for i := inicio; i <= fin; i++ {
 			variable := Variable{
@@ -160,7 +161,7 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 		if determineType(expresion) == "String" {
 			//crear la variable a iterar en el entorno
 			varName := ctx.ID().GetText()
-			l.agregarVariable(varName, "nil", true,nil)
+			l.agregarVariable(varName, "nil", true,nil, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 
 			for _, char := range expresion.(string) {
 				variable := Variable{
@@ -188,7 +189,7 @@ func (l *Visitor) VisitForstmt(ctx *parser.ForstmtContext) interface{} {
 		if vector, ok := l.currentEnvironment.Vectores[ctx.Expr().GetText()]; ok {
 			//crear la variable a iterar en el entorno
 			varName := ctx.ID().GetText()
-			l.agregarVariable(varName, "nil", true,nil)
+			l.agregarVariable(varName, "nil", true,nil, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 
 			for _, valor := range vector.Valores {
 				variable := Variable{

@@ -11,6 +11,7 @@ func (l *Visitor) VisitFuncionNormal(ctx *parser.FuncionNormalContext) interface
 	funcBlock := ctx.Block()
 
 	if _, ok := l.currentEnvironment.funciones[funcId]; ok {
+		l.errores.InsertarError("Error funcion ya existente en el entorno actual: " + funcId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error funcion ya existente en el entorno actual: %s", funcId)
 	}
 	if ctx.Parametros() != nil {
@@ -40,6 +41,7 @@ func (l *Visitor) VisitFuncionRetorno(ctx *parser.FuncionRetornoContext) interfa
 	tipo := ctx.Tipo().GetText()
 
 	if _, ok := l.currentEnvironment.funciones[funcId]; ok {
+		l.errores.InsertarError("Error funcion ya existente en el entorno actual: " + funcId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 		return fmt.Sprintf("Error funcion ya existente en el entorno actual: %s", funcId)
 	}
 	if ctx.Parametros() != nil {
@@ -84,9 +86,9 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 								if param.Tipo == "vector" {
 									valores := paramValue.(ParametroCall).Valor.([]interface{})
 									tipo := determineType(valores[0])
-									l.agregarVector(param.Interno, tipo, valores)
+									l.agregarVector(param.Interno, tipo, valores, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 								} else {
-									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor)
+									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 								}
 							}
 						}
@@ -155,12 +157,11 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					for paramName, paramValue := range argValues {
 						for _, param := range parametros {
 							if param.Externo == paramName {
-								fmt.Println("TIPPPPPPPPPPPPPPOOOOOOOOO", param.Tipo)
 								//validar si es una variable, vector o matriz
 								if param.Tipo == "vector" {
 									valores := paramValue.(ParametroCall).Valor.([]interface{})
 									tipo := determineType(valores[0])
-									l.agregarVector(param.Interno, tipo, valores)
+									l.agregarVector(param.Interno, tipo, valores, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 								} else if param.Tipo == "matriz2" {
 									fmt.Println("es matriz2")
 									valores := paramValue.(ParametroCall).Valor.([][]interface{})
@@ -184,7 +185,7 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 									}
 									l.currentEnvironment.Matrices3D[param.Interno] = matrizNueva
 								} else {
-									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor)
+									l.agregarVariable(param.Interno, determineType(paramValue.(ParametroCall).Valor), false, paramValue.(ParametroCall).Valor, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 								}
 
 							}
@@ -194,7 +195,6 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					//actualizar variables inout en los entornos anteriores
 					for _, param := range parametros {
 						if param.Inout {
-							fmt.Println("es inout", param)
 							nombreBuscar := param.Externo
 							//buscar en argvalues
 							for paramName, paramValue := range argValues {
@@ -204,7 +204,6 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 									currentEnv := l.currentEnvironment
 									for currentEnv != nil {
 										if param.Tipo == "vector" {
-											fmt.Println("valores: ", l.currentEnvironment.Vectores[param.Interno].Valores)
 											if _, ok := currentEnv.Vectores[nombreVariable]; ok {
 												nuevoVector := Vector{
 													Id:      nombreVariable,
@@ -239,7 +238,6 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 					}
 					return instrucciones
 				} else {
-					fmt.Println("dentro de funcion normal sin parametros")
 					previousEnvironment := CrearEntorno(l)
 					defer EliminarEntorno(l, previousEnvironment)
 					return l.Visit(function.Sentencias)
@@ -248,6 +246,7 @@ func (l *Visitor) VisitAccfuncstm(ctx *parser.AccfuncstmContext) interface{} {
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error funcion no encontrada: " + funcId, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error funcion no encontrada: %s", funcId)
 }
 

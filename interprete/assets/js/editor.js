@@ -3,6 +3,7 @@ const botonCrearArchivo = document.getElementById("btn-crear-archivo");
 const botonGuardarArchivo = document.getElementById("btn-guardar-archivo");
 const btnEjecutar = document.getElementById("btn-ejecutar");
 const btnTablaSimbolos = document.getElementById("btn-simbolos");
+const btnTablaErrores = document.getElementById("btn-errores");
 
 /*funcionalidad de editor de codigo*/
 
@@ -100,8 +101,19 @@ btnEjecutar.addEventListener("click", function () {
       link.innerHTML = "Descargar imagen";
       document.body.appendChild(link);
 
+      //Agregar un enlace para descargar la imagen de errores
+      const link2 = document.createElement("a");
+      link2.href = "data:image/png;base64," + data.imagenE;
+      link2.download = "tablaErrores.png";
+      link2.innerHTML = "Descargar imagen";
+      document.body.appendChild(link2);
+
       btnTablaSimbolos.addEventListener("click", function(){
         link.click()
+      });
+
+      btnTablaErrores.addEventListener("click", function(){
+        link2.click()
       });
     }
   })

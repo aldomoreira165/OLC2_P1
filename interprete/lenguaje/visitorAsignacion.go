@@ -32,14 +32,17 @@ func (l *Visitor) VisitAsignstmt(ctx *parser.AsignstmtContext) interface{} {
 					currentEnv.variables[varName] = variableActualizada
 					return true // La asignación fue exitosa
 				} else {
+					l.errores.InsertarError("Error de tipo en la asignacion para la variable: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 					return fmt.Sprintf("Error de tipo en la asignacion para la variable: %s", varName)
 				}
 			} else {
+				l.errores.InsertarError("Error la variable: " + varName + " es una constante", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return fmt.Sprintf("Error la variable: %s es una constante", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error no existe la variable: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error no existe la variable: %s", varName)
 }
 
@@ -93,17 +96,21 @@ func (l *Visitor) VisitIncremento(ctx *parser.IncrementoContext) interface{} {
 							return true // La asignación fue exitosa
 						}
 					} else {
+						l.errores.InsertarError("Error: Operacion invalida", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 						return fmt.Sprintf("Error: Operacion invalida")
 					}
 				} else {
+					l.errores.InsertarError("Error de tipo en la asignacion para la variable: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 					return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
 				}
 			} else {
+				l.errores.InsertarError("Error la variable: " + varName + " es una constante", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return fmt.Sprintf("Error la variable: %s es una constante", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error variable no encontrada: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error Variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
 }
 
@@ -147,17 +154,21 @@ func (l *Visitor) VisitDecremento(ctx *parser.DecrementoContext) interface{} {
 							return true // La asignación fue exitosa
 						}
 					} else {
+						l.errores.InsertarError("Error: Operacion invalida", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 						return fmt.Sprintf("Error: Operacion invalida") // La asignación falló debido a un error de tipo
 					}
 
 				} else {
+					l.errores.InsertarError("Error de tipo en la asignacion para la variable: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 					return fmt.Sprintf("Error de tipo en la asignación para: %s", varName) // La asignación falló debido a un error de tipo
 				}
 			}else{
+				l.errores.InsertarError("Error la variable: " + varName + " es una constante", ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 				return fmt.Sprintf("Error la variable: %s es una constante", varName)
 			}
 		}
 		currentEnv = currentEnv.parent
 	}
+	l.errores.InsertarError("Error variable no encontrada: " + varName, ctx.GetStart().GetLine(), ctx.GetStart().GetColumn())
 	return fmt.Sprintf("Error variable no encontrada: %s", varName) // La variable no se encontró en ningún entorno
 }

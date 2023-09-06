@@ -41,8 +41,9 @@ func EliminarEntorno(visit *Visitor, previousEnvironment *Environment) {
 	visit.currentEnvironment = previousEnvironment
 }
 
-func (l *Visitor) agregarVariable(name string, tipo string, constante bool,value interface{}) interface{} {
+func (l *Visitor) agregarVariable(name string, tipo string, constante bool,value interface{}, linea int, columna int) interface{} {
 	if _, ok := l.currentEnvironment.variables[name]; ok {
+		l.errores.InsertarError("Error variable ya existente en el entorno actual: " + name, linea, columna)
 		return fmt.Sprintf("Error variable ya existente en el entorno actual: %s", name)
 	}
 
@@ -59,8 +60,9 @@ func (l *Visitor) agregarVariable(name string, tipo string, constante bool,value
 	return true
 }
 
-func (l *Visitor) agregarVector(id string, tipo string, valores []interface{}) interface{} {
+func (l *Visitor) agregarVector(id string, tipo string, valores []interface{}, linea int, columna int) interface{} {
 	if _, ok := l.currentEnvironment.Vectores[id]; ok {
+		l.errores.InsertarError("Error vector ya existente en el entorno actual: " + id, linea, columna)
 		return fmt.Sprintf("Error vector ya existente en el entorno actual: %s",id)
 	}
 
