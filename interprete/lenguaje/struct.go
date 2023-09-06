@@ -14,11 +14,17 @@ type Attribute struct {
 
 type Dupla struct {
     AttributeName string
+    AttributeAsignado bool
     AttributeType string
     AttributeValue interface{}
 }
 
 type StructInstance struct {
     StructName string
-    Attributes map[string]interface{}
+    Attributes map[string]infoDataInstance
+}
+
+type infoDataInstance struct {
+    Asignado bool
+    Data interface{}
 }

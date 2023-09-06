@@ -25,6 +25,9 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#StructExpr.
 	VisitStructExpr(ctx *StructExprContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#StructExprID.
+	VisitStructExprID(ctx *StructExprIDContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#ValorStructExpr.
 	VisitValorStructExpr(ctx *ValorStructExprContext) interface{}
 

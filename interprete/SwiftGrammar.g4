@@ -46,6 +46,7 @@ lista_atributos
 
 struct_expr
     : ST (VAR|LET) ID (DOSPUNTOS ID)? IG valor_struct_expr #StructExpr
+    | ST (VAR|LET) ID (DOSPUNTOS ID)? IG ID? #StructExprID 
     ;
 
 valor_struct_expr

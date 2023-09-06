@@ -324,6 +324,16 @@ func (l *Visitor) VisitIdExpr(ctx *parser.IdExprContext) interface{} {
 		currentEnv = currentEnv.parent
 	}
 
+	//buscar en lista de structs
+	currentEnv = l.currentEnvironment
+	for currentEnv != nil {
+		structInstance, ok := currentEnv.Instancias[id]
+		if ok {
+			return structInstance
+		}
+		currentEnv = currentEnv.parent
+	}
+
 	// Devolver un mensaje de error en lugar de lanzar una excepción
 	return fmt.Sprintf("Error variable no encontrada: %s", id)
 }

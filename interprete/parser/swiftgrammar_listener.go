@@ -25,6 +25,9 @@ type SwiftGrammarListener interface {
 	// EnterStructExpr is called when entering the StructExpr production.
 	EnterStructExpr(c *StructExprContext)
 
+	// EnterStructExprID is called when entering the StructExprID production.
+	EnterStructExprID(c *StructExprIDContext)
+
 	// EnterValorStructExpr is called when entering the ValorStructExpr production.
 	EnterValorStructExpr(c *ValorStructExprContext)
 
@@ -267,6 +270,9 @@ type SwiftGrammarListener interface {
 
 	// ExitStructExpr is called when exiting the StructExpr production.
 	ExitStructExpr(c *StructExprContext)
+
+	// ExitStructExprID is called when exiting the StructExprID production.
+	ExitStructExprID(c *StructExprIDContext)
 
 	// ExitValorStructExpr is called when exiting the ValorStructExpr production.
 	ExitValorStructExpr(c *ValorStructExprContext)

@@ -31,6 +31,10 @@ func (v *BaseSwiftGrammarVisitor) VisitStructExpr(ctx *StructExprContext) interf
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitStructExprID(ctx *StructExprIDContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitValorStructExpr(ctx *ValorStructExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }

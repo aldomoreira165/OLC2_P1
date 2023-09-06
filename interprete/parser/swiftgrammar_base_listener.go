@@ -56,6 +56,12 @@ func (s *BaseSwiftGrammarListener) EnterStructExpr(ctx *StructExprContext) {}
 // ExitStructExpr is called when production StructExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitStructExpr(ctx *StructExprContext) {}
 
+// EnterStructExprID is called when production StructExprID is entered.
+func (s *BaseSwiftGrammarListener) EnterStructExprID(ctx *StructExprIDContext) {}
+
+// ExitStructExprID is called when production StructExprID is exited.
+func (s *BaseSwiftGrammarListener) ExitStructExprID(ctx *StructExprIDContext) {}
+
 // EnterValorStructExpr is called when production ValorStructExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterValorStructExpr(ctx *ValorStructExprContext) {}
 

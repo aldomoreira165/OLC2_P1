@@ -36,6 +36,8 @@ func (l *Visitor) VisitAtributoStruct(ctx *parser.AtributoStructContext) interfa
 
 	if ctx.Expr() != nil {
 		attributeExpr = l.Visit(ctx.Expr())
+	}else{
+		attributeExpr = nil
 	}
 
 	// Crear una nueva instancia de Attribute
@@ -49,10 +51,35 @@ func (l *Visitor) VisitAtributoStruct(ctx *parser.AtributoStructContext) interfa
 }
 
 func (l *Visitor) VisitStructExpr(ctx *parser.StructExprContext) interface{} {
-	structName := ctx.ID(0).GetText()
+	instanceName := ctx.ID(0).GetText()
 	structInstance := l.Visit(ctx.Valor_struct_expr()).(StructInstance)
-	structInstance.StructName = structName
-	l.currentEnvironment.Instancias[structName] = structInstance
+	
+
+	//verificar que no hayan atributos nil
+	for key, value := range structInstance.Attributes {
+		if value.Data == nil {
+			return fmt.Sprintf("Error: el atributo %s no puede ser nil", key)
+		}
+	}
+
+	//verificar que no se haya asignado valor a una propiedad let o inmutable que ya tenia un valor definido en el struct
+	if structDef, ok := l.currentEnvironment.Structs[structInstance.StructName]; ok {
+		for _, attr := range structDef.Attributes {
+			if !attr.IsMutable {
+				if attr.Expression != nil {
+					fmt.Println("exp", attr.Expression)
+					if instance, ok := structInstance.Attributes[attr.Name]; ok {
+						if instance.Asignado {
+							return fmt.Sprintf("Error: el atributo %s del struct %s es inmutable y ya tiene un valor definido", attr.Name, structInstance.StructName)
+						}
+					}
+				}
+			}
+		}
+	}
+
+	structInstance.StructName = instanceName
+	l.currentEnvironment.Instancias[instanceName] = structInstance
 	return nil
 }
 
@@ -76,6 +103,7 @@ func (l *Visitor) VisitValorStructExpr(ctx *parser.ValorStructExprContext) inter
 				if !encontrado {
 					attributes = append(attributes, Dupla{
 						AttributeName:  structDef.Attributes[i].Name,
+						AttributeAsignado: false,
 						AttributeType:  structDef.Attributes[i].Type,
 						AttributeValue: structDef.Attributes[i].Expression,
 					})
@@ -83,27 +111,51 @@ func (l *Visitor) VisitValorStructExpr(ctx *parser.ValorStructExprContext) inter
 			}
 		}
 
-		//verificar que todos los struct tengan un valor para cada atributo
-		for i := 0; i < len(structDef.Attributes); i++ {
-			if attributes[i].AttributeValue == nil {
-				return fmt.Sprintf("Error: el atributo %s no tiene un valor asignado", structDef.Attributes[i].Name)
-			}
-		}
-
 		//retornando data con los atributos
 		dataInstance := StructInstance{
-			StructName: "",
-			Attributes: make(map[string]interface{}),
+			StructName: structName,
+			Attributes: make(map[string]infoDataInstance),
 		}
 
+
 		for _, attr := range attributes {
-			dataInstance.Attributes[attr.AttributeName] = attr.AttributeValue
+
+			infoDataInstance := infoDataInstance{
+				Asignado: attr.AttributeAsignado,
+				Data: attr.AttributeValue,
+			}
+			dataInstance.Attributes[attr.AttributeName] = infoDataInstance
 		}
 
 		return dataInstance
 	} else {
 		return fmt.Sprintf("Error: el struct %s no está definido", structName)
 	}
+}
+
+// #StructExprID
+func (l *Visitor) VisitStructExprID(ctx *parser.StructExprIDContext) interface{} {
+	structName := ctx.ID(0).GetText()
+	id := ctx.ID(1).GetText()
+
+	//buscar el id en las instancias de structs y asignarle el valor
+	if structInstance, ok := l.currentEnvironment.Instancias[id]; ok {
+		//crear una nueva instancia de StructInstance
+		newStructInstance := StructInstance{
+			StructName: structName,
+			Attributes: make(map[string]infoDataInstance),
+		}
+
+		//agregar los atributos de structInstance a newStructInstance
+		for key, value := range structInstance.Attributes {
+			newStructInstance.Attributes[key] = value
+		}
+
+		l.currentEnvironment.Instancias[structName] = newStructInstance
+	} else {
+		return fmt.Sprintf("Error: el struct %s no está definido", structName)
+	}
+	return nil
 }
 
 func (l *Visitor) VisitDuplastruct(ctx *parser.DuplastructContext) interface{} {
@@ -118,6 +170,7 @@ func (l *Visitor) VisitDuplastruct(ctx *parser.DuplastructContext) interface{} {
 		// Agregar la dupla actual al arreglo de duplas
 		duplas = append(duplas, Dupla{
 			AttributeName:  attributeName,
+			AttributeAsignado: true,
 			AttributeType:  "",
 			AttributeValue: attributeValue,
 		})
@@ -140,7 +193,7 @@ func (l *Visitor) VisitAccesoStruct(ctx *parser.AccesoStructContext) interface{}
 			if currentStructInstance, ok := currentValue.(StructInstance); ok {
 				// Verificar si el struct tiene el atributo
 				if attributeValue, ok := currentStructInstance.Attributes[attributeName]; ok {
-					currentValue = attributeValue
+					currentValue = attributeValue.Data
 				} else {
 					return fmt.Sprintf("Error: el atributo %s no existe en el struct %s", attributeName, currentStructInstance.StructName)
 				}
@@ -175,8 +228,12 @@ func (l *Visitor) VisitAsignStruct(ctx *parser.AsignStructContext) interface{} {
 			if currentStructInstance, ok := currentValue.(StructInstance); ok {
 				// Verificar si el struct tiene el atributo
 				if _, ok := currentStructInstance.Attributes[attributeName]; ok {
-					//actualizar el valor del atributo
-					currentStructInstance.Attributes[attributeName] = valor
+					//actualizar la instanci
+					data := infoDataInstance{
+						Asignado: true,
+						Data: valor,
+					}
+					currentStructInstance.Attributes[attributeName] = data
 				} else {
 					return fmt.Sprintf("Error: el atributo %s no existe en el struct %s", attributeName, currentStructInstance.StructName)
 				}
@@ -184,9 +241,8 @@ func (l *Visitor) VisitAsignStruct(ctx *parser.AsignStructContext) interface{} {
 				return fmt.Sprintf("Error: el valor %v no es una instancia de un struct", currentValue)
 			}
 		}
-
-		return currentValue
 	} else {
 		return fmt.Sprintf("Error: la instancia del struct con id %s no existe", structID)
 	}
+	return nil
 }
