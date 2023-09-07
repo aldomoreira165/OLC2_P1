@@ -13,15 +13,17 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
+
 type Respuesta struct {
-	Salida string `json:"salida"`
-	Imagen string `json:"imagen"`
+	Salida  string `json:"salida"`
+	Imagen  string `json:"imagen"`
 	ImagenE string `json:"imagenE"`
 }
 
 type CodigoEnviado struct {
 	Contenido string `json:"contenido"`
 }
+
 
 func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	// Decodificar el cuerpo JSON en una estructura CodigoEnviado
@@ -40,6 +42,7 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 	visitor := lenguaje.NewVisitor()
 	tree := p.S()
 	out := visitor.Visit(tree)
+
 
 	//generando tabla de simbolos
 	tablaResult := visitor.(*lenguaje.Visitor).GetSymbolTable()
@@ -65,8 +68,8 @@ func manejarEnviarcodigo(w http.ResponseWriter, r *http.Request) {
 
 	//preparando respuesta
 	respuesta := Respuesta{
-		Salida: out.(string),
-		Imagen: base64.StdEncoding.EncodeToString(pngData),
+		Salida:  out.(string),
+		Imagen:  base64.StdEncoding.EncodeToString(pngData),
 		ImagenE: base64.StdEncoding.EncodeToString(pngDataE),
 	}
 
