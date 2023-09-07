@@ -40,6 +40,15 @@ type SwiftGrammarVisitor interface {
 	// Visit a parse tree produced by SwiftGrammarParser#AsignStruct.
 	VisitAsignStruct(ctx *AsignStructContext) interface{}
 
+	// Visit a parse tree produced by SwiftGrammarParser#VectorStruct.
+	VisitVectorStruct(ctx *VectorStructContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#AccesoVectorStruct.
+	VisitAccesoVectorStruct(ctx *AccesoVectorStructContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#AppendVectorStruct.
+	VisitAppendVectorStruct(ctx *AppendVectorStructContext) interface{}
+
 	// Visit a parse tree produced by SwiftGrammarParser#declvectorstmt.
 	VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{}
 
@@ -237,6 +246,9 @@ type SwiftGrammarVisitor interface {
 
 	// Visit a parse tree produced by SwiftGrammarParser#IntExpr.
 	VisitIntExpr(ctx *IntExprContext) interface{}
+
+	// Visit a parse tree produced by SwiftGrammarParser#AccesoVectorStructExpr.
+	VisitAccesoVectorStructExpr(ctx *AccesoVectorStructExprContext) interface{}
 
 	// Visit a parse tree produced by SwiftGrammarParser#AccesoStructExpr.
 	VisitAccesoStructExpr(ctx *AccesoStructExprContext) interface{}

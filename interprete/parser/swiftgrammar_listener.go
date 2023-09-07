@@ -40,6 +40,15 @@ type SwiftGrammarListener interface {
 	// EnterAsignStruct is called when entering the AsignStruct production.
 	EnterAsignStruct(c *AsignStructContext)
 
+	// EnterVectorStruct is called when entering the VectorStruct production.
+	EnterVectorStruct(c *VectorStructContext)
+
+	// EnterAccesoVectorStruct is called when entering the AccesoVectorStruct production.
+	EnterAccesoVectorStruct(c *AccesoVectorStructContext)
+
+	// EnterAppendVectorStruct is called when entering the AppendVectorStruct production.
+	EnterAppendVectorStruct(c *AppendVectorStructContext)
+
 	// EnterDeclvectorstmt is called when entering the declvectorstmt production.
 	EnterDeclvectorstmt(c *DeclvectorstmtContext)
 
@@ -238,6 +247,9 @@ type SwiftGrammarListener interface {
 	// EnterIntExpr is called when entering the IntExpr production.
 	EnterIntExpr(c *IntExprContext)
 
+	// EnterAccesoVectorStructExpr is called when entering the AccesoVectorStructExpr production.
+	EnterAccesoVectorStructExpr(c *AccesoVectorStructExprContext)
+
 	// EnterAccesoStructExpr is called when entering the AccesoStructExpr production.
 	EnterAccesoStructExpr(c *AccesoStructExprContext)
 
@@ -285,6 +297,15 @@ type SwiftGrammarListener interface {
 
 	// ExitAsignStruct is called when exiting the AsignStruct production.
 	ExitAsignStruct(c *AsignStructContext)
+
+	// ExitVectorStruct is called when exiting the VectorStruct production.
+	ExitVectorStruct(c *VectorStructContext)
+
+	// ExitAccesoVectorStruct is called when exiting the AccesoVectorStruct production.
+	ExitAccesoVectorStruct(c *AccesoVectorStructContext)
+
+	// ExitAppendVectorStruct is called when exiting the AppendVectorStruct production.
+	ExitAppendVectorStruct(c *AppendVectorStructContext)
 
 	// ExitDeclvectorstmt is called when exiting the declvectorstmt production.
 	ExitDeclvectorstmt(c *DeclvectorstmtContext)
@@ -483,6 +504,9 @@ type SwiftGrammarListener interface {
 
 	// ExitIntExpr is called when exiting the IntExpr production.
 	ExitIntExpr(c *IntExprContext)
+
+	// ExitAccesoVectorStructExpr is called when exiting the AccesoVectorStructExpr production.
+	ExitAccesoVectorStructExpr(c *AccesoVectorStructExprContext)
 
 	// ExitAccesoStructExpr is called when exiting the AccesoStructExpr production.
 	ExitAccesoStructExpr(c *AccesoStructExprContext)

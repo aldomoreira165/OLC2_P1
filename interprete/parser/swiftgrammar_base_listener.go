@@ -86,6 +86,24 @@ func (s *BaseSwiftGrammarListener) EnterAsignStruct(ctx *AsignStructContext) {}
 // ExitAsignStruct is called when production AsignStruct is exited.
 func (s *BaseSwiftGrammarListener) ExitAsignStruct(ctx *AsignStructContext) {}
 
+// EnterVectorStruct is called when production VectorStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterVectorStruct(ctx *VectorStructContext) {}
+
+// ExitVectorStruct is called when production VectorStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitVectorStruct(ctx *VectorStructContext) {}
+
+// EnterAccesoVectorStruct is called when production AccesoVectorStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesoVectorStruct(ctx *AccesoVectorStructContext) {}
+
+// ExitAccesoVectorStruct is called when production AccesoVectorStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesoVectorStruct(ctx *AccesoVectorStructContext) {}
+
+// EnterAppendVectorStruct is called when production AppendVectorStruct is entered.
+func (s *BaseSwiftGrammarListener) EnterAppendVectorStruct(ctx *AppendVectorStructContext) {}
+
+// ExitAppendVectorStruct is called when production AppendVectorStruct is exited.
+func (s *BaseSwiftGrammarListener) ExitAppendVectorStruct(ctx *AppendVectorStructContext) {}
+
 // EnterDeclvectorstmt is called when production declvectorstmt is entered.
 func (s *BaseSwiftGrammarListener) EnterDeclvectorstmt(ctx *DeclvectorstmtContext) {}
 
@@ -481,6 +499,12 @@ func (s *BaseSwiftGrammarListener) EnterIntExpr(ctx *IntExprContext) {}
 
 // ExitIntExpr is called when production IntExpr is exited.
 func (s *BaseSwiftGrammarListener) ExitIntExpr(ctx *IntExprContext) {}
+
+// EnterAccesoVectorStructExpr is called when production AccesoVectorStructExpr is entered.
+func (s *BaseSwiftGrammarListener) EnterAccesoVectorStructExpr(ctx *AccesoVectorStructExprContext) {}
+
+// ExitAccesoVectorStructExpr is called when production AccesoVectorStructExpr is exited.
+func (s *BaseSwiftGrammarListener) ExitAccesoVectorStructExpr(ctx *AccesoVectorStructExprContext) {}
 
 // EnterAccesoStructExpr is called when production AccesoStructExpr is entered.
 func (s *BaseSwiftGrammarListener) EnterAccesoStructExpr(ctx *AccesoStructExprContext) {}

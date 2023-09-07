@@ -33,6 +33,8 @@ stmt: printstmt
     | defstructstmt
     | asignstructstmt
     | struct_expr
+    | vector_struct_stmt
+    | append_vector_struct_stmt
     ;
 
 // struct
@@ -63,6 +65,18 @@ accesostructstmt
 
 asignstructstmt
     : ID (PUNTO ID)+ IG expr #AsignStruct
+    ;
+
+vector_struct_stmt
+    : VAR ID IG CORCHIZQ ID CORCHDER PARIZQ PARDER #VectorStruct
+    ;
+
+acceso_vector_struct_stmt
+    : ID CORCHIZQ expr CORCHDER PUNTO ID #AccesoVectorStruct
+    ;
+
+append_vector_struct_stmt
+    : ST ID PUNTO APPEND PARIZQ valor_struct_expr PARDER #AppendVectorStruct
     ;
 
 //vectores
@@ -270,6 +284,7 @@ expr
     | accesomatriz                              # AccesoMatrizExpr
     | accesostructstmt                          # AccesoStructExpr
     | valor_struct_expr                         # AccesoValorStructExpr
+    | acceso_vector_struct_stmt                 # AccesoVectorStructExpr
     ;
 
 tipo

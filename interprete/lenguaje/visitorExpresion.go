@@ -423,7 +423,11 @@ func (l *Visitor) VisitAccesoStructExpr(ctx *parser.AccesoStructExprContext) int
 	return l.Visit(ctx.Accesostructstmt())
 }
 
-//AccesoValorStructExpr
 func (l *Visitor) VisitAccesoValorStructExpr(ctx *parser.AccesoValorStructExprContext) interface{} {
 	return l.Visit(ctx.Valor_struct_expr())
 }
+
+func (l *Visitor) VisitAccesoVectorStructExpr(ctx *parser.AccesoVectorStructExprContext) interface{} {
+	return l.Visit(ctx.Acceso_vector_struct_stmt())
+}
+

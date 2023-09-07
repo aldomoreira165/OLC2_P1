@@ -147,6 +147,12 @@ func (l *Visitor) VisitStmt(ctx *parser.StmtContext) interface{} {
 	if ctx.Struct_expr() != nil {
 		return l.Visit(ctx.Struct_expr())
 	}
+	if ctx.Vector_struct_stmt() != nil {
+		return l.Visit(ctx.Vector_struct_stmt())
+	}
+	if ctx.Append_vector_struct_stmt() != nil {
+		return l.Visit(ctx.Append_vector_struct_stmt())
+	}
 	return nil
 }
 

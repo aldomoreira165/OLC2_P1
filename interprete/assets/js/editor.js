@@ -98,14 +98,14 @@ btnEjecutar.addEventListener("click", function () {
       const link = document.createElement("a");
       link.href = "data:image/png;base64," + data.imagen;
       link.download = "tabla.png";
-      link.innerHTML = "Descargar imagen";
+      link.innerHTML = "";
       document.body.appendChild(link);
 
       //Agregar un enlace para descargar la imagen de errores
       const link2 = document.createElement("a");
       link2.href = "data:image/png;base64," + data.imagenE;
       link2.download = "tablaErrores.png";
-      link2.innerHTML = "Descargar imagen";
+      link2.innerHTML = "";
       document.body.appendChild(link2);
 
       btnTablaSimbolos.addEventListener("click", function(){

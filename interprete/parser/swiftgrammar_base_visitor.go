@@ -51,6 +51,18 @@ func (v *BaseSwiftGrammarVisitor) VisitAsignStruct(ctx *AsignStructContext) inte
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseSwiftGrammarVisitor) VisitVectorStruct(ctx *VectorStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccesoVectorStruct(ctx *AccesoVectorStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAppendVectorStruct(ctx *AppendVectorStructContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseSwiftGrammarVisitor) VisitDeclvectorstmt(ctx *DeclvectorstmtContext) interface{} {
 	return v.VisitChildren(ctx)
 }
@@ -312,6 +324,10 @@ func (v *BaseSwiftGrammarVisitor) VisitNotExpr(ctx *NotExprContext) interface{} 
 }
 
 func (v *BaseSwiftGrammarVisitor) VisitIntExpr(ctx *IntExprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
+func (v *BaseSwiftGrammarVisitor) VisitAccesoVectorStructExpr(ctx *AccesoVectorStructExprContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 

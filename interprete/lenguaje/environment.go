@@ -13,6 +13,7 @@ type Environment struct {
 	funciones map[string]Funcion
 	Structs map[string]Struct
 	Instancias map[string]StructInstance
+	VectoresStruct map[string]VectorStruct
 }
 
 func NewEnvironment(parent *Environment) *Environment {
@@ -25,6 +26,7 @@ func NewEnvironment(parent *Environment) *Environment {
 		funciones: make(map[string]Funcion),
 		Structs: make(map[string]Struct),
 		Instancias: make(map[string]StructInstance),
+		VectoresStruct: make(map[string]VectorStruct),
 	}
 }
 
