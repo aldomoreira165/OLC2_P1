@@ -3,7 +3,7 @@ struct Persona{
     var edad = 0
 }
 
-struct Transporte {
+/*struct Transporte {
     var pasajeros = 0
     var velocidad = 100
     var nombre: String
@@ -20,14 +20,14 @@ struct Transporte {
     func mostrarPasajeros(){
         print("Pasajeros: ", self.pasajeros)
     }
-}
+}*/
 
 struct Verdura{
     let nombre: String
     var precio: Int
 }
 
-var transmetro = Transporte(nombre: "RutaPerifericoUsac", piloto: Persona(Nombre: "Joel", edad: 43))
+/*var transmetro = Transporte(nombre: "RutaPerifericoUsac", piloto: Persona(Nombre: "Joel", edad: 43))
 
 transmetro.pasajeros = 36
 transmetro.mostrarPasajeros()
@@ -37,13 +37,13 @@ transmetro.acelerar()
 transmetro.acelerar()
 transmetro.mostrarVelocidad()
 transmetro.frenar()
-transmetro.mostrarVelocidad()
+transmetro.mostrarVelocidad()*/
 
 var verduras = [Verdura]()
 
-verduras.append(Verdura(nombre: "Coliflor", precio: 15))
-verduras.append(Verdura(nombre: "Cebolla", precio: 5))
-verduras.append(Verdura(nombre: "VerduraGenerica", precio: 12))
+st verduras.append(st Verdura(nombre: "Coliflor", precio: 15))
+st verduras.append(st Verdura(nombre: "Cebolla", precio: 5))
+st verduras.append(st Verdura(nombre: "VerduraGenerica", precio: 12))
 
 print(verduras[2].nombre)
 print(verduras[2].precio)
